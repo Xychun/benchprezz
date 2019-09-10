@@ -14,3 +14,5 @@ sudo apt-get install ethereum
 # fix smartcard socket bug
 sudo apt-get install pcscd
 sudo service pcscd start
+# init project
+sudo ./init.sh

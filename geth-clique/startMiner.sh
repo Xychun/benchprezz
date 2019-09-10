@@ -3,12 +3,10 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 MINERS=$1
-CLIENTS=$2
-THREADS=$3
-PORT=$4
+THREADS=$2
+PORT=$3
 
 geth --datadir=$DATA_DIR init $GETH_HOME/genesis_clique"_"$1".json"
-#geth account import --datadir=$DATA_DIR --password <(echo -n "${PWD}") $CLIENTS;
 geth --nodiscover --datadir=$GETH_HOME/chainInfo --port $PORT --rpc --rpcaddr 0.0.0.0 --rpccorsdomain "*" --rpcapi "eth,web3,personal,net,miner,admin,debug" --allow-insecure-unlock --unlock 0 --password <(echo -n "${PWD}") --verbosity 5 --mine --minerthreads $THREADS > $LOG_DIR/eth_log 2>&1 &
 
 echo miner started
