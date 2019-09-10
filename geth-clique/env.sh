@@ -17,7 +17,7 @@ LOG_DIR=$GETH_HOME/logs-geth-clique
 # password for account unlock
 PWD="password"
 # ssh key file
-SSH_KEY=$HOME/.ssh/JDev.pem
+SSH_KEY=$HOME.ssh/JDev.pem
 # folder that contains the benchmark (client) executable (make sure that you have build the client) (this could be on a network share)
 EXE_HOME=$ETH_HOME/../../src/macro/kvstore
 # port used by ethereum nodes
