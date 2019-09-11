@@ -2,21 +2,21 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-MINERS=$1
-THREADS=$2
+let miners=$1
+let threads=$2
 
 #rm -rf $PEERS
 #./scrapeEnodes.sh
 sleep 3
 
 i=0
-for miner in `cat $MINSERS`; do
+for miner in `cat $MINERS`; do
   echo sharing peer list with $miner
   scp -i $SSH_KEY -oStrictHostKeyChecking=no $PEERS $USER@$miner:$GETH_HOME/
   echo start mining on $miner
   port=`expr $PORT_INIT + $i`
   #rpcport=`expr $RPCPORT_INIT + $i`
-  ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $GETH_HOME/startMiner.sh $MINERS $THREADS $port
+  ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $GETH_HOME/startMiner.sh $miners $threads $port
   echo done $miner
   let i=$i+1
 done

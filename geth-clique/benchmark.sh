@@ -2,15 +2,15 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-MINERS=$1
-CLIENTS=$2
-THREADS=$3
-TXRATE=$4
+let miners=$1
+let clients=$2
+let threads=$3
+let txrate=$4
 
 printf " \n++++++++++++ \nSTOP ALL MINERS AND HOSTS \n++++++++++++\n"
 ./all-stop.sh
 printf " \n++++++++++++ \nSTART MINERS \n++++++++++++\n"
-./all-startMiners.sh $1 $2 $3 $PORT_INIT
+./all-startMiners.sh $miners $clients $threads $PORT_INIT
 
 
 #sleep

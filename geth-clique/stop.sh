@@ -3,4 +3,4 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 sudo killall -KILL geth
-rm -r $DATA_DIR
+rm -r $DATA_DIR/geth
