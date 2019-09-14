@@ -2,15 +2,17 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-let miners=$1
-let clients=$2
-let threads=$3
+let minerCount=$1
+let clientCount=$2
+let threadCount=$3
 let txrate=$4
 
-printf " \n++++++++++++ \nSTOP ALL MINERS AND CLIENTS \n++++++++++++\n"
-./all-stop.sh
-printf " \n++++++++++++ \nSTART MINERS \n++++++++++++\n"
-./all-startMiners.sh $miners $clients $threads $PORT_INIT
+printf " \n++++++++++++ \nSTOP ALL MINER AND CLIENT NODES \n++++++++++++\n"
+./all-stop.sh $minerCount $clientCount
+printf " \n++++++++++++ \nINIT GETH ON MINER NODES \n++++++++++++\n"
+./all-init.sh $minerCount
+printf " \n++++++++++++ \nSTART MINER NODES \n++++++++++++\n"
+./all-startMiners.sh $minerCount $clientCount $threadCount $PORT_INIT
 
 #sleep
 #stop-all
