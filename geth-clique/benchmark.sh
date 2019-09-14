@@ -7,11 +7,10 @@ let clients=$2
 let threads=$3
 let txrate=$4
 
-printf " \n++++++++++++ \nSTOP ALL MINERS AND HOSTS \n++++++++++++\n"
+printf " \n++++++++++++ \nSTOP ALL MINERS AND CLIENTS \n++++++++++++\n"
 ./all-stop.sh
 printf " \n++++++++++++ \nSTART MINERS \n++++++++++++\n"
 ./all-startMiners.sh $miners $clients $threads $PORT_INIT
-
 
 #sleep
 #stop-all

@@ -5,8 +5,7 @@ cd `dirname ${BASH_SOURCE-$0}`
 let miners=$1
 let threads=$2
 
-#rm -rf $PEERS
-#./scrapeEnodes.sh
+./scrapePeers.sh
 sleep 3
 
 i=0
