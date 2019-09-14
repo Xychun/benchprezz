@@ -5,8 +5,8 @@ cd `dirname ${BASH_SOURCE-$0}`
 let miners=$1
 let threads=$2
 
-./scrapePeers.sh
-sleep 3
+#./scrapePeers.sh
+sleep 5
 
 i=0
 for miner in `cat $MINERS`; do
