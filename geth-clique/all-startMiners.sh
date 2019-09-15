@@ -6,7 +6,6 @@ let minerCount=$1
 let threadCount=$2
 
 ./scrapePeers.sh
-sleep 2 #needed?
 
 i=0
 for miner in `cat $MINERS`; do
