@@ -43,7 +43,7 @@ inline void Properties::SetProperty(const std::string &key,
 }
 
 inline bool Properties::Load(std::ifstream &input) {
-  if (!input.is_open()) throw utils::Exception("File not open!");
+  if (!input.is_open()) throw utils::Exception("File not open! (Core)");
 
   while (!input.eof() && !input.bad()) {
     std::string line;

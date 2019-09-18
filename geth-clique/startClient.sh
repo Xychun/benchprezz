@@ -18,6 +18,6 @@ for miner in `cat $MINERS`; do
   cd $DRIVER_HOME
   rpcport=`expr $RPCPORT_INIT + $i`
   echo "Starting driver for endpoint " $miner:$rpcport
-  nohup ./driver -db ethereum -threads $threadCount -P workloads/workloada.spec -endpoint $miner:$rpcport -txrate $txrate -wt 60 > $LOG_DIR/client_$clientID"_"$miner 2>&1 &
+  nohup ./driver -db ethereum -threads $threadCount -P workloads/workloada.spec -endpoint $miner:$rpcport -txrate $txrate -wt 60 > $log_dir/client_$clientId"_"$miner 2>&1 &
   let i=i+1
 done

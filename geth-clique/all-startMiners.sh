@@ -13,8 +13,8 @@ for miner in `cat $MINERS`; do
     echo sharing peer list with $miner
     scp -i $SSH_KEY -oStrictHostKeyChecking=no $PEERS $USER@$miner:$GETH_HOME/
     echo start mining on $miner
-    port=`expr $PORT_INIT + $i`
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $GETH_HOME/startMiner.sh $minerCount $threadCount $port
+    rpcport=`expr $RPCPORT_INIT + $i`
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $GETH_HOME/startMiner.sh $minerCount $threadCount $rpcport
     echo done $miner
   fi
   let i=$i+1

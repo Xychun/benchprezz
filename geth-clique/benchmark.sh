@@ -7,17 +7,17 @@ let clientCount=$2
 let threadCount=$3
 let txrate=$4
 
-printf " \n++++++++++++ \nSTOP ALL MINER AND CLIENT NODES \n++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh $minerCount $clientCount
-printf " \n++++++++++++ \nINIT GETH ON MINER NODES \n++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT GETH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
-printf " \n++++++++++++ \nSTART MINER NODES \n++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount $threadCount
-printf " \n++++++++++++ \nSTART CLIENT NODES \n++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startClients.sh $minerCount $clientCount $threadCount $txrate
 
 count=0
-total=30
+total=12
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 10 # this is work
@@ -25,8 +25,7 @@ while [ $count -lt $total ]; do
   pd=$(( $count * 73 / $total ))
   printf "\r%3d.%1d%% %.${pd}s" $(( $count * 100 / $total )) $(( ($count * 1000 / $total) % 10 )) $pstr
 done
+echo ""
 
-./all-stop.sh
-$minerCount $clientCount
-
-printf " \n++++++++++++ \nEXPERIMENT DONE \n++++++++++++\n"
+./all-stop.sh $minerCount $clientCount
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tEXPERIMENT DONE \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
