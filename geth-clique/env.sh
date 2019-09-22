@@ -10,6 +10,8 @@ MINERS=$GETH_HOME/miners
 CLIENTS=$GETH_HOME/clients
 # file containing the peer info
 PEERS=$GETH_HOME/peers
+# file containing the peer info
+ACCOUNTS=$GETH_HOME/accounts
 # file containing chain info and running geth directory
 DATA_DIR=$GETH_HOME/chainInfo
 # folder that stores the log files (client-side)

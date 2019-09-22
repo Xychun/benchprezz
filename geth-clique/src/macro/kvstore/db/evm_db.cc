@@ -27,13 +27,13 @@ EVMDB::EVMDB(const string &endpoint, const string &dbname,
     sctype_ = BBUtils::SmartContractType::DoNothing;
   }
   from_address_ = get_from_address(endpoint_);
-  cout << "from_address: " << from_address_ << endl;
+  cout << "From Address: " << from_address_ << endl;
   if (evmtype_ == EVMType::Parity)
     unlock_address(endpoint_, from_address_);
   auto receipt = deploy_smart_contract(endpoint_, from_address_, sctype_);
   std::this_thread::sleep_for(std::chrono::seconds(deploy_wait_sec));
   to_address_ = lookup_smart_contract_address_or_die(endpoint_, receipt);
-  cout << "to address: " << to_address_ << endl;
+  cout << "To Address: " << to_address_ << endl;
   cout << "Smart contract " + wl_name + " deploy ready" << endl;
 }
 

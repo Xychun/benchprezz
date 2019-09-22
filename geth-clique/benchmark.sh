@@ -2,10 +2,10 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-let minerCount=$1
-let clientCount=$2
-let threadCount=$3
-let txrate=$4
+minerCount=$1
+clientCount=$2
+threadCount=$3
+txrate=$4
 
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh $minerCount $clientCount

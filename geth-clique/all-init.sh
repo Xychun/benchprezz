@@ -2,7 +2,7 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-let minerCount=$1
+minerCount=$1
 
 i=0
 for miner in `cat $MINERS`; do

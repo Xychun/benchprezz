@@ -2,11 +2,11 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-let minerCount=$1
-let clientCount=$2
-let threadCount=$3
-let txrate=$4
-let clientId=$5
+minerCount=$1
+clientCount=$2
+threadCount=$3
+txrate=$4
+clientId=$5
 
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 log_dir=$LOG_DIR/$timestamp"_"$1"_"miners_$2"_"clients_$3"_"threads_$4"_"txrate

@@ -220,10 +220,8 @@ string ParseCommandLine(int argc, const char *argv[],
       filename.assign(argv[argindex]);
       ifstream input(argv[argindex]);
       try {
-        cout << "Load:" << endl;
         props.Load(input);
       } catch (const string &message) {
-        cout << "Catch: " << message << endl;
         exit(0);
       }
       input.close();

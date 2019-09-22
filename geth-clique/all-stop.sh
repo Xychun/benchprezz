@@ -2,8 +2,8 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-let minerCount=$1
-let clientCount=$2
+minerCount=$1
+clientCount=$2
 
 i=0
 for client in `cat $CLIENTS`; do

@@ -1,8 +1,10 @@
 #include "evm_utils.h"
 #include <iostream>
 
-namespace BBUtils {
-namespace EVMUtils {
+namespace BBUtils
+{
+namespace EVMUtils
+{
 
 const std::string REQUEST_HEADERS = "application/json";
 const std::string UNLOCK_ACCOUNT_PREFIX =
@@ -215,7 +217,8 @@ const std::string GET_METHOD_SIG =
     "0x693ec85e00000000000000000000000000000000000000000000000000000000000000"
     "20";
 
-std::string encode_set(const std::string &key, const std::string &value) {
+std::string encode_set(const std::string &key, const std::string &value)
+{
   std::string ret = SET_METHOD_SIG;
   std::string argument_1 = encode_string(key);
   ret += left_padding_string(encode_hex(argument_1.length()));
@@ -223,37 +226,43 @@ std::string encode_set(const std::string &key, const std::string &value) {
   return ret;
 }
 
-std::string encode_get(const std::string &key) {
+std::string encode_get(const std::string &key)
+{
   return GET_METHOD_SIG + encode_string(key);
 }
 
 std::string compose_donothing_tx_data(const std::string &from_address,
-                                      const std::string &to_address) {
+                                      const std::string &to_address)
+{
   return SEND_TXN_PREFIX + from_address + MIDDLE_PART_1 + to_address +
          MIDDLE_PART_2 + DONOTHING_METHOD_SIG + SEND_TXN_SUFFIX;
 }
 
 std::string compose_read(const std::string &key,
                          const std::string &from_address,
-                         const std::string &to_address) {
+                         const std::string &to_address)
+{
   return CALL_PREFIX + from_address + MIDDLE_PART_1 + to_address +
          MIDDLE_PART_2 + encode_get(key) + CALL_SUFFIX;
 }
 
 std::string compose_write(const std::string &key, const std::string &val,
                           const std::string &from_address,
-                          const std::string &to_address) {
+                          const std::string &to_address)
+{
   return SEND_TXN_PREFIX + from_address + MIDDLE_PART_1 + to_address +
          MIDDLE_PART_2 + encode_set(key, val) + SEND_TXN_SUFFIX;
 }
 
-std::string compose_get_transaction(const std::string &txn_hash) {
+std::string compose_get_transaction(const std::string &txn_hash)
+{
   return GET_TXN_PREFIX + txn_hash + GET_TXN_SUFFIX;
 }
 
-unsigned int get_tip_block_number(const std::string &endpoint) {
+unsigned int get_tip_block_number(const std::string &endpoint)
+{
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, GET_BLOCKNUMBER);
-  if (r.find("Failed") != std::string::npos) 
+  if (r.find("Failed") != std::string::npos)
     return -1;
 
   return decode_hex(get_json_field(
@@ -262,21 +271,25 @@ unsigned int get_tip_block_number(const std::string &endpoint) {
 }
 
 unsigned int get_txn_block_number(const std::string &endpoint,
-                                  const std::string &txn_hash) {
+                                  const std::string &txn_hash)
+{
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                                 compose_get_transaction(txn_hash));
   // in case this transaction haven't been mined, return MAXIMUM uint.
-  if (r.find("\"blockNumber\":null") != std::string::npos) return -1;
+  if (r.find("\"blockNumber\":null") != std::string::npos)
+    return -1;
   return decode_hex(get_json_field(r, "blockNumber"));
 }
 
-std::string get_from_address(const std::string &endpoint) {
+std::string get_from_address(const std::string &endpoint)
+{
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, GET_ACCOUNTS);
   return get_json_field(r, "result");
 }
 
 std::vector<std::string> poll_txs_by_block_hash(const std::string &endpoint,
-                                                std::string block_hash) {
+                                                std::string block_hash)
+{
   std::string request =
       GET_BLOCK_BY_HASH_PREFIX + block_hash + GET_BLOCK_BY_HASH_SUFFIX;
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, request);
@@ -285,7 +298,8 @@ std::vector<std::string> poll_txs_by_block_hash(const std::string &endpoint,
 }
 
 std::vector<std::string> poll_txs_by_block_number(const std::string &endpoint,
-                                                  int block_number) {
+                                                  int block_number)
+{
   std::string request = GET_BLOCK_BY_NUMBER_PREFIX +
                         ("0x" + encode_hex(block_number)) +
                         GET_BLOCK_BY_NUMBER_SUFFIX;
@@ -294,34 +308,40 @@ std::vector<std::string> poll_txs_by_block_number(const std::string &endpoint,
 
   std::vector<std::string> ret = get_list_field(r, "transactions");
   std::vector<std::string> uncles = get_list_field(r, "uncles");
-  for (std::string uncle : uncles) {
+  for (std::string uncle : uncles)
+  {
     std::vector<std::string> uncletxs = poll_txs_by_block_hash(endpoint, uncle);
-    for (std::string tx : uncletxs) ret.push_back(tx);
+    for (std::string tx : uncletxs)
+      ret.push_back(tx);
   }
   return ret;
 }
 
-void unlock_address(const std::string &endpoint, const std::string &address) {
+void unlock_address(const std::string &endpoint, const std::string &address)
+{
   send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                        UNLOCK_ACCOUNT_PREFIX + address + UNLOCK_ACCOUNT_SUFFIX);
 }
 
 std::string deploy_smart_contract(const std::string &endpoint,
                                   const std::string &from_address,
-                                  SmartContractType type) {
+                                  SmartContractType type)
+{
   std::string txn_data = DEPLOY_SMARTCONTRACT_PREFIX + from_address;
-  switch (type) {
-    case SmartContractType::KVStore:
-      txn_data += DEPLOY_KV_SMARTCONTRACT_SUFFIX;
-      break;
-    case SmartContractType::SmallBank:
-      txn_data += DEPLOY_SB_SMARTCONTRACT_SUFFIX;
-      break;
-    case SmartContractType::DoNothing:
-      txn_data += DEPLOY_DONOTHING_SMARTCONTRACT_SUFFIX;
-      break;
+  switch (type)
+  {
+  case SmartContractType::KVStore:
+    txn_data += DEPLOY_KV_SMARTCONTRACT_SUFFIX;
+    break;
+  case SmartContractType::SmallBank:
+    txn_data += DEPLOY_SB_SMARTCONTRACT_SUFFIX;
+    break;
+  case SmartContractType::DoNothing:
+    txn_data += DEPLOY_DONOTHING_SMARTCONTRACT_SUFFIX;
+    break;
   }
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, txn_data);
+  std::cout << "deploy_smart_contract" << std::endl;
   std::cout << "txn_data: " << txn_data << std::endl;
   std::cout << "endpoint: " << endpoint << " from address: " << from_address << std::endl;
   std::cout << "r: " << r << std::endl;
@@ -329,20 +349,23 @@ std::string deploy_smart_contract(const std::string &endpoint,
 }
 
 std::string lookup_smart_contract_address_or_die(const std::string &endpoint,
-                                                 const std::string &receipt) {
-  
+                                                 const std::string &receipt)
+{
+
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                                 GET_SMART_CONTRACT_ADDRESS_PREFIX + receipt +
                                     GET_SMART_CONTRACT_ADDRESS_SUFFIX);
-
-  std::cout << "endpoint: " << endpoint << " receipt: " << receipt << " r: " << r << std::endl;
+  std::cout << "lookup_smart_contract_address_or_die" << std::endl;
+  std::cout << "endpoint: " << endpoint << " receipt: " << receipt << std::endl;
+  std::cout << "r: " << r << std::endl;
   assert(r.find("\"result\":null") == std::string::npos);
   return get_json_field(r, "contractAddress");
 }
 
 std::string submit_do_nothing_txn(const std::string &endpoint,
                                   const std::string &from_address,
-                                  const std::string &to_address) {
+                                  const std::string &to_address)
+{
   auto r =
       send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                            compose_donothing_tx_data(from_address, to_address));
@@ -352,7 +375,8 @@ std::string submit_do_nothing_txn(const std::string &endpoint,
 std::string submit_set_txn(const std::string &endpoint, const std::string &key,
                            const std::string &val,
                            const std::string &from_address,
-                           const std::string &to_address) {
+                           const std::string &to_address)
+{
   auto r =
       send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                            compose_write(key, val, from_address, to_address));
@@ -361,11 +385,12 @@ std::string submit_set_txn(const std::string &endpoint, const std::string &key,
 
 std::string submit_get_txn(const std::string &endpoint, const std::string &key,
                            const std::string &from_address,
-                           const std::string &to_address) {
+                           const std::string &to_address)
+{
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS,
                                 compose_read(key, from_address, to_address));
   return get_json_field(r, "result");
 }
 
-}  // EVMUtils
-}  // BBUtils
+} // namespace EVMUtils
+} // namespace BBUtils
