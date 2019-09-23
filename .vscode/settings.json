@@ -1,0 +1,75 @@
+{
+  "deploy.reloaded": {
+    "ignore": [".ssh", ".vscode", ".git", ".DS_Store"],
+    "packages": [
+      {
+        "name": "my benchprezz",
+        "files": ["**"],
+        "deployOnSave": [
+          "get-clique-1",
+          "get-clique-2",
+          "get-clique-3",
+          "get-clique-4",
+          "get-clique-5"
+        ]
+      }
+    ],
+    "targets": [
+      {
+        "type": "sftp",
+        "name": "get-clique-1",
+        "host": "10.195.2.31",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "get-clique-2",
+        "host": "10.195.2.37",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "get-clique-3",
+        "host": "10.195.2.38",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "get-clique-4",
+        "host": "10.195.2.105",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "get-clique-5",
+        "host": "10.195.2.111",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      }
+    ]
+  }
+}
