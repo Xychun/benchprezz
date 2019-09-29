@@ -1,5 +1,6 @@
 ### Install
 sudo apt-get update
+sudo ldconfig
 # install dependencies to build the source files
 sudo apt-get install build-essential cmake libudev-dev
 sudo apt-get install libtool
@@ -14,6 +15,6 @@ cd restclient-cpp/ && ./autogen.sh && ./configure && sudo make install
 cd ..
 sudo rm -r restclient-cpp/
 # make for client driver
-cd benchprezz/parity-aura/src/macro/kvstore/
+cd benchprezz/src/macro/kvstore/
 make
 cd ~

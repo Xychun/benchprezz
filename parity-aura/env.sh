@@ -1,7 +1,7 @@
 # server - user
 USER=ubuntu
 # home directory
-HOME=/home/$USER/
+HOME=/home/$USER
 # parity-aura home directory
 AURA_HOME=/home/$USER/benchprezz/parity-aura
 # file containing the miner ip addresses
@@ -21,9 +21,9 @@ KEY_DIR=$DATA_DIR/keystore
 # password for account unlock
 PWD="password"
 # ssh key file
-SSH_KEY=$HOME.ssh/JDev.pem
+SSH_KEY=$HOME/.ssh/JDev.pem
 # folder that contains the benchmark (client) executable (make sure that you have build the client) (this could be on a network share)
-DRIVER_HOME=$AURA_HOME/src/macro/kvstore
+DRIVER_HOME=$HOME/benchprezz/src/macro/kvstore
 # port used by ethereum nodes
 PORT_INIT=30001
 # RPCport used by ethereum nodes

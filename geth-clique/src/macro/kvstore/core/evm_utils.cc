@@ -327,7 +327,9 @@ std::string deploy_smart_contract(const std::string &endpoint,
                                   const std::string &from_address,
                                   SmartContractType type)
 {
+  std::cout << "xxxxx" << std::endl;
   std::string txn_data = DEPLOY_SMARTCONTRACT_PREFIX + from_address;
+  std::cout << "yyyyy" << std::endl;
   switch (type)
   {
   case SmartContractType::KVStore:
@@ -340,6 +342,7 @@ std::string deploy_smart_contract(const std::string &endpoint,
     txn_data += DEPLOY_DONOTHING_SMARTCONTRACT_SUFFIX;
     break;
   }
+
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, txn_data);
   std::cout << "deploy_smart_contract" << std::endl;
   std::cout << "txn_data: " << txn_data << std::endl;
