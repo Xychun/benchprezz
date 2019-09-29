@@ -1,7 +1,7 @@
 # server - user
 USER=ubuntu
 # home directory
-HOME=/home/$USER/
+HOME=/home/$USER
 # geth-clique home directory
 GETH_HOME=/home/$USER/benchprezz/geth-clique
 # file containing the miner ip addresses
@@ -19,9 +19,9 @@ LOG_DIR=$GETH_HOME/logs-geth-clique
 # password for account unlock
 PWD="password"
 # ssh key file
-SSH_KEY=$HOME.ssh/JDev.pem
-# folder that contains the benchmark (client) executable (make sure that you have build the client) (this could be on a network share)
-DRIVER_HOME=$GETH_HOME/src/macro/kvstore
+SSH_KEY=$HOME/.ssh/JDev.pem
+# folder that contains the benchmark (client) executable (make sure that you have build the client)
+DRIVER_HOME=$HOME/benchprezz/src/macro/kvstore
 # port used by ethereum nodes
 PORT_INIT=30001
 # RPCport used by ethereum nodes
