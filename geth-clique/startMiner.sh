@@ -12,6 +12,9 @@ sleep 1
 echo miner started
 
 for peer in `cat $GETH_HOME/peers`; do
-  echo adding peer $peer
-  geth --exec $peer attach ipc:$DATA_DIR/geth.ipc
+  if [[ $i -lt $minerCount ]]; then
+    echo adding peer $peer
+    geth --exec $peer attach ipc:$DATA_DIR/geth.ipc
+  fi
+    let i=$i+1
 done

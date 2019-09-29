@@ -2,20 +2,22 @@
 USER=ubuntu
 # home directory
 HOME=/home/$USER
-# geth-clique home directory
-GETH_HOME=/home/$USER/benchprezz/geth-clique
+# parity-aura home directory
+AURA_HOME=/home/$USER/benchprezz/parity-aura
 # file containing the miner ip addresses
-MINERS=$GETH_HOME/miners
+MINERS=$AURA_HOME/miners
 # file containing the client ip addresses
-CLIENTS=$GETH_HOME/clients
+CLIENTS=$AURA_HOME/clients
 # file containing the peer info
-PEERS=$GETH_HOME/peers
+PEERS=$AURA_HOME/peers
 # file containing the peer info
-ACCOUNTS=$GETH_HOME/accounts
-# file containing chain info and running geth directory
-DATA_DIR=$GETH_HOME/chainInfo
+ACCOUNTS=$AURA_HOME/accounts
 # folder that stores the log files (client-side)
-LOG_DIR=$GETH_HOME/logs-geth-clique
+LOG_DIR=$AURA_HOME/logs-parity-aura
+# file containing chain info and running aura directory
+DATA_DIR=$AURA_HOME/chainInfo
+# folde that contains the keystore
+KEY_DIR=$DATA_DIR/keystore
 # password for account unlock
 PWD="password"
 # ssh key file
