@@ -14,7 +14,7 @@ const std::string UNLOCK_ACCOUNT_PREFIX =
   \"params\": [\"";
 
 const std::string UNLOCK_ACCOUNT_SUFFIX =
-    "\",\"\",null], \
+    "\",\"password\",null], \
       \"id\": 1}";
 
 const std::string SEND_TXN_PREFIX =
@@ -319,8 +319,11 @@ std::vector<std::string> poll_txs_by_block_number(const std::string &endpoint,
 
 void unlock_address(const std::string &endpoint, const std::string &address)
 {
-  send_jsonrpc_request(endpoint, REQUEST_HEADERS,
-                       UNLOCK_ACCOUNT_PREFIX + address + UNLOCK_ACCOUNT_SUFFIX);
+  std::cout << "unlock - endpoint" << endpoint << std::endl;
+  std::cout << "unlock - address" << address << std::endl;
+  auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS,
+                                UNLOCK_ACCOUNT_PREFIX + address + UNLOCK_ACCOUNT_SUFFIX);
+  std::cout << "unlock r: " << r << std::endl;
 }
 
 std::string deploy_smart_contract(const std::string &endpoint,
@@ -340,6 +343,9 @@ std::string deploy_smart_contract(const std::string &endpoint,
     txn_data += DEPLOY_DONOTHING_SMARTCONTRACT_SUFFIX;
     break;
   }
+  std::cout << "lalala" << std::endl;
+  std::cout << "endpoint: " << endpoint << std::endl;
+  std::cout << "txn_data: " << txn_data << std::endl;
   auto r = send_jsonrpc_request(endpoint, REQUEST_HEADERS, txn_data);
   std::cout << "deploy_smart_contract" << std::endl;
   std::cout << "txn_data: " << txn_data << std::endl;

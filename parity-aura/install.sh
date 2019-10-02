@@ -8,7 +8,7 @@ sudo apt-get install autoconf
 sudo apt-get install libcurl4-gnutls-dev
 sudo apt-get install make
 # install parity
-bash <(curl https://get.parity.io -L)
+bash <(curl https://get.parity.io -L) -r stable
 # install restlcient-cpp
 git clone https://github.com/mrtazz/restclient-cpp.git
 cd restclient-cpp/ && ./autogen.sh && ./configure && sudo make install
