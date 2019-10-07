@@ -6,9 +6,17 @@ var KVStoreABI = ABIs.KVStore;
 var fromAddress = "0x933e73c3f959759c169effa4019c8faf7d05ce33"
 
 var endpoint = myArgs[0];
-var txRate = myArgs[1];
-var waitTime = myArgs[2];
-var contractType = myArgs[3];
+var contractType = myArgs[1];
+var deployTime = myArgs[2];
+var txRate = myArgs[3];
+var txLimit = myArgs[4];
+
+var txs0 = [] //Tuple<Hash, time> add when received
+var txs1 = [] //Tuple<Hash, time> add when mined
+
+let txCount = 0;
+let start = 0;
+let finish = 0;
 
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
@@ -43,13 +51,54 @@ web3.eth.sendTransaction({ "from": "0x933e73c3f959759c169effa4019c8faf7d05ce33",
     });
 
 function sendTransaction() {
-    tx.send({ from: fromAddress }, (error, result) => {
-        if (error) {
-            console.log("error:", error)
-        } else {
-            console.log("result:", result)
+    if (start == 0) {
+        start = Date.now();
+    }
+    tx.send({ from: fromAddress })
+        .once('transactionHash', function (hash) {
+            // console.log("TX RECEIVED:", hash)
+            txs0.push({ txHash: hash, time: Date.now() });
+        })
+        .on('error', function (error) { console.log("ERROR\n:", error) })
+        .then(function (receipt) {
+            // console.log("TX MINED:", receipt.transactionHash)
+            txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
+            if (txCount == txLimit) {
+                finish = Date.now();
+            }
+        });
+}
+
+async function evaluate() {
+    while (txs1.length < txLimit) {
+        await sleep(1000);
+    }
+
+    let totalLatency = 0;
+    console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
+    for (let i = 0; i < txs0.length; i++) {
+        totalLatency += txs1[i].time - txs0[i].time;
+    }
+
+    if (txCount != txLimit) {
+        console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
+    }
+    console.log("\nDURATION:", finish - start, "\n");
+    console.log("\nAVG. TPS:", txCount / ((finish - start) / 1000), "\n");
+    console.log("\nAVG. LATENCY:", totalLatency / txs0.length, "\n");
+}
+
+function setIntervalX(callback, delay, repetitions) {
+    var intervalID = setInterval(function () {
+
+        callback();
+
+        console.log(txCount + 1 + " of " + repetitions);
+        if (++txCount == repetitions) {
+            console.log("\nALL TXS SENT - Waiting for mining process to finish!\n");
+            clearInterval(intervalID);
         }
-    })
+    }, delay);
 }
 
 function sleep(ms) {
@@ -57,19 +106,19 @@ function sleep(ms) {
 }
 
 async function loop() {
-    await sleep(waitTime * 1000);
+    await sleep(deployTime * 1000);
 
     contract = new web3.eth.Contract(KVStoreABI);
     contract.options.address = contractAddress;
     tx = contract.methods.set("hello", "world");
 
-    setInterval(() => sendTransaction(), 1000 / txRate);
+    console.log("\nSending ", txLimit + "txs...\n");
+    setIntervalX(function () {
+        sendTransaction();
+    }, 1000 / txRate, txLimit);
+    setTimeout(function () {
+        evaluate();
+    }, (1000 / txRate) * txLimit);
 }
 
 loop();
-
-// create loop for sending tx
-
-// check reciepts
-
-// calc tx / sec and latency

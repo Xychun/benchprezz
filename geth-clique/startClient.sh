@@ -28,6 +28,6 @@ for miner in `cat $MINERS`; do
   cd $BENCHMARK_HOME
   rpcport=`expr $RPCPORT_INIT + $i`
   echo "Starting client for endpoint " $miner:$rpcport
-  nohup node ./run.js $miner:$rpcport $txrate 10 "KVStore" > $log_dir/client_$clientId"_"$miner 2>&1 &
+  nohup node ./run.js $miner:$rpcport "KVStore" 10 $txrate 20  > $log_dir/client_$clientId"_"$miner 2>&1 &
   let i=i+1
 done
