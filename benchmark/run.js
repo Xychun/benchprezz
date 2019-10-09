@@ -35,7 +35,7 @@ switch (contractType) {
         // code block
         break;
     default:
-        console.log("Contract Type not specified");
+        console.log("\nERROR: Contract Type not specified!!!!\n");
 }
 
 console.log("Deploying smart contract");
@@ -93,7 +93,7 @@ function setIntervalX(callback, delay, repetitions) {
 
         callback();
 
-        console.log(txCount + 1 + " of " + repetitions);
+        // console.log(txCount + 1 + " of " + repetitions);
         if (++txCount == repetitions) {
             console.log("\nALL TXS SENT - Waiting for mining process to finish!\n");
             clearInterval(intervalID);
