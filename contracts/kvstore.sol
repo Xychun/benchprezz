@@ -1,13 +1,13 @@
-pragma solidity ^0.4.0;
+pragma solidity ^0.5.7;
 
 contract KVstore {
 
-  mapping(string=>string) store;
+  mapping(string=>string) public store;
 
-  function get(string key) constant returns(string) {
+  function get(string memory key) public view returns(string memory) {
     return store[key];
   }
-  function set(string key, string value) {
+  function set(string memory key, string memory value) public {
     store[key] = value;
   }
 }

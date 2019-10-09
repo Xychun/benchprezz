@@ -22,6 +22,8 @@ KEY_DIR=$DATA_DIR/keystore
 PWD="password"
 # ssh key file
 SSH_KEY=$HOME/.ssh/JDev.pem
+# folder that contains the benchmark client executable
+BENCHMARK_HOME=$HOME/benchprezz/benchmark/
 # folder that contains the benchmark (client) executable (make sure that you have build the client)
 DRIVER_HOME=$HOME/benchprezz/src/macro/kvstore
 # port used by ethereum nodes
