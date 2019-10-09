@@ -5,19 +5,14 @@
       {
         "name": "my benchprezz",
         "files": ["**"],
-        // "deployOnSave": [
-        //   "geth-clique-1",
-        //   "geth-clique-2",
-        //   "geth-clique-3",
-        //   "geth-clique-4",
-        //   "geth-clique-5"
-        // ]
         "deployOnSave": [
           "geth-clique-1",
           "geth-clique-2",
           "geth-clique-3",
           "geth-clique-4",
-          "geth-clique-5"
+          "geth-clique-5",
+          "geth-clique-6",
+          "geth-clique-7"
         ]
         // "deployOnSave": [
         //   "parity-aura-1",
@@ -81,6 +76,30 @@
         "type": "sftp",
         "name": "geth-clique-5",
         "host": "10.195.2.111",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-clique-6",
+        "host": "10.195.0.10",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-clique-7",
+        "host": "10.195.2.66",
         "user": "ubuntu",
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
