@@ -20,14 +20,3 @@ sudo apt-get install software-properties-common
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
 sudo apt-get install ethereum
-
-
-# # install restlcient-cpp
-# git clone https://github.com/mrtazz/restclient-cpp.git
-# cd restclient-cpp/ && ./autogen.sh && ./configure && sudo make install
-# cd ..
-# sudo rm -r restclient-cpp/
-# # make for client driver
-# cd benchprezz/geth-clique/src/macro/kvstore/
-# make
-# cd ~
