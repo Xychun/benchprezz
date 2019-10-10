@@ -4,30 +4,22 @@ cd `dirname ${BASH_SOURCE-$0}`
 
 minerCount=$1
 clientCount=$2
-threadCount=$3
-txrate=$4
-clientId=$5
+txRate=$3
+txLimit=$4
+wl=$5
+let clientId=$6
 
+let deployTime=10
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
-log_dir=$LOG_DIR/$timestamp"_"$1"_"miners_$2"_"clients_$3"_"threads_$4"_"txrate
-mkdir -p $log_dir
+rpcport=`expr $RPCPORT_INIT + $clientId`
+readarray accounts < $ACCOUNTS -t
+account=${accounts[$clientId]}
+readarray miners < $MINERS -t
+miner="$(echo -e "${miners[$clientId]}" | tr -d '[:space:]')"
+endpoint=$miner:$rpcport
 
-# i=0
-# echo "iterating over miners for clientID=$5"
-# for miner in `cat $MINERS`; do
-#   cd $DRIVER_HOME
-#   rpcport=`expr $RPCPORT_INIT + $i`
-#   echo "Starting driver for endpoint " $miner:$rpcport
-#   nohup ./driver -db parity -threads $threadCount -P workloads/workloada.spec -endpoint $miner:$rpcport -txrate $txrate -wt 60 > $log_dir/client_$clientId"_"$miner 2>&1 &
-#   let i=i+1
-# done
+mkdir -p $LOG_DIR
+cd $BENCHMARK_HOME
 
-i=0
-echo "iterating over miners for clientID=$5"
-for miner in `cat $MINERS`; do
-  cd $BENCHMARK_HOME
-  rpcport=`expr $RPCPORT_INIT + $i`
-  echo "Starting client for endpoint " $miner:$rpcport
-  nohup node ./run.js $miner:$rpcport $txrate 60 > $log_dir/client_$clientId"_"$miner 2>&1 &
-  let i=i+1
-done
+echo "Starting client " $clientId " for endpoint " $endpoint " with configuration:: minerCount:"$minerCount " clientCount:"$clientCount " txRate:"$txRate " txLimit:"$txLimit " workload:"$wl " deployTime:"$deployTime
+nohup node ./run.js $endpoint $account $wl $deployTime $txRate $txLimit > $LOG_DIR/$wl"_"$minerCount"_"miners_$clientCount"_"clients_$txRate"_"txRate_$txLimit"_"txLimit_$timestamp 2>&1 &

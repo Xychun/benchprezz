@@ -11,7 +11,7 @@ sudo apt-get install make
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install nodejs
 sudo apt-get install npm
-cd ..
+cd ~/benchprezz/
 npm install
 # install parity
 bash <(curl https://get.parity.io -L)
