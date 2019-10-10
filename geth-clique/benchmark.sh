@@ -26,10 +26,10 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT N
 ./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
 
 count=0
-total=12
+total=$(expr 60 + $txLimit / $txrate)
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
-  sleep 10 # this is work
+  sleep 1 # this is work
   count=$(( $count + 1 ))
   pd=$(( $count * 73 / $total ))
   printf "\r%3d.%1d%% %.${pd}s" $(( $count * 100 / $total )) $(( ($count * 1000 / $total) % 10 )) $pstr
