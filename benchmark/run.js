@@ -1,26 +1,22 @@
 var ABIs = require('./ABIs');
 var myArgs = process.argv.slice(2);
 
-var KVStoreABI = ABIs.KVStore;
-
-var fromAddress = "0x933e73c3f959759c169effa4019c8faf7d05ce33"
-
 var endpoint = myArgs[0];
-var contractType = myArgs[1];
-var deployTime = myArgs[2];
-var txRate = myArgs[3];
-var txLimit = myArgs[4];
+var fromAddress = myArgs[1];
+var contractType = myArgs[2];
+var deployTime = myArgs[3];
+var txRate = myArgs[4];
+var txLimit = myArgs[5];
 
+var KVStoreABI = ABIs.KVStore;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
-
 let txCount = 0;
 let start = 0;
 let finish = 0;
 
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
-
 if (!web3) {
     console.log("Issue connecting to web3 provider at " + endpoint);
 } else {
@@ -35,11 +31,11 @@ switch (contractType) {
         // code block
         break;
     default:
-        console.log("Contract Type not specified");
+        console.log("\nERROR: Contract Type not specified!!!!\n");
 }
 
-console.log("Deploying smart contract");
-web3.eth.sendTransaction({ "from": "0x933e73c3f959759c169effa4019c8faf7d05ce33", "data": byteCode })
+console.log("Deploying smart contract from " + fromAddress);
+web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode })
     .once('transactionHash', function (hash) { console.log("TX HASH:\n", hash) })
     .once('receipt', function (receipt) { console.log("RECEIPT:\n", receipt) })
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
@@ -93,7 +89,7 @@ function setIntervalX(callback, delay, repetitions) {
 
         callback();
 
-        console.log(txCount + 1 + " of " + repetitions);
+        // console.log(txCount + 1 + " of " + repetitions);
         if (++txCount == repetitions) {
             console.log("\nALL TXS SENT - Waiting for mining process to finish!\n");
             clearInterval(intervalID);
