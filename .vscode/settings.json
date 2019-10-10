@@ -5,20 +5,22 @@
       {
         "name": "my benchprezz",
         "files": ["**"],
-        // "deployOnSave": [
-        //   "geth-clique-1",
-        //   "geth-clique-2",
-        //   "geth-clique-3",
-        //   "geth-clique-4",
-        //   "geth-clique-5"
-        // ]
         "deployOnSave": [
-          "parity-aura-1",
-          "parity-aura-2",
-          "parity-aura-3",
-          "parity-aura-4",
-          "parity-aura-5"
+          "geth-clique-1",
+          "geth-clique-2",
+          "geth-clique-3",
+          "geth-clique-4",
+          "geth-clique-5",
+          "geth-clique-6",
+          "geth-clique-7"
         ]
+        // "deployOnSave": [
+        //   "parity-aura-1",
+        //   "parity-aura-2",
+        //   "parity-aura-3",
+        //   "parity-aura-4",
+        //   "parity-aura-5"
+        // ]
       }
     ],
     "targets": [
@@ -30,7 +32,8 @@
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
         "modes": {
-          "/**/*.sh": 744
+          "/**/*.sh": 744,
+          "/**/*.js": 744
         }
       },
       {
@@ -41,7 +44,8 @@
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
         "modes": {
-          "/**/*.sh": 744
+          "/**/*.sh": 744,
+          "/**/*.js": 744
         }
       },
       {
@@ -52,7 +56,8 @@
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
         "modes": {
-          "/**/*.sh": 744
+          "/**/*.sh": 744,
+          "/**/*.js": 744
         }
       },
       {
@@ -63,7 +68,8 @@
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
         "modes": {
-          "/**/*.sh": 744
+          "/**/*.sh": 744,
+          "/**/*.js": 744
         }
       },
       {
@@ -74,7 +80,92 @@
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
         "modes": {
-          "/**/*.sh": 744
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-clique-6",
+        "host": "10.195.0.10",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-clique-7",
+        "host": "10.195.2.66",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-aura-1",
+        "host": "10.195.2.106",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-aura-2",
+        "host": "10.195.2.113",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-aura-3",
+        "host": "10.195.2.115",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-aura-4",
+        "host": "10.195.2.131",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-aura-5",
+        "host": "10.195.2.132",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
         }
       },
       {

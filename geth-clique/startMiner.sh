@@ -2,7 +2,7 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-miners=$1
+minerCount=$1
 threads=$2
 rpcport=$3
 account=$4
