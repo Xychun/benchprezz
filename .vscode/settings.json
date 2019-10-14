@@ -15,14 +15,21 @@
         //   "geth-clique-7"
         // ]
         "deployOnSave": [
-          "parity-aura-1",
-          "parity-aura-2",
-          "parity-aura-3",
-          "parity-aura-4",
-          "parity-aura-5",
-          "parity-aura-6",
-          "parity-aura-7"
+          "geth-ethash-1",
+          "geth-ethash-2",
+          "geth-ethash-3",
+          "geth-ethash-4",
+          "geth-ethash-5"
         ]
+        // "deployOnSave": [
+        //   "parity-aura-1",
+        //   "parity-aura-2",
+        //   "parity-aura-3",
+        //   "parity-aura-4",
+        //   "parity-aura-5",
+        //   "parity-aura-6",
+        //   "parity-aura-7"
+        // ]
       }
     ],
     "targets": [
@@ -78,6 +85,66 @@
         "type": "sftp",
         "name": "geth-clique-5",
         "host": "10.195.2.111",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-ethash-1",
+        "host": "10.195.2.174",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-ethash-2",
+        "host": "10.195.2.127",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-ethash-3",
+        "host": "10.195.2.169",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-ethash-4",
+        "host": "10.195.2.92",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744,
+          "/**/*.js": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "geth-ethash-5",
+        "host": "10.195.2.158",
         "user": "ubuntu",
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
