@@ -7,6 +7,9 @@ clientCount=$2
 threadCount=$3
 txrate=$4
 
+mkdir -p $LOG_DIR
+mkdir -p $DATA_DIR
+
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh $minerCount $clientCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT GETH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
