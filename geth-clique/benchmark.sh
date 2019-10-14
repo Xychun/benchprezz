@@ -9,6 +9,9 @@ txrate=$4
 txLimit=$5
 wl=$6
 
+mkdir -p $LOG_DIR
+mkdir -p $DATA_DIR
+
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 printf "Miners: "$minerCount"\n"
 printf "Clients: "$clientCount"\n"
