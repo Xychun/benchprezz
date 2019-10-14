@@ -9,7 +9,7 @@ txLimit=$4
 wl=$5
 let clientId=$6
 
-let deployTime=10
+let deployTime=20
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 rpcport=`expr $RPCPORT_INIT + $clientId`
 ./scrapePeers.sh
@@ -20,6 +20,7 @@ miner="$(echo -e "${miners[$clientId]}" | tr -d '[:space:]')"
 endpoint=$miner:$rpcport
 
 mkdir -p $LOG_DIR
+mkdir -p $DATA_DIR
 cd $BENCHMARK_HOME
 
 echo "Starting client " $clientId " for endpoint " $endpoint " with configuration:: minerCount:"$minerCount " clientCount:"$clientCount " txRate:"$txRate " txLimit:"$txLimit " workload:"$wl " deployTime:"$deployTime
