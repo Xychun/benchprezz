@@ -8,7 +8,7 @@ clientCount=$2
 i=0
 for client in `cat $CLIENTS`; do
     if [[ $i -lt $clientCount ]]; then
-        ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$client killall -s KILL node
+        ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$client sudo killall -s KILL node
         echo stopped node on client $client
     fi
     let i=$i+1
