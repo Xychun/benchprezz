@@ -7,4 +7,4 @@ minerCount=$1
 
 mkdir -p $DATA_DIR
 
-geth --datadir=$DATA_DIR init $ETHASH_HOME/genesis_clique"_"$minerCount".json"
+geth --datadir=$DATA_DIR init $ETHASH_HOME/genesis_ethash"_"$minerCount".json"
