@@ -18,7 +18,7 @@ printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh $minerCount $clientCount
-printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT GETH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT ETHASH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount $threadCount
