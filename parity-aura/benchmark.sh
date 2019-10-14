@@ -21,7 +21,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount $threadCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startClients.sh $minerCount $clientCount $threadCount $txrate $txLimit $wl
+./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
 
 count=0
 total=$(expr 60 + $txLimit / $txrate)

@@ -55,9 +55,6 @@ function sendTransaction() {
             console.log("TX RECEIVED:", hash)
             txs0.push({ txHash: hash, time: Date.now() });
         })
-        .once('receipt', function (receipt) {
-            console.log("RECEIPT:\n", receipt)
-        })
         .on('error', function (error) {
             console.log("ERROR\n:", error)
         })

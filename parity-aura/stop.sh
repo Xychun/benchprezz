@@ -7,5 +7,3 @@ rm -r $DATA_DIR/cache
 rm -r $DATA_DIR/chains
 rm -r $DATA_DIR/network
 rm -rf $DATA_DIR/jsonrpc.ipc
-
-# rm -rf $DATA_DIR/chains/Benchprezz/network/nodes.json
