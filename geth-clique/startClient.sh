@@ -9,7 +9,7 @@ txLimit=$4
 wl=$5
 let clientId=$6
 
-let deployTime=10
+let deployTime=20
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 rpcport=`expr $RPCPORT_INIT + $clientId`
 ./scrapePeers.sh
