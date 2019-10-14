@@ -14,13 +14,13 @@
         //   "geth-clique-6",
         //   "geth-clique-7"
         // ]
-        "deployOnSave": [
-          "geth-ethash-1",
-          "geth-ethash-2",
-          "geth-ethash-3",
-          "geth-ethash-4",
-          "geth-ethash-5"
-        ]
+        // "deployOnSave": [
+        //   "geth-ethash-1",
+        //   "geth-ethash-2",
+        //   "geth-ethash-3",
+        //   "geth-ethash-4",
+        //   "geth-ethash-5"
+        // ]
         // "deployOnSave": [
         //   "parity-aura-1",
         //   "parity-aura-2",
@@ -30,6 +30,13 @@
         //   "parity-aura-6",
         //   "parity-aura-7"
         // ]
+        "deployOnSave": [
+          "parity-seal-1",
+          "parity-seal-2",
+          "parity-seal-3",
+          "parity-seal-4",
+          "parity-seal-5"
+        ]
       }
     ],
     "targets": [
@@ -307,6 +314,61 @@
         "type": "sftp",
         "name": "parity-aura-7",
         "host": "10.195.2.132",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      }
+      {
+        "type": "sftp",
+        "name": "parity-seal-1",
+        "host": "10.195.2.185",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-seal-2",
+        "host": "10.195.2.134",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-seal-3",
+        "host": "10.195.2.83",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-seal-4",
+        "host": "10.195.2.56",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "parity-seal-5",
+        "host": "10.195.2.165",
         "user": "ubuntu",
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
