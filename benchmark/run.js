@@ -53,14 +53,14 @@ function sendTransaction() {
     }
     tx.send({ "from": fromAddress })
         .once('transactionHash', function (hash) {
-            console.log("TX RECEIVED:", hash)
+            // console.log("TX RECEIVED:", hash)
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
             console.log("ERROR\n:", error)
         })
         .then(function (receipt) {
-            console.log("TX MINED:", receipt.transactionHash)
+            // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
             if (txCount == txLimit) {
                 finish = Date.now();
