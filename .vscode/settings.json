@@ -34,11 +34,17 @@
           // "parity-seal-4",
           // "parity-seal-5",
 
-          "quorum-raft-1",
-          "quorum-raft-2",
-          "quorum-raft-3",
-          "quorum-raft-4",
-          "quorum-raft-5"
+          // "quorum-raft-1",
+          // "quorum-raft-2",
+          // "quorum-raft-3",
+          // "quorum-raft-4",
+          // "quorum-raft-5",
+
+          "quorum-IBFT-1",
+          "quorum-IBFT-2",
+          "quorum-IBFT-3",
+          "quorum-IBFT-4",
+          "quorum-IBFT-5"
         ]
       }
     ],
@@ -427,6 +433,61 @@
         "type": "sftp",
         "name": "quorum-raft-5",
         "host": "10.195.2.126",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "quorum-IBFT-1",
+        "host": "10.195.2.191",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "quorum-IBFT-2",
+        "host": "10.195.2.66",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "quorum-IBFT-3",
+        "host": "10.195.2.168",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "quorum-IBFT-4",
+        "host": "10.195.0.10",
+        "user": "ubuntu",
+        "dir": "/home/ubuntu/benchprezz",
+        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+        "modes": {
+          "/**/*.sh": 744
+        }
+      },
+      {
+        "type": "sftp",
+        "name": "quorum-IBFT-5",
+        "host": "10.195.2.98",
         "user": "ubuntu",
         "dir": "/home/ubuntu/benchprezz",
         "privateKey": "/Users/Juuu/.ssh/JDev.pem",
