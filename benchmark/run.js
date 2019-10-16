@@ -36,7 +36,7 @@ switch (contractType) {
 }
 
 console.log("Deploying smart contract from " + fromAddress);
-web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode })
+web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gasLimit": 1000000 })
     .once('transactionHash', function (hash) { console.log("TX HASH:\n", hash) })
     .once('receipt', function (receipt) { console.log("RECEIPT:\n", receipt) })
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
@@ -51,7 +51,7 @@ function sendTransaction() {
     if (start == 0) {
         start = Date.now();
     }
-    tx.send({ "from": fromAddress })
+    tx.send({ "from": fromAddress, "gasLimit": 1000000 })
         .once('transactionHash', function (hash) {
             // console.log("TX RECEIVED:", hash)
             txs0.push({ txHash: hash, time: Date.now() });
