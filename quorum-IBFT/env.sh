@@ -27,8 +27,6 @@ SSH_KEY=$HOME/.ssh/JDev.pem
 # folder that contains the benchmark client executable
 BENCHMARK_HOME=$HOME/benchprezz/benchmark/
 # port used by quorum nodes
-PORT_INIT=21001
+PORT_INIT=20001
 # port used by quorum nodes
-RPCPORT_INIT=22001
-# RPCport used by quorum nodes
-RAFTPORT_INIT=50401
+RPCPORT_INIT=30001

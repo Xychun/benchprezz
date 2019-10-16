@@ -16,10 +16,12 @@ printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh $minerCount $clientCount
-printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT RAFT ON NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT IBFT ON NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
 
 count=0
 total=$(expr 60 + $txLimit / $txrate)
