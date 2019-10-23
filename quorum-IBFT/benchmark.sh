@@ -20,6 +20,16 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT IBFT ON N
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount
+printf "Booting...\n"
+count=0
+total=60
+pstr="[=======================================================================]"
+while [ $count -lt $total ]; do
+  sleep 1
+  count=$(( $count + 1 ))
+  pd=$(( $count * 73 / $total ))
+  printf "\r%3d.%1d%% %.${pd}s" $(( $count * 100 / $total )) $(( ($count * 1000 / $total) % 10 )) $pstr
+done
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
 
