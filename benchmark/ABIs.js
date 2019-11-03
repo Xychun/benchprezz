@@ -3,25 +3,6 @@ var KVStoreABI = [
         "constant": true,
         "inputs": [
             {
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "name": "store",
-        "outputs": [
-            {
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "constant": true,
-        "inputs": [
-            {
                 "name": "key",
                 "type": "string"
             }
@@ -58,41 +39,6 @@ var KVStoreABI = [
 ]
 
 var StandardContractABI = [
-    {
-        "constant": true,
-        "inputs": [
-            {
-                "name": "",
-                "type": "address"
-            }
-        ],
-        "name": "addressToStateVector_",
-        "outputs": [
-            {
-                "name": "latitude",
-                "type": "int32"
-            },
-            {
-                "name": "longitude",
-                "type": "int32"
-            },
-            {
-                "name": "direction",
-                "type": "uint16"
-            },
-            {
-                "name": "speed",
-                "type": "uint16"
-            },
-            {
-                "name": "acceleration",
-                "type": "int8"
-            }
-        ],
-        "payable": false,
-        "stateMutability": "view",
-        "type": "function"
-    },
     {
         "constant": false,
         "inputs": [

@@ -20,6 +20,8 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT RAFT ON N
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
 
 count=0
 total=$(expr 60 + $txLimit / $txrate)
