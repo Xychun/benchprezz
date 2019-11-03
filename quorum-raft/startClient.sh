@@ -23,4 +23,4 @@ mkdir -p $DATA_DIR
 cd $BENCHMARK_HOME
 
 echo "Starting client " $clientId " for endpoint " $endpoint " with configuration:: minerCount:"$minerCount " clientCount:"$clientCount " txRate:"$txRate " txLimit:"$txLimit " workload:"$wl " deployTime:"$deployTime
-nohup node ./run.js $endpoint $account $wl $deployTime $txRate $txLimit > $LOG_DIR/$wl"_"$minerCount"_"miners_$clientCount"_"clients_$txRate"_"txRate_$txLimit"_"txLimit_$timestamp 2>&1 &
+nohup node ./run.js $endpoint $account $wl $deployTime $txRate $txLimit > $LOG_DIR/client_$clientId"_"$wl"_"$minerCount"_"miners_$clientCount"_"clients_$txRate"_"txRate_$txLimit"_"txLimit_$timestamp 2>&1 &
