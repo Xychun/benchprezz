@@ -4,15 +4,16 @@ var myArgs = process.argv.slice(2);
 var endpoint = myArgs[0];
 var fromAddress = myArgs[1];
 var contractType = myArgs[2];
-var deployTime = myArgs[3];
-var txRate = myArgs[4];
-var txLimit = myArgs[5];
+var deployTime = Number(myArgs[3]);
+var txRate = Number(myArgs[4]);
+var txLimit = Number(myArgs[5]);
 
 var KVStoreABI = ABIs.KVStore;
 var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
 let txCount = 0;
+let startingBlock = 0;
 let start = 0;
 let finish = 0;
 
@@ -47,13 +48,10 @@ web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 1000000
         contractAddress = receipt.contractAddress;
     });
 
-function sendTransaction() {
-    if (start == 0) {
-        start = Date.now();
-    }
+async function sendTransaction() {
     tx.send({ "from": fromAddress, "gas": 4000000 })
         .once('transactionHash', function (hash) {
-            // console.log("TX RECEIVED:", hash)
+            // console.log("TX RECEIVED:", hash, "at", Date.now())
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
@@ -62,8 +60,13 @@ function sendTransaction() {
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
+            if (startingBlock == 0) {
+                startingBlock = receipt.blockNumber;
+                console.log("startingBlock", startingBlock);
+            }
             if (txs1.length == txLimit) {
-                finish = Date.now();
+                finishBlock = receipt.blockNumber;
+                console.log("finishBlock", finishBlock);
             }
         });
 }
@@ -72,6 +75,11 @@ async function evaluate() {
     while (txs1.length < txLimit) {
         await sleep(1000);
     }
+
+    startBlockInfo = await web3.eth.getBlock(startingBlock);
+    start = startBlockInfo.timestamp;
+    finishBlockInfo = await web3.eth.getBlock(finishBlock);
+    finish = finishBlockInfo.timestamp;
 
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
@@ -83,16 +91,16 @@ async function evaluate() {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
     console.log("\nDURATION:", finish - start, "\n");
-    console.log("\nAVG. TPS:", txCount / ((finish - start) / 1000), "\n");
-    console.log("\nAVG. LATENCY:", totalLatency / txs0.length, "\n");
+    console.log("\nAVG. TPS:", (txCount / (finish - start)), "\n");
+    console.log("\nAVG. LATENCY:", totalLatency / (txs0.length), "\n");
 }
 
-function setIntervalX(callback, delay, repetitions) {
+async function setIntervalX(callback, delay, repetitions) {
     var intervalID = setInterval(function () {
 
         callback();
 
-        // console.log(txCount + 1 + " of " + repetitions);
+        // console.log(txCount + 1 + " of " + repetitions + " at " + Date.now());
         if (++txCount == repetitions) {
             console.log("\nALL TXS SENT - Waiting for mining process to finish!\n");
             clearInterval(intervalID);
@@ -122,7 +130,7 @@ async function loop() {
             console.log("\nERROR: Contract Type not specified!!!!\n");
     }
 
-    console.log("\nSending ", txLimit + "txs...\n");
+    console.log("\nEvaluating ", txLimit + "txs...\n");
     setIntervalX(function () {
         sendTransaction();
     }, 1000 / txRate, txLimit);

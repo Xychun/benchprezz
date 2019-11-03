@@ -4,16 +4,18 @@ cd `dirname ${BASH_SOURCE-$0}`
 
 minerCount=$1
 clientCount=$2
-threadCount=$3
-txrate=$4
-txLimit=$5
-wl=$6
+txRate=$3
+adjTxRate=$(expr $txRate / $clientCount)
+txLimit=$4
+adjTxLimit=$(expr $txLimit / $clientCount)
+wl=$5
+
+threadCount="1"
 
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 printf "Miners: "$minerCount"\n"
 printf "Clients: "$clientCount"\n"
-printf "Threads: "$threadCount"\n"
-printf "Sending TPS: "$txrate"\n"
+printf "Sending TPS: "$txRate"\n"
 printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
@@ -21,10 +23,10 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount $threadCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
+./all-startClients.sh $minerCount $clientCount $adjTxRate $adjTxLimit $wl
 
 count=0
-total=$(expr 60 + $txLimit / $txrate)
+total=$(expr 300)
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 1
