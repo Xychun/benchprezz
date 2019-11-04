@@ -13,12 +13,12 @@ var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
 let txCount = 0;
-// let startingBlock = 0; // issue with quorum-raft
-// let finishBlock = 0; // issue with quorum-raft
 let sendingStart = 0;
 let sendingEnd = 0;
-let measureStart = 0;
-let measureEnd = 0;
+let startingBlock = 0; // issue with quorum-raft
+let finishBlock = 0; // issue with quorum-raft
+// let measureStart = 0;
+// let measureEnd = 0;
 
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
@@ -63,22 +63,50 @@ async function sendTransaction() {
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
-            if (measureStart == 0) {
-                measureStart = Date.now();
-            }
-            if (txs1.length == txLimit) {
-                measureEnd = Date.now();
-            }
-
-            // if (startingBlock == 0) {
-            //     startingBlock = receipt.blockNumber;
-            //     console.log("startingBlock:", startingBlock);
+            // if (measureStart == 0) {
+            //     measureStart = Date.now();
             // }
             // if (txs1.length == txLimit) {
-            //     finishBlock = receipt.blockNumber;
-            //     console.log("finishBlock:", finishBlock);
+            //     measureEnd = Date.now();
             // }
+
+            if (startingBlock == 0) {
+                startingBlock = receipt.blockNumber;
+                console.log("startingBlock:", startingBlock);
+            }
+            if (txs1.length == txLimit) {
+                finishBlock = receipt.blockNumber;
+                console.log("finishBlock:", finishBlock);
+            }
         });
+}
+
+let Web3Helpers = require('web3-core-helpers');
+let Web3Utils = require('web3-utils');
+
+web3.extend({
+    property: 'quorum_raft',
+    methods: [{
+        name: 'getBlock',
+        call: (args) => {
+            return "eth_getBlockByNumber";
+        },
+        params: 2,
+        inputFormatter: [Web3Helpers.formatters.inputBlockNumberFormatter, function (val) { return !!val; }],
+        outputFormatter: getOutputBlockFormatter
+    }]
+});
+
+function getOutputBlockFormatter(block) {
+    try {
+        // check to see if we have an issue with timestamp
+        Web3Utils.hexToNumber(block.timestamp);
+    }
+    catch (err) {
+        // WARNING this implementation assumes RAFT timestamp (precision is nanoseconds)
+        block.timestamp = '0x' + Math.floor(block.timestamp / 1e6).toString(16);
+    }
+    return Web3Helpers.formatters.outputBlockFormatter(block);
 }
 
 async function evaluate() {
@@ -87,9 +115,11 @@ async function evaluate() {
     }
 
     // startBlockInfo = await web3.eth.getBlock(startingBlock);
-    // start = startBlockInfo.timestamp;
+    startBlockInfo = await web3.quorum_raft.getBlock(startingBlock);
+    measureStart = startBlockInfo.timestamp;
     // finishBlockInfo = await web3.eth.getBlock(finishBlock);
-    // finish = finishBlockInfo.timestamp;
+    finishBlockInfo = await web3.quorum_raft.getBlock(finishBlock);
+    measureEnd = finishBlockInfo.timestamp;
 
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
