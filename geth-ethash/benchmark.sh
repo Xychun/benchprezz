@@ -26,7 +26,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NO
 ./all-startMiners.sh $minerCount $threadCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tGenerating DAG \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 count=0
-total=300
+total=360
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 1

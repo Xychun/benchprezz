@@ -7,12 +7,11 @@ clientCount=$2
 txRate=$3
 txLimit=$4
 wl=$5
-let clientId=$6
+clientId=$6
 
-let deployTime=10
+deployTime=10
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 rpcport=`expr $RPCPORT_INIT + $clientId`
-./scrapePeers.sh
 readarray accounts < $ACCOUNTS -t
 account=${accounts[$clientId]}
 readarray miners < $MINERS -t

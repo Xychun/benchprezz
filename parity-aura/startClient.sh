@@ -7,7 +7,7 @@ clientCount=$2
 txRate=$3
 txLimit=$4
 wl=$5
-let clientId=$6
+clientId=$6
 
 deployTime=20
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
