@@ -13,9 +13,12 @@ var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
 let txCount = 0;
-let startingBlock = 0;
-let start = 0;
-let finish = 0;
+// let startingBlock = 0; // issue with quorum-raft
+// let finishBlock = 0; // issue with quorum-raft
+let sendingStart = 0;
+let sendingEnd = 0;
+let measureStart = 0;
+let measureEnd = 0;
 
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
@@ -43,7 +46,7 @@ web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 1000000
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
     .on('error', function (error) { console.log("ERROR\n:", error) })
     .then(function (receipt) {
-        // will be fired once the receipt is mined
+        // will be fired once, at the time the transaction is mined
         console.log("Contract at:", receipt.contractAddress)
         contractAddress = receipt.contractAddress;
     });
@@ -60,14 +63,21 @@ async function sendTransaction() {
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
-            if (startingBlock == 0) {
-                startingBlock = receipt.blockNumber;
-                console.log("startingBlock", startingBlock);
+            if (measureStart == 0) {
+                measureStart = Date.now();
             }
             if (txs1.length == txLimit) {
-                finishBlock = receipt.blockNumber;
-                console.log("finishBlock", finishBlock);
+                measureEnd = Date.now();
             }
+
+            // if (startingBlock == 0) {
+            //     startingBlock = receipt.blockNumber;
+            //     console.log("startingBlock:", startingBlock);
+            // }
+            // if (txs1.length == txLimit) {
+            //     finishBlock = receipt.blockNumber;
+            //     console.log("finishBlock:", finishBlock);
+            // }
         });
 }
 
@@ -76,13 +86,14 @@ async function evaluate() {
         await sleep(1000);
     }
 
-    startBlockInfo = await web3.eth.getBlock(startingBlock);
-    start = startBlockInfo.timestamp;
-    finishBlockInfo = await web3.eth.getBlock(finishBlock);
-    finish = finishBlockInfo.timestamp;
+    // startBlockInfo = await web3.eth.getBlock(startingBlock);
+    // start = startBlockInfo.timestamp;
+    // finishBlockInfo = await web3.eth.getBlock(finishBlock);
+    // finish = finishBlockInfo.timestamp;
 
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
+    console.log("========================================================");
     for (let i = 0; i < txs0.length; i++) {
         totalLatency += txs1[i].time - txs0[i].time;
     }
@@ -90,9 +101,10 @@ async function evaluate() {
     if (txCount != txLimit) {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
-    console.log("\nDURATION:", finish - start, "\n");
-    console.log("\nAVG. TPS:", (txCount / (finish - start)), "\n");
-    console.log("\nAVG. LATENCY:", totalLatency / (txs0.length), "\n");
+    console.log("DURATION:", measureEnd - measureStart, "\n");
+    console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
+    console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
+    console.log("========================================================");
 }
 
 async function setIntervalX(callback, delay, repetitions) {
@@ -101,9 +113,16 @@ async function setIntervalX(callback, delay, repetitions) {
         callback();
 
         // console.log(txCount + 1 + " of " + repetitions + " at " + Date.now());
+        if (txCount == 0) {
+            sendingStart = Date.now();
+            console.log("Sending TXS started at", sendingStart, "...");
+        }
         if (++txCount == repetitions) {
-            console.log("\nALL TXS SENT - Waiting for mining process to finish!\n");
             clearInterval(intervalID);
+            sendingEnd = Date.now();
+            console.log("...", "Sending TXS finished at", sendingEnd);
+            console.log("Total send duration:", sendingEnd - sendingStart);
+            console.log("...", "Waiting for mining process to finish!", "...");
         }
     }, delay);
 }

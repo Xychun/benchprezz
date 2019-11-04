@@ -19,7 +19,7 @@ printf "Sending TPS: "$txRate"\n"
 printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-stop.sh $minerCount $clientCount
+./all-stop.sh
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT RAFT ON NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
