@@ -4,10 +4,11 @@ var myArgs = process.argv.slice(2);
 var endpoint = myArgs[0];
 var fromAddress = myArgs[1];
 var contractType = myArgs[2];
-var deployTime = Number(myArgs[3]);
-var txRate = Number(myArgs[4]);
-var txLimit = Number(myArgs[5]);
+var txRate = Number(myArgs[3]);
+var txLimit = Number(myArgs[4]);
+var startTime = Number(myArgs[5]);
 
+var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
 var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
@@ -26,6 +27,7 @@ if (!web3) {
     console.log("Issue connecting to web3 provider at " + endpoint);
 } else {
     console.log("Connected web3 provider at " + endpoint);
+    console.log("Date.now()", Date.now(), "startTime:", startTime, "delay", delay);
 }
 
 switch (contractType) {
@@ -165,7 +167,7 @@ function sleep(ms) {
 }
 
 async function loop() {
-    await sleep(deployTime * 1000);
+    await sleep(delay);
 
     switch (contractType) {
         case "KVStore":
