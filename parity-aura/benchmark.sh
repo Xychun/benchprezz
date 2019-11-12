@@ -5,9 +5,7 @@ cd `dirname ${BASH_SOURCE-$0}`
 minerCount=$1
 clientCount=$2
 txRate=$3
-adjTxRate=$(expr $txRate / $clientCount)
 txLimit=$4
-adjTxLimit=$(expr $txLimit / $clientCount)
 wl=$5
 
 threadCount="1"
@@ -23,7 +21,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startMiners.sh $minerCount $threadCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startClients.sh $minerCount $clientCount $adjTxRate $adjTxLimit $wl
+./all-startClients.sh $minerCount $clientCount $txRate $txLimit $wl
 
 count=0
 total=$(expr 300)

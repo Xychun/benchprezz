@@ -40,7 +40,7 @@ switch (contractType) {
 }
 
 console.log("Deploying smart contract from " + fromAddress);
-web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 1000000 })
+web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000 })
     .once('transactionHash', function (hash) { console.log("TX HASH:\n", hash) })
     .once('receipt', function (receipt) { console.log("RECEIPT:\n", receipt) })
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
@@ -99,11 +99,9 @@ web3.extend({
 
 function getOutputBlockFormatter(block) {
     try {
-        // check to see if we have an issue with timestamp
         Web3Utils.hexToNumber(block.timestamp);
     }
     catch (err) {
-        // WARNING this implementation assumes RAFT timestamp (precision is nanoseconds)
         block.timestamp = '0x' + Math.floor(block.timestamp / 1e6).toString(16);
     }
     return Web3Helpers.formatters.outputBlockFormatter(block);
@@ -114,12 +112,16 @@ async function evaluate() {
         await sleep(1000);
     }
 
-    // startBlockInfo = await web3.eth.getBlock(startingBlock);
     startBlockInfo = await web3.quorum_raft.getBlock(startingBlock);
     measureStart = startBlockInfo.timestamp;
-    // finishBlockInfo = await web3.eth.getBlock(finishBlock);
     finishBlockInfo = await web3.quorum_raft.getBlock(finishBlock);
     measureEnd = finishBlockInfo.timestamp;
+
+    gasBlockInfo = await web3.quorum_raft.getBlock(finishBlock - 1);
+    gasUsed = gasBlockInfo.gasUsed;
+    gasLimit = gasBlockInfo.gasLimit;
+    blockGasUsage = (gasUsed / gasLimit);
+    console.log("Gas Stats: gasUsed:", gasUsed, "gasLimit:", gasLimit, "blockGasUsage:", blockGasUsage * 100 + "%");
 
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
@@ -132,7 +134,8 @@ async function evaluate() {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
     console.log("DURATION:", measureEnd - measureStart, "\n");
-    console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
+    // console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
+    console.log("\nAVG. TPS:", txCount / (measureEnd - measureStart), "\n");
     console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
     console.log("========================================================");
 }

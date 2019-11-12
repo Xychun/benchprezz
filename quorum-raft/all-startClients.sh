@@ -8,7 +8,6 @@ txrate=$3
 txLimit=$4
 wl=$5
 
-
 echo "==== starting all clients ===="
 i=0
 for client in `cat $CLIENTS`; do

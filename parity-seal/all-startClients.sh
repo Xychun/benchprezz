@@ -12,8 +12,9 @@ echo "==== starting all clients ===="
 i=0
 for client in `cat $CLIENTS`; do
   if [[ $i -lt $clientCount ]]; then
-    echo starting client $client  clientNo=$i txrate=$txrate txLimit=$txLimit
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $SEAL_HOME/startClient.sh $minerCount $clientCount $txrate $txLimit $wl $i
+    clientId=$(expr $i + 1)
+    echo starting client $client  clientNo=$clientId
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $SEAL_HOME/startClient.sh $minerCount $clientCount $txrate $txLimit $wl clientNo=$clientId
   fi
   let i=$i+1
 done

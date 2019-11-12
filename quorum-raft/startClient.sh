@@ -10,8 +10,8 @@ wl=$5
 clientId=$6
 
 minerId=$(expr $clientId % $minerCount)
-adjTxRate=$(expr $txRate / $clientCount)
-adjTxLimit=$(expr $txLimit / $clientCount)
+adjTxRate=$(echo "scale=2; $txRate/$clientCount" | bc)
+adjTxLimit=$(echo "scale=2; $txLimit/$clientCount" | bc)
 
 deployTime=10
 timestamp=$(date +"%Y-%m-%d_%H-%M-%S")

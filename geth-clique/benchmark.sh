@@ -5,12 +5,8 @@ cd `dirname ${BASH_SOURCE-$0}`
 minerCount=$1
 clientCount=$2
 txRate=$3
-adjTxRate=$(expr $txRate / $clientCount)
 txLimit=$4
-adjTxLimit=$(expr $txLimit / $clientCount)
 wl=$5
-
-threadCount="1"
 
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 printf "Miners: "$minerCount"\n"
@@ -20,12 +16,12 @@ printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-stop.sh
-printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT ETHASH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startMiners.sh $minerCount $threadCount
+./all-startMiners.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startClients.sh $minerCount $clientCount $adjTxRate $adjTxLimit $wl
+./all-startClients.sh $minerCount $clientCount $txRate $txLimit $wl
 
 count=0
 total=$(expr 300)
