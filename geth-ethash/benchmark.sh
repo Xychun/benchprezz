@@ -8,7 +8,10 @@ txRate=$3
 txLimit=$4
 wl=$5
 
-threadCount="1"
+if [ $(( $txRate % $clientCount )) -ne 0 ]; then
+ printf "++++++++++++++++++++++++++++++++++++++++++++++++ \nPlease pass a txRate != $txRate, which is divisible by the given client count ${clientCount}\n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+ exit 64
+fi
 
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 printf "Miners: "$minerCount"\n"
@@ -21,7 +24,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tINIT GETH ON MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-init.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startMiners.sh $minerCount $threadCount
+./all-startMiners.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tGenerating DAG \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 count=0
 total=360

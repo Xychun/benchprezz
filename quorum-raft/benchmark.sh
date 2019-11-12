@@ -8,7 +8,10 @@ txRate=$3
 txLimit=$4
 wl=$5
 
-threadCount="1"
+if [ $(( $txRate % $clientCount )) -ne 0 ]; then
+ printf "++++++++++++++++++++++++++++++++++++++++++++++++ \nPlease pass a txRate != $txRate, which is divisible by the given client count ${clientCount}\n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+ exit 64
+fi
 
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 printf "Miner: "$minerCount"\n"
