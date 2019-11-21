@@ -21,5 +21,8 @@ sudo apt-get install -y software-properties-common
 sudo add-apt-repository -y ppa:ethereum/ethereum
 sudo apt-get update
 sudo apt-get install -y ethereum
+# sync system time
+sudo apt install chrony -y
+sudo chronyd -q
 # Install finished
 sl

@@ -25,5 +25,8 @@ cd ~/
 git clone https://github.com/jpmorganchase/istanbul-tools.git
 cd istanbul-tools
 make
+# sync system time
+sudo apt install chrony -y
+sudo chronyd -q
 # Install finished
 sl

@@ -16,5 +16,8 @@ cd ~/benchprezz/
 npm install
 # install parity
 bash <(curl https://get.parity.io -L)
+# sync system time
+sudo apt install chrony -y
+sudo chronyd -q
 # Install finished
 sl

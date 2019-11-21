@@ -16,8 +16,9 @@ var txs1 = [] //Tuple<Hash, time> add when mined
 let txCount = 0;
 let sendingStart = 0;
 let sendingEnd = 0;
-let startingBlock = 0; // issue with quorum-raft
-let finishBlock = 0; // issue with quorum-raft
+let startingBlock = 0;
+let finishBlock = 0;
+let nanoseconds = false;
 // let measureStart = 0;
 // let measureEnd = 0;
 
@@ -105,6 +106,7 @@ function getOutputBlockFormatter(block) {
     }
     catch (err) {
         block.timestamp = '0x' + Math.floor(block.timestamp / 1e6).toString(16);
+        nanoseconds = true;
     }
     return Web3Helpers.formatters.outputBlockFormatter(block);
 }
@@ -136,8 +138,11 @@ async function evaluate() {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
     console.log("DURATION:", measureEnd - measureStart, "\n");
-    // console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
-    console.log("\nAVG. TPS:", txCount / (measureEnd - measureStart), "\n");
+    if (nanoseconds) {
+        console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
+    } else {
+        console.log("\nAVG. TPS:", txCount / (measureEnd - measureStart), "\n");
+    }
     console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
     console.log("========================================================");
 }
