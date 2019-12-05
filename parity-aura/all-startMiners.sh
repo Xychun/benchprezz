@@ -19,7 +19,7 @@ for miner in `cat $MINERS`; do
 done
 
 echo '++ scraping peers for peer list ++'
-sleep 10
+sleep 20
 ./scrapePeers.sh
 echo '++ scraping successful ++'
 i=0

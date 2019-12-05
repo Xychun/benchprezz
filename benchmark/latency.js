@@ -4,9 +4,8 @@ var myArgs = process.argv.slice(2);
 var endpoint = myArgs[0];
 var fromAddress = myArgs[1];
 var contractType = myArgs[2];
-var txRate = Number(myArgs[3]);
-var txLimit = Number(myArgs[4]);
-var startTime = Number(myArgs[5]);
+var txLimit = Number(myArgs[3]);
+var startTime = Number(myArgs[4]);
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
@@ -14,13 +13,9 @@ var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
 let txCount = 0;
-let sendingStart = 0;
-let sendingEnd = 0;
 let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
-// let measureStart = 0;
-// let measureEnd = 0;
 
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
@@ -66,12 +61,6 @@ async function sendTransaction() {
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
-            // if (measureStart == 0) {
-            //     measureStart = Date.now();
-            // }
-            // if (txs1.length == txLimit) {
-            //     measureEnd = Date.now();
-            // }
 
             if (startingBlock == 0) {
                 startingBlock = receipt.blockNumber;
@@ -80,6 +69,11 @@ async function sendTransaction() {
             if (txs1.length == txLimit) {
                 finishBlock = receipt.blockNumber;
                 console.log("finishBlock:", finishBlock);
+            }
+
+            txCount++;
+            if (txCount < txLimit) {
+                sendTransaction();
             }
         });
 }
@@ -116,55 +110,18 @@ async function evaluate() {
         await sleep(1000);
     }
 
-    startBlockInfo = await web3.quorum_raft.getBlock(startingBlock);
-    measureStart = startBlockInfo.timestamp;
-    finishBlockInfo = await web3.quorum_raft.getBlock(finishBlock);
-    measureEnd = finishBlockInfo.timestamp;
-
-    gasBlockInfo = await web3.quorum_raft.getBlock(finishBlock - 1);
-    gasUsed = gasBlockInfo.gasUsed;
-    gasLimit = gasBlockInfo.gasLimit;
-    blockGasUsage = (gasUsed / gasLimit);
-    console.log("Gas Stats: gasUsed:", gasUsed, "gasLimit:", gasLimit, "blockGasUsage:", blockGasUsage * 100 + "%");
-
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
     console.log("========================================================");
     for (let i = 0; i < txs0.length; i++) {
-        totalLatency += txs1[i].time - txs0[i].time;
-    }
-
-    if (txCount != txLimit) {
-        console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
-    }
-    console.log("DURATION:", measureEnd - measureStart, "\n");
-    if (nanoseconds) {
-        console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
-    } else {
-        console.log("\nAVG. TPS:", txCount / (measureEnd - measureStart), "\n");
+        if (txs0[i].hash == txs1[i].hash) {
+            totalLatency += txs1[i].time - txs0[i].time;
+        } else {
+            console.log("TXs were not mined chronologically - consider searching the array for correct hash!")
+        }
     }
     console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
     console.log("========================================================");
-}
-
-async function setIntervalX(callback, delay, repetitions) {
-    var intervalID = setInterval(function () {
-
-        callback();
-
-        // console.log(txCount + 1 + " of " + repetitions + " at " + Date.now());
-        if (txCount == 0) {
-            sendingStart = Date.now();
-            console.log("Sending TXS started at", sendingStart, "...");
-        }
-        if (++txCount == repetitions) {
-            clearInterval(intervalID);
-            sendingEnd = Date.now();
-            console.log("...", "Sending TXS finished at", sendingEnd);
-            console.log("Total send duration:", sendingEnd - sendingStart);
-            console.log("...", "Waiting for mining process to finish!", "...");
-        }
-    }, delay);
 }
 
 function sleep(ms) {
@@ -190,12 +147,10 @@ async function loop() {
     }
 
     console.log("\nEvaluating ", txLimit + "txs...\n");
-    setIntervalX(function () {
-        sendTransaction();
-    }, 1000 / txRate, txLimit);
     setTimeout(function () {
         evaluate();
-    }, (1000 / txRate) * txLimit);
+    }, 2010 * txLimit);
+    sendTransaction();
 }
 
 loop();
