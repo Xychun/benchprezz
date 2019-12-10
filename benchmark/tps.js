@@ -13,6 +13,7 @@ var KVStoreABI = ABIs.KVStore;
 var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
+let nonce = 0;
 let txCount = 0;
 let sendingStart = 0;
 let sendingEnd = 0;
@@ -43,7 +44,7 @@ switch (contractType) {
 }
 
 console.log("Deploying smart contract from " + fromAddress);
-web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000 })
+web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000, "nonce": 0 })
     .once('transactionHash', function (hash) { console.log("TX HASH:\n", hash) })
     .once('receipt', function (receipt) { console.log("RECEIPT:\n", receipt) })
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
@@ -55,7 +56,9 @@ web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000
     });
 
 async function sendTransaction() {
-    tx.send({ "from": fromAddress, "gas": 4000000 })
+    // avoids "replacement transaction underpriced" error by geth
+    nonce++;
+    tx.send({ "from": fromAddress, "gas": 4000000, "nonce": nonce })
         .once('transactionHash', function (hash) {
             // console.log("TX RECEIVED:", hash, "at", Date.now())
             txs0.push({ txHash: hash, time: Date.now() });
