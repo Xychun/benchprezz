@@ -4,12 +4,13 @@ cd `dirname ${BASH_SOURCE-$0}`
 
 minerCount=$1
 rpcport=$2
-account=$3
+accounts=$3
+account=$4
 
 mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
 
-nohup geth --nodiscover --syncmode full --datadir=$DATA_DIR --rpc --rpcaddr 0.0.0.0 --rpcport $rpcport --rpccorsdomain "*" --rpcapi "personal,db,eth,net,web3,txpool,miner" --networkid 1337 --allow-insecure-unlock --unlock $account --password <(echo -n "${PWD}") --verbosity 5 --mine --miner.etherbase $account --miner.gastarget 80000000 > $LOG_DIR/eth_log 2>&1 &
+nohup geth --nodiscover --syncmode full --datadir=$DATA_DIR --rpc --rpcaddr 0.0.0.0 --rpcport $rpcport --rpccorsdomain "*" --rpcapi "personal,db,eth,net,web3,txpool,miner" --networkid 1337 --allow-insecure-unlock --unlock $accounts --password <(echo -n "${PWD}") --verbosity 5 --mine --miner.etherbase $account --miner.gastarget 40000000 > $LOG_DIR/eth_log 2>&1 &
 sleep 1
 echo miner started
 

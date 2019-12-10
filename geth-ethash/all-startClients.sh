@@ -10,7 +10,7 @@ wl=$5
 
 sudo chronyd -q
 now=$(($(date +%s%N)/1000000))
-startTime=`expr $now + 180000`
+startTime=$((now + 10000 + clientCount*9000))
 
 echo "==== starting all clients ===="
 i=0
