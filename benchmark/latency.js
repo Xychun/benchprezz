@@ -58,7 +58,7 @@ async function sendTransaction() {
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
-            // console.log("ERROR\n:", error)
+            console.log("ERROR\n:", error)
         })
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
