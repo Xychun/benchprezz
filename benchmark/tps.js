@@ -13,7 +13,7 @@ var KVStoreABI = ABIs.KVStore;
 var StandardContractABI = ABIs.StandardContract;
 var txs0 = [] //Tuple<Hash, time> add when received
 var txs1 = [] //Tuple<Hash, time> add when mined
-let nonce = 0;
+let nonce = 0; // avoids "replacement transaction underpriced" error by geth
 let txCount = 0;
 let sendingStart = 0;
 let sendingEnd = 0;
@@ -56,7 +56,6 @@ web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000
     });
 
 async function sendTransaction() {
-    // avoids "replacement transaction underpriced" error by geth
     nonce++;
     tx.send({ "from": fromAddress, "gas": 4000000, "nonce": nonce })
         .once('transactionHash', function (hash) {
