@@ -2,11 +2,12 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-minerCount=$1
-clientCount=$2
-txRate=$3
-txLimit=$4
-wl=$5
+test=$1
+minerCount=$2
+clientCount=$3
+txRate=$4
+txLimit=$5
+wl=$6
 
 sudo chronyd -q
 now=$(($(date +%s%N)/1000000))
@@ -18,7 +19,7 @@ for client in `cat $CLIENTS`; do
   if [[ $i -lt $clientCount ]]; then
     clientId=$(expr $i + 1)
     echo starting client $client  clientNo=$clientId
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $AURA_HOME/startClient.sh $minerCount $clientCount $txRate $txLimit $wl $startTime $clientId
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $AURA_HOME/startClient.sh $test $minerCount $clientCount $txRate $txLimit $wl $startTime $clientId
   fi
   let i=$i+1
 done

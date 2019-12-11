@@ -2,13 +2,14 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-minerCount=$1
-clientCount=$2
-txRate=$3
-txLimit=$4
-wl=$5
-startTime=$6
-clientId=$7
+test=$1
+minerCount=$2
+clientCount=$3
+txRate=$4
+txLimit=$5
+wl=$6
+startTime=$7
+clientId=$8
 
 sudo chronyd -q
 
@@ -29,5 +30,10 @@ mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
 cd $BENCHMARK_HOME
 
-echo "Starting client " $clientId " for endpoint " $endpoint " using account" $account " with configuration:: minerCount:"$minerCount " clientCount:"$clientCount " txRate:"$adjTxRate " txLimit:"$adjTxLimit " workload:"$wl " startTime:"$startTime
-nohup node ./tps.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/client_$clientId"_"$wl"_"$minerCount"_"miners_$clientCount"_"clients_$txRate"_"txRate_$txLimit"_"txLimit_$timestamp 2>&1 &
+if [ $test = "latency" ]; then
+    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
+    nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
+else
+    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txRate: "$adjTxRate " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
+    nohup node ./tps.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
+fi

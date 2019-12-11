@@ -29,7 +29,7 @@ if (!web3) {
     console.log("Issue connecting to web3 provider at " + endpoint);
 } else {
     console.log("Connected web3 provider at " + endpoint);
-    console.log("Date.now()", Date.now(), "startTime:", startTime, "delay", delay);
+    console.log("Date.now():", Date.now(), "startTime:", startTime, "delay:", delay);
 }
 
 switch (contractType) {
