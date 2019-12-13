@@ -123,11 +123,22 @@ async function evaluate() {
     finishBlockInfo = await web3.quorum_raft.getBlock(finishBlock);
     measureEnd = finishBlockInfo.timestamp;
 
-    gasBlockInfo = await web3.quorum_raft.getBlock(finishBlock - 1);
-    gasUsed = gasBlockInfo.gasUsed;
-    gasLimit = gasBlockInfo.gasLimit;
+    gasUsed = 0;
+    gasLimit = finishBlockInfo.gasLimit;
+    // get max value for block gas usage
+    for (let i = startingBlock; i <= finishBlock; i++) {
+        gasBlockInfo = await web3.quorum_raft.getBlock(i);
+        gasUsedTmp = gasBlockInfo.gasUsed;
+        if (gasUsed < gasUsedTmp) {
+            gasUsed = gasUsedTmp;
+        }
+    }
     blockGasUsage = (gasUsed / gasLimit);
+
     console.log("Gas Stats: gasUsed:", gasUsed, "gasLimit:", gasLimit, "blockGasUsage:", blockGasUsage * 100 + "%");
+    if (blockGasUsage * 100 >= 85) {
+        console.log("ATTENTION: The block gas usage exceeds 85% (" + (blockGasUsage * 100) + "%) of the block gas limit (" + gasLimit + ") - consider raising the block gas limit!");
+    }
 
     let totalLatency = 0;
     console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
