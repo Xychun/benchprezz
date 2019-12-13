@@ -21,8 +21,8 @@ for miner in `cat $MINERS`; do
 done
 
 echo '++ scraping peers for peer list ++'
-sleep 20
-./scrapePeers.sh
+sleep 30
+./scrapePeers.sh $minerCount
 echo '++ scraping successful ++'
 i=0
 for miner in `cat $MINERS`; do

@@ -27,21 +27,14 @@
   "params": {
     "gasLimitBoundDivisor": "0x400",
     "maximumExtraDataSize": "0x20",
-    "minGasLimit": "0x7A1200",
+    "minGasLimit": "0x1388",
     "networkID": "0x2323",
     "eip155Transition": 0,
     "validateChainIdTransition": 0,
     "eip140Transition": 0,
     "eip211Transition": 0,
     "eip214Transition": 0,
-    "eip658Transition": 0,
-    "eip150Transition": "0x0",
-    "eip160Transition": "0x0",
-    "eip161abcTransition": "0x0",
-    "eip161dTransition": "0x0",
-    "eip98Transition": "0x7fffffffffffff",
-    "maxCodeSize": 24576,
-    "maxCodeSizeTransition": "0x0"
+    "eip658Transition": 0
   },
   "genesis": {
     "seal": {
@@ -82,41 +75,6 @@
         "pricing": { "linear": { "base": 15, "word": 3 } }
       }
     },
-    "0000000000000000000000000000000000000005": {
-      "builtin": {
-        "name": "modexp",
-        "activate_at": "0x0",
-        "pricing": { "modexp": { "divisor": 20 } }
-      }
-    },
-    "0000000000000000000000000000000000000006": {
-      "builtin": {
-        "name": "alt_bn128_add",
-        "activate_at": "0x0",
-        "pricing": { "linear": { "base": 500, "word": 0 } }
-      }
-    },
-    "0000000000000000000000000000000000000007": {
-      "builtin": {
-        "name": "alt_bn128_mul",
-        "activate_at": "0x0",
-        "pricing": { "linear": { "base": 40000, "word": 0 } }
-      }
-    },
-    "0000000000000000000000000000000000000008": {
-      "builtin": {
-        "name": "alt_bn128_pairing",
-        "activate_at": "0x0",
-        "pricing": {
-          "alt_bn128_pairing": {
-            "base": 100000,
-            "pair": 80000,
-            "eip1108_transition_base": 45000,
-            "eip1108_transition_pair": 34000
-          }
-        }
-      }
-    },
     "0x933e73c3f959759c169effa4019c8faf7d05ce33": {
       "balance": "10000000000000000000000"
     },
@@ -154,6 +112,15 @@
       "balance": "10000000000000000000000"
     },
     "0x6b68423ec26708431c8244AD7116b7909A386E75": {
+      "balance": "10000000000000000000000"
+    },
+    "0x5794AE026E8cdC8C2A9d6B85cD2061967E8314E4": {
+      "balance": "10000000000000000000000"
+    },
+    "0xdC55B8A1d3A0D44A62CD788a82bEC1C10485ab41": {
+      "balance": "10000000000000000000000"
+    },
+    "0xCC4B6e60c07C7174b2C6645eFf6FC4DAFab0c97a": {
       "balance": "10000000000000000000000"
     }
   }
