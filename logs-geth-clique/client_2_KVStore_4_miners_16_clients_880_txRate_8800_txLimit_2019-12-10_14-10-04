@@ -1,0 +1,20 @@
+Connected web3 provider at 10.195.2.231:8003
+Date.now() 1575987004849 startTime: 1575987141652 delay 137111
+/home/ubuntu/benchprezz/node_modules/web3-core-helpers/src/formatters.js:409
+    throw new Error('Provided address "'+ address +'" is invalid, the capitalization checksum test failed, or its an indrect IBAN address which can\'t be converted.');
+    ^
+
+Error: Provided address "undefined" is invalid, the capitalization checksum test failed, or its an indrect IBAN address which can't be converted.
+    at Method.inputAddressFormatter (/home/ubuntu/benchprezz/node_modules/web3-core-helpers/src/formatters.js:409:11)
+    at /home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:146:38
+    at Array.map (<anonymous>)
+    at Method.formatInput (/home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:144:32)
+    at Method.toPayload (/home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:179:23)
+    at Eth.send [as getTransactionCount] (/home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:534:30)
+    at Object.<anonymous> (/home/ubuntu/benchprezz/benchmark/tps.js:52:57)
+    at Module._compile (internal/modules/cjs/loader.js:959:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:995:10)
+    at Module.load (internal/modules/cjs/loader.js:815:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:727:14)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:1047:10)
+    at internal/main/run_main_module.js:17:11
