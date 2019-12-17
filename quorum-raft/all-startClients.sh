@@ -11,7 +11,7 @@ wl=$6
 
 sudo chronyd -q
 now=$(($(date +%s%N)/1000000))
-startTime=$((now + 10000 + clientCount*9000))
+startTime=$((now + 10000 + clientCount*10000))
 
 echo "==== starting all clients ===="
 i=0
@@ -19,7 +19,7 @@ for client in `cat $CLIENTS`; do
   if [[ $i -lt $clientCount ]]; then
     clientId=$(expr $i + 1)
     echo starting client $client  clientNo=$clientId
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $RAFT_HOME/startClient.sh $test $minerCount $clientCount $txrate $txLimit $wl $startTime $clientId
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $AURA_HOME/startClient.sh $test $minerCount $clientCount $txRate $txLimit $wl $startTime $clientId
   fi
   let i=$i+1
 done

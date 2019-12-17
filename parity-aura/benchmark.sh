@@ -36,7 +36,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT N
 ./all-startClients.sh $test $minerCount $clientCount $txRate $txLimit $wl
 
 count=0
-total=$(expr 300)
+total=$(expr 600)
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 1

@@ -81,7 +81,7 @@ async function sendTransaction() {
             }
             if (txs1.length == txLimit) {
                 finishBlock = receipt.blockNumber;
-                console.log("finishBlock:", finishBlock);
+                console.log("finishBlock:", finishBlock + "\n");
             }
         });
 }
@@ -124,24 +124,32 @@ async function evaluate() {
     measureEnd = finishBlockInfo.timestamp;
 
     gasUsed = 0;
+    gasUsedTotal = 0;
     gasLimit = finishBlockInfo.gasLimit;
     // get max value for block gas usage
     for (let i = startingBlock; i <= finishBlock; i++) {
         gasBlockInfo = await web3.quorum_raft.getBlock(i);
         gasUsedTmp = gasBlockInfo.gasUsed;
+        gasUsedTotal += gasBlockInfo.gasUsed;
         if (gasUsed < gasUsedTmp) {
             gasUsed = gasUsedTmp;
         }
     }
     blockGasUsage = (gasUsed / gasLimit);
+    blockGasUsageAvg = gasUsedTotal / (finishBlock - startingBlock);
 
-    console.log("Gas Stats: gasUsed:", gasUsed, "gasLimit:", gasLimit, "blockGasUsage:", blockGasUsage * 100 + "%");
+    console.log("Gas Stats:");
+    console.log("gasLimit:", gasLimit);
+    console.log("maximum blockGasUsage:", gasUsed);
+    console.log("average blockGasUsage:", blockGasUsageAvg);
+    console.log("maximum blockGasUsage of gasLimit:", blockGasUsage * 100 + "%");
+
     if (blockGasUsage * 100 >= 85) {
         console.log("ATTENTION: The block gas usage exceeds 85% (" + (blockGasUsage * 100) + "%) of the block gas limit (" + gasLimit + ") - consider raising the block gas limit!");
     }
 
     let totalLatency = 0;
-    console.log("\nAnalyzing the data....", txs0.length + "txs tracked.\n");
+    console.log("\nAnalyzing the data....", txs0.length + "txs tracked.");
     console.log("========================================================");
     for (let i = 0; i < txs0.length; i++) {
         totalLatency += txs1[i].time - txs0[i].time;
