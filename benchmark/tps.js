@@ -171,7 +171,7 @@ async function evaluate() {
         console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)), "\n");
     }
     if (totalDuration < sendingDuration + 7500) {
-        "ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!"
+        console.log("ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!");
     }
     console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
     console.log("========================================================");
