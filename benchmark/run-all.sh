@@ -24,7 +24,7 @@ then
             for j in {0..4}
             do
                 maxi=$((rounds - 1))
-                for i in {0..$maxi}
+                for i in $(seq 0 $maxi);
                 do
                     tps=$(($startTps + $i * $increment))
                     limit=$(($tps * 100))
@@ -42,7 +42,7 @@ then
             for j in {0..4}
             do
                 maxi=$((rounds - 1))
-                for i in {0..$maxi}
+                for i in $(seq 0 $maxi);
                 do
                     tps=$(($startTps + $i * $increment))
                     limit=$(($tps * 100))
