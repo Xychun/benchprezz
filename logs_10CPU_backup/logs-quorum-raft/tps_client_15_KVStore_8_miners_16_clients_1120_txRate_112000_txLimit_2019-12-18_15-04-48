@@ -1,0 +1,38 @@
+Connected web3 provider at 10.195.2.242:22008
+Date.now(): 1576681489050 startTime: 1576681530209 delay: 41451
+Deploying smart contract from 0xdC55B8A1d3A0D44A62CD788a82bEC1C10485ab41
+TX HASH:
+ 0x860748055d198af2e5cb1f6c92b074d0b1e30ba83d73cc3e32e858de38dfa733
+RECEIPT:
+ { blockHash:
+   '0x5f07bbdefa72eb6f8a199178e4fe9479bcfc807496ec448c1dc426f0eae10c98',
+  blockNumber: 15,
+  contractAddress: '0x159D15f0fBE11ec0b69C96Fb76C8368DA2E909Ad',
+  cumulativeGasUsed: 414372,
+  from: '0xdc55b8a1d3a0d44a62cd788a82bec1c10485ab41',
+  gasUsed: 414372,
+  logs: [],
+  logsBloom:
+   '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash:
+   '0x860748055d198af2e5cb1f6c92b074d0b1e30ba83d73cc3e32e858de38dfa733',
+  transactionIndex: 0 }
+Contract at: 0x159D15f0fBE11ec0b69C96Fb76C8368DA2E909Ad
+
+Evaluating  7000txs...
+
+Sending TXS started at 1576681530558 ...
+startingBlock: 19
+... Sending TXS finished at 1576681642289
+/home/ubuntu/benchprezz/benchmark/tps.js:187
+            console.log("Total send duration:", sendDuration);
+                                                ^
+
+ReferenceError: sendDuration is not defined
+    at Timeout.<anonymous> (/home/ubuntu/benchprezz/benchmark/tps.js:187:49)
+    at ontimeout (timers.js:436:11)
+    at tryOnTimeout (timers.js:300:5)
+    at listOnTimeout (timers.js:263:5)
+    at Timer.processTimers (timers.js:223:10)

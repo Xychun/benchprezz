@@ -17,6 +17,8 @@ let nonce = 0; // avoids "replacement transaction underpriced" error by geth
 let txCount = 0;
 let sendingStart = 0;
 let sendingEnd = 0;
+let sendingDuration = 0;
+let totalDuration = 0;
 let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
@@ -158,11 +160,18 @@ async function evaluate() {
     if (txCount != txLimit) {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
-    console.log("DURATION:", measureEnd - measureStart, "\n");
+
+    totalDuration = measureEnd - measureStart;
     if (nanoseconds) {
-        console.log("\nAVG. TPS:", txCount / ((measureEnd - measureStart) / 1000), "\n");
+        console.log("DURATION:", totalDuration + "ms\n");
+        console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)), "\n");
     } else {
-        console.log("\nAVG. TPS:", txCount / (measureEnd - measureStart), "\n");
+        totalDuration = totalDuration * 1000;
+        console.log("DURATION:", (totalDuration) + "ms\n");
+        console.log("\nAVG. TPS:", (txCount / totalDuration), "\n");
+    }
+    if (totalDuration < sendingDuration + 7500) {
+        "ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!"
     }
     console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
     console.log("========================================================");
@@ -182,7 +191,8 @@ async function setIntervalX(callback, delay, repetitions) {
             clearInterval(intervalID);
             sendingEnd = Date.now();
             console.log("...", "Sending TXS finished at", sendingEnd);
-            console.log("Total send duration:", sendingEnd - sendingStart);
+            sendingDuration = sendingEnd - sendingStart;
+            console.log("Total send duration:", sendingDuration);
             console.log("...", "Waiting for mining process to finish!", "...");
         }
     }, delay);
