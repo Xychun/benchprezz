@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.37:8001
+Date.now(): 1576760894463 startTime: 1576761028469 delay: 134257
+Deploying smart contract from 0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d
+TX HASH:
+ 0xc806ff42eca5830cb906d0734db64d82956642c34c747346392b6c565353e633
+RECEIPT:
+ {
+  blockHash: '0x2a523e7721ddfd1afb4316bc2b6f6ef6f3b54400912379cbcfed7066a7154783',
+  blockNumber: 33,
+  contractAddress: '0x68Cb1240f589BC813b5F246BDdF481a99a886F79',
+  cumulativeGasUsed: 218495,
+  from: '0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xc806ff42eca5830cb906d0734db64d82956642c34c747346392b6c565353e633',
+  transactionIndex: 0
+}
+Contract at: 0x68Cb1240f589BC813b5F246BDdF481a99a886F79
+
+Evaluating  3500txs...
+
+Sending TXS started at 1576761028804 ...
+startingBlock: 167
+... Sending TXS finished at 1576761127668
+Total send duration: 98864
+... Waiting for mining process to finish! ...
+finishBlock: 266
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 31064088
+average blockGasUsage: 28027313.13131313
+maximum blockGasUsage of gasLimit: 12.4256352%
+
+Analyzing the data.... 3500txs tracked.
+========================================================
+DURATION: 99000ms
+
+
+AVG. TPS: 35.35353535353536 
+
+ATTENTION: The measure duration is only 136ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 2011.2102857142856
+========================================================

@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.37:8001
+Date.now(): 1576799660830 startTime: 1576799683106 delay: 22566
+Deploying smart contract from 0xCC4B6e60c07C7174b2C6645eFf6FC4DAFab0c97a
+TX HASH:
+ 0xef0c3b1ef3cbcb95e22cb1815bcbab569be77238bf4d998816c6b23f09d99dd9
+RECEIPT:
+ {
+  blockHash: '0x6b8802242c81f794b5fc47c174c701168d1aba1e24d80e112759260063f2b968',
+  blockNumber: 145,
+  contractAddress: '0x6209E750936f737d712450472517A8A37548Ad49',
+  cumulativeGasUsed: 218495,
+  from: '0xcc4b6e60c07c7174b2c6645eff6fc4dafab0c97a',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xef0c3b1ef3cbcb95e22cb1815bcbab569be77238bf4d998816c6b23f09d99dd9',
+  transactionIndex: 0
+}
+Contract at: 0x6209E750936f737d712450472517A8A37548Ad49
+
+Evaluating  3600txs...
+
+Sending TXS started at 1576799683445 ...
+startingBlock: 168
+... Sending TXS finished at 1576799781504
+Total send duration: 98059
+... Waiting for mining process to finish! ...
+finishBlock: 266
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 34482624
+average blockGasUsage: 29122187.755102042
+maximum blockGasUsage of gasLimit: 13.793049600000002%
+
+Analyzing the data.... 3600txs tracked.
+========================================================
+DURATION: 98000ms
+
+
+AVG. TPS: 36.734693877551024 
+
+ATTENTION: The measure duration is only -59ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 2018.2811111111112
+========================================================

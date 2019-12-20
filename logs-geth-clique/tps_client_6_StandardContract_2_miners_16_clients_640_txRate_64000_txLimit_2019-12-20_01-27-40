@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.37:8001
+Date.now(): 1576805261055 startTime: 1576805379198 delay: 118439
+Deploying smart contract from 0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4
+TX HASH:
+ 0xd824407958f35bff96afcdda2dfe559de76eb8cf555e6c428276bf3652e19596
+RECEIPT:
+ {
+  blockHash: '0xe45ed513e8044854a532f060a1a17e5206081f59a01ef4bb40fea9f5fce1e383',
+  blockNumber: 51,
+  contractAddress: '0x826688F89B56fAD385e53925606c0Ce7BcFE5856',
+  cumulativeGasUsed: 218495,
+  from: '0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xd824407958f35bff96afcdda2dfe559de76eb8cf555e6c428276bf3652e19596',
+  transactionIndex: 0
+}
+Contract at: 0x826688F89B56fAD385e53925606c0Ce7BcFE5856
+
+Evaluating  4000txs...
+
+Sending TXS started at 1576805379633 ...
+startingBlock: 169
+... Sending TXS finished at 1576805480471
+Total send duration: 100838
+... Waiting for mining process to finish! ...
+finishBlock: 271
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 55836088
+average blockGasUsage: 31088784.31372549
+maximum blockGasUsage of gasLimit: 22.334435199999998%
+
+Analyzing the data.... 4000txs tracked.
+========================================================
+DURATION: 102000ms
+
+
+AVG. TPS: 39.21568627450981 
+
+ATTENTION: The measure duration is only 1162ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1947.63025
+========================================================

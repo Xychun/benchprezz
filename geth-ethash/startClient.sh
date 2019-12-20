@@ -35,5 +35,5 @@ if [ $test = "latency" ]; then
     nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
 else
     echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txRate: "$adjTxRate " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
-    nohup node ./tps.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
+    nohup node ./tpsUnsigned.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
 fi

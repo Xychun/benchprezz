@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.37:8001
+Date.now(): 1576805331946 startTime: 1576805379198 delay: 47499
+Deploying smart contract from 0x5794AE026E8cdC8C2A9d6B85cD2061967E8314E4
+TX HASH:
+ 0xcb09546718feafa8efad9b243a4977a2276be80096657037b50e8c4139a5cf16
+RECEIPT:
+ {
+  blockHash: '0x5830871b1a92a83126de7193e596262d2a9d20c44e08aa5cffef9f865fd69ed0',
+  blockNumber: 121,
+  contractAddress: '0x3BA4C4AcF7c5e1f13667d8bf92F96bc3336cfA18',
+  cumulativeGasUsed: 218495,
+  from: '0x5794ae026e8cdc8c2a9d6b85cd2061967e8314e4',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xcb09546718feafa8efad9b243a4977a2276be80096657037b50e8c4139a5cf16',
+  transactionIndex: 0
+}
+Contract at: 0x3BA4C4AcF7c5e1f13667d8bf92F96bc3336cfA18
+
+Evaluating  4000txs...
+
+Sending TXS started at 1576805379491 ...
+startingBlock: 169
+... Sending TXS finished at 1576805480300
+Total send duration: 100809
+... Waiting for mining process to finish! ...
+finishBlock: 270
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 55836088
+average blockGasUsage: 31363237.702970296
+maximum blockGasUsage of gasLimit: 22.334435199999998%
+
+Analyzing the data.... 4000txs tracked.
+========================================================
+DURATION: 101000ms
+
+
+AVG. TPS: 39.603960396039604 
+
+ATTENTION: The measure duration is only 191ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1948.949
+========================================================

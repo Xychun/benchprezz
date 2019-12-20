@@ -39,7 +39,7 @@ then
                 $HOME/parity-aura/benchmark.sh latency 1 1 100 $wl
             done
 
-            for j in {0..4}
+            for j in {0..5}
             do
                 maxi=$((rounds - 1))
                 for i in $(seq 0 $maxi);

@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.180:8009
+Date.now(): 1576819299100 startTime: 1576819398237 delay: 99390
+Deploying smart contract from 0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f
+TX HASH:
+ 0x615d57b369114ef85fcb959cda0f8616c990a8c55e4e3ed98d2659878097d1e4
+RECEIPT:
+ {
+  blockHash: '0xae4efb4e291c5781307a26ec8c6480ff9703672d80498ec4af09b484c52be33f',
+  blockNumber: 106,
+  contractAddress: '0x476b19Bb83c5DE9C2f09052b1C659304178C1E64',
+  cumulativeGasUsed: 218495,
+  from: '0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x615d57b369114ef85fcb959cda0f8616c990a8c55e4e3ed98d2659878097d1e4',
+  transactionIndex: 0
+}
+Contract at: 0x476b19Bb83c5DE9C2f09052b1C659304178C1E64
+
+Evaluating  4000txs...
+
+Sending TXS started at 1576819398608 ...
+startingBlock: 205
+... Sending TXS finished at 1576819499608
+Total send duration: 101000
+... Waiting for mining process to finish! ...
+finishBlock: 306
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 67478928
+average blockGasUsage: 31396594.05940594
+maximum blockGasUsage of gasLimit: 26.991571199999996%
+
+Analyzing the data.... 4000txs tracked.
+========================================================
+DURATION: 101000ms
+
+
+AVG. TPS: 39.603960396039604 
+
+ATTENTION: The measure duration is only 0ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 2050.28475
+========================================================
