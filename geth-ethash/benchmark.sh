@@ -47,8 +47,12 @@ done
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startClients.sh $test $minerCount $clientCount $txRate $txLimit $wl
 
+if [ $test = "tps" ]; then
+  total=$(expr 300)
+else
+  total=$(expr 500)
+fi
 count=0
-total=$(expr 500)
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 1

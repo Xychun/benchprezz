@@ -16,6 +16,7 @@ then
                 wl=KVStore
             fi
 
+            # GETH_CLIQUE
             for i in {1..5}
             do
                 $HOME/geth-clique/benchmark.sh latency 1 1 100 $wl
@@ -34,12 +35,14 @@ then
             done
             $HOME/geth-clique/all-receiveLogs.sh
 
+
+            # PARITY_AURA
             for i in {1..5}
             do
                 $HOME/parity-aura/benchmark.sh latency 1 1 100 $wl
             done
 
-            for j in {0..5}
+            for j in {5..5}
             do
                 maxi=$((rounds - 1))
                 for i in $(seq 0 $maxi);
