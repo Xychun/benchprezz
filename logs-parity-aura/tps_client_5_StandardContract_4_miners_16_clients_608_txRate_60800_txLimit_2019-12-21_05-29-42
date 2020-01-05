@@ -1,0 +1,49 @@
+Connected web3 provider at 10.195.2.38:8002
+Date.now(): 1576906182719 startTime: 1576906309076 delay: 126612
+Deploying smart contract from 0xf19bd883f468433d2a50910be0aa8d3b5e56b95e
+TX HASH:
+ 0x83dfdedd1cde78425769205a12c13b1c2b419ba8325cba5ddfbb94eba7c72c5e
+RECEIPT:
+ {
+  blockHash: '0xf27825acaf62dc89fc806ead559e9ae1c828c0b4115c5e5560e12cb829864686',
+  blockNumber: 4,
+  contractAddress: '0x537dcb383Bb33a37714f0A0abA09fadD47301B42',
+  cumulativeGasUsed: 218495,
+  from: '0xf19bd883f468433d2a50910be0aa8d3b5e56b95e',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x83dfdedd1cde78425769205a12c13b1c2b419ba8325cba5ddfbb94eba7c72c5e',
+  transactionIndex: 0
+}
+Contract at: 0x537dcb383Bb33a37714f0A0abA09fadD47301B42
+
+Evaluating  3800txs...
+
+Sending TXS started at 1576906309376 ...
+startingBlock: 14
+... Sending TXS finished at 1576906408870
+Total send duration: 99494
+... Waiting for mining process to finish! ...
+finishBlock: 34
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 246035504
+average blockGasUsage: 147556509.2
+maximum blockGasUsage of gasLimit: 98.4142016%
+ATTENTION: The block gas usage exceeds 85% (98.4142016%) of the block gas limit (250000000) - consider raising the block gas limit!
+
+Analyzing the data.... 3800txs tracked.
+========================================================
+DURATION: 106000ms
+
+
+AVG. TPS: 35.84905660377358 
+
+ATTENTION: The measure duration is only 6506ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 7876.668157894736
+========================================================

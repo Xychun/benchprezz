@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.83:8005
+Date.now(): 1576914936343 startTime: 1576915071136 delay: 135041
+Deploying smart contract from 0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d
+TX HASH:
+ 0xdddfeca88d412276bb9bd11cf4baff7138cff080a56bfa1e1f32fa2b9ed58a06
+RECEIPT:
+ {
+  blockHash: '0xcbff615a9966ce0963cfa9bd2cec5aacd8e0b4fa132499d3b33e8e701e351e01',
+  blockNumber: 50,
+  contractAddress: '0x68Cb1240f589BC813b5F246BDdF481a99a886F79',
+  cumulativeGasUsed: 218495,
+  from: '0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xdddfeca88d412276bb9bd11cf4baff7138cff080a56bfa1e1f32fa2b9ed58a06',
+  transactionIndex: 0
+}
+Contract at: 0x68Cb1240f589BC813b5F246BDdF481a99a886F79
+
+Evaluating  3600txs...
+
+Sending TXS started at 1576915071507 ...
+startingBlock: 185
+... Sending TXS finished at 1576915169510
+Total send duration: 98003
+... Waiting for mining process to finish! ...
+finishBlock: 283
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 32005424
+average blockGasUsage: 29122187.755102042
+maximum blockGasUsage of gasLimit: 12.8021696%
+
+Analyzing the data.... 3600txs tracked.
+========================================================
+DURATION: 98000ms
+
+
+AVG. TPS: 36.734693877551024 
+
+ATTENTION: The measure duration is only -3ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1984.5327777777777
+========================================================

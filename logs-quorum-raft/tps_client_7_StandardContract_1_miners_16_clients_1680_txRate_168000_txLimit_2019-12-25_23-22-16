@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577316137227 startTime: 1577316240984 delay: 103989
+Deploying smart contract from 0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a
+TX HASH:
+ 0x3c0c10612f58b711a718f2f8869ad879e06a3ca0087dbc627d35bde86a05929a
+RECEIPT:
+ {
+  blockHash: '0x86dd20deb96dc77c892215d475d097c1b4118d82c90d686c4b5270fb251ad2f8',
+  blockNumber: 7,
+  contractAddress: '0x8f6983a2F40df2F1d456A440a6f003AF231B7ef7',
+  cumulativeGasUsed: 218495,
+  from: '0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x3c0c10612f58b711a718f2f8869ad879e06a3ca0087dbc627d35bde86a05929a',
+  transactionIndex: 0
+}
+Contract at: 0x8f6983a2F40df2F1d456A440a6f003AF231B7ef7
+
+Evaluating  10500txs...
+
+Sending TXS started at 1577316241323 ...
+startingBlock: 21
+... Sending TXS finished at 1577316338375
+Total send duration: 97052
+... Waiting for mining process to finish! ...
+finishBlock: 1920
+
+Gas Stats:
+gasLimit: 2351624331
+maximum blockGasUsage: 17786296
+average blockGasUsage: 4381999.02685624
+maximum blockGasUsage of gasLimit: 0.7563408732225776%
+
+Analyzing the data.... 10500txs tracked.
+========================================================
+DURATION: 97060ms
+
+AVG. TPS: 108.18050690294663
+ATTENTION: The measure duration is only 8ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1032.4817142857144
+========================================================

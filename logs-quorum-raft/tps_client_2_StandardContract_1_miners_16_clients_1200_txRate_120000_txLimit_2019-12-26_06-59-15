@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577343555785 startTime: 1577343707800 delay: 152283
+Deploying smart contract from 0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c
+TX HASH:
+ 0x95af7f40ccd737e3f8a068c5ca99f82607e14f48fc524f0c6b09599663709ffc
+RECEIPT:
+ {
+  blockHash: '0xca90474dffa88e4a2bd2a3755f3c8d605de40722d56769967cf627555573cb1f',
+  blockNumber: 2,
+  contractAddress: '0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86',
+  cumulativeGasUsed: 218495,
+  from: '0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x95af7f40ccd737e3f8a068c5ca99f82607e14f48fc524f0c6b09599663709ffc',
+  transactionIndex: 0
+}
+Contract at: 0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86
+
+Evaluating  7500txs...
+
+Sending TXS started at 1577343708121 ...
+startingBlock: 20
+... Sending TXS finished at 1577343807314
+Total send duration: 99193
+... Waiting for mining process to finish! ...
+finishBlock: 2000
+
+Gas Stats:
+gasLimit: 2306134420
+maximum blockGasUsage: 6539808
+average blockGasUsage: 3002399.688888889
+maximum blockGasUsage of gasLimit: 0.2835831226178047%
+
+Analyzing the data.... 7500txs tracked.
+========================================================
+DURATION: 99200ms
+
+AVG. TPS: 75.60483870967742
+ATTENTION: The measure duration is only 7ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1010.5473333333333
+========================================================

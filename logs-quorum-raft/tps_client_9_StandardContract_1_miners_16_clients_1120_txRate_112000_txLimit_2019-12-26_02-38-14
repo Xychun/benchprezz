@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577327894963 startTime: 1577327982946 delay: 88248
+Deploying smart contract from 0x56eAB1c8709e9C7658C97eAD3903c012F115f71b
+TX HASH:
+ 0x5fa8f7da9578243c89af3c3f1e0516156ee640d4a726a69450aa7f177a28ae49
+RECEIPT:
+ {
+  blockHash: '0x92acb921c8aa55dd9fd4ec1e0fd7b770a2ca851d1bc81feecb33c9eae4b06b5d',
+  blockNumber: 9,
+  contractAddress: '0x8a0ea6C3D219FabDC1DCF783cCa720A3099A496F',
+  cumulativeGasUsed: 218495,
+  from: '0x56eab1c8709e9c7658c97ead3903c012f115f71b',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x5fa8f7da9578243c89af3c3f1e0516156ee640d4a726a69450aa7f177a28ae49',
+  transactionIndex: 0
+}
+Contract at: 0x8a0ea6C3D219FabDC1DCF783cCa720A3099A496F
+
+Evaluating  7000txs...
+
+Sending TXS started at 1577327983309 ...
+startingBlock: 21
+... Sending TXS finished at 1577328082525
+Total send duration: 99216
+... Waiting for mining process to finish! ...
+finishBlock: 2004
+
+Gas Stats:
+gasLimit: 2303883166
+maximum blockGasUsage: 6093912
+average blockGasUsage: 2792765.3938477053
+maximum blockGasUsage of gasLimit: 0.2645061212275032%
+
+Analyzing the data.... 7000txs tracked.
+========================================================
+DURATION: 99212ms
+
+AVG. TPS: 70.55598113131475
+ATTENTION: The measure duration is only -4ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1004.7851428571429
+========================================================

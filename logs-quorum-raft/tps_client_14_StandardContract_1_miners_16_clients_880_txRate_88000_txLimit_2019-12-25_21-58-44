@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577311124864 startTime: 1577311163138 delay: 38554
+Deploying smart contract from 0x5794AE026E8cdC8C2A9d6B85cD2061967E8314E4
+TX HASH:
+ 0xc95a9e0e3da788a2d0ed51b3134e68a5dc7fe81a772895593d6b7cc725f869e7
+RECEIPT:
+ {
+  blockHash: '0xa84b02548c4397319cae0385932596c54bd397d6ae472b513bcda6574054fd3b',
+  blockNumber: 14,
+  contractAddress: '0x3BA4C4AcF7c5e1f13667d8bf92F96bc3336cfA18',
+  cumulativeGasUsed: 218495,
+  from: '0x5794ae026e8cdc8c2a9d6b85cd2061967e8314e4',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xc95a9e0e3da788a2d0ed51b3134e68a5dc7fe81a772895593d6b7cc725f869e7',
+  transactionIndex: 0
+}
+Contract at: 0x3BA4C4AcF7c5e1f13667d8bf92F96bc3336cfA18
+
+Evaluating  5500txs...
+
+Sending TXS started at 1577311163469 ...
+startingBlock: 20
+... Sending TXS finished at 1577311263370
+Total send duration: 99901
+... Waiting for mining process to finish! ...
+finishBlock: 2016
+
+Gas Stats:
+gasLimit: 2297142583
+maximum blockGasUsage: 4359872
+average blockGasUsage: 2182808.480961924
+maximum blockGasUsage of gasLimit: 0.18979544553591168%
+
+Analyzing the data.... 5500txs tracked.
+========================================================
+DURATION: 99898ms
+
+AVG. TPS: 55.056157280426035
+ATTENTION: The measure duration is only -3ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1004.1950909090909
+========================================================

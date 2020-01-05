@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577314116368 startTime: 1577314213374 delay: 97228
+Deploying smart contract from 0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f
+TX HASH:
+ 0x9cdd4790d550d9323df0860bfb9fe02a73708fdd5008642de43aaf1af19b53b0
+RECEIPT:
+ {
+  blockHash: '0x6272c2283f45c778f382e64dd3bd745d7ba2f944a26269dedc451653dff32451',
+  blockNumber: 8,
+  contractAddress: '0x476b19Bb83c5DE9C2f09052b1C659304178C1E64',
+  cumulativeGasUsed: 218495,
+  from: '0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x9cdd4790d550d9323df0860bfb9fe02a73708fdd5008642de43aaf1af19b53b0',
+  transactionIndex: 0
+}
+Contract at: 0x476b19Bb83c5DE9C2f09052b1C659304178C1E64
+
+Evaluating  8500txs...
+
+Sending TXS started at 1577314213662 ...
+startingBlock: 20
+... Sending TXS finished at 1577314308895
+Total send duration: 95233
+... Waiting for mining process to finish! ...
+finishBlock: 1919
+
+Gas Stats:
+gasLimit: 2352198597
+maximum blockGasUsage: 7282968
+average blockGasUsage: 3544990.234860453
+maximum blockGasUsage of gasLimit: 0.3096238561356475%
+
+Analyzing the data.... 8500txs tracked.
+========================================================
+DURATION: 95250ms
+
+AVG. TPS: 89.23884514435696
+ATTENTION: The measure duration is only 17ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1007.0921176470588
+========================================================

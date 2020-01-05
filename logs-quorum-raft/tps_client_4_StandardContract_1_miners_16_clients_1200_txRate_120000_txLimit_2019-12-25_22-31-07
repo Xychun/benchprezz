@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577313068039 startTime: 1577313201785 delay: 134003
+Deploying smart contract from 0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d
+TX HASH:
+ 0x430c4db355905ff231066d03db6014bb427c0a04055228261f6918c700a5fdc4
+RECEIPT:
+ {
+  blockHash: '0x34b4dcbbeb39fbb0031ccde3c7707e1a1b81a03ffb97cec743f0e56c05b87da1',
+  blockNumber: 4,
+  contractAddress: '0x68Cb1240f589BC813b5F246BDdF481a99a886F79',
+  cumulativeGasUsed: 218495,
+  from: '0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x430c4db355905ff231066d03db6014bb427c0a04055228261f6918c700a5fdc4',
+  transactionIndex: 0
+}
+Contract at: 0x68Cb1240f589BC813b5F246BDdF481a99a886F79
+
+Evaluating  7500txs...
+
+Sending TXS started at 1577313202190 ...
+startingBlock: 22
+... Sending TXS finished at 1577313301287
+Total send duration: 99097
+... Waiting for mining process to finish! ...
+finishBlock: 2000
+
+Gas Stats:
+gasLimit: 2306134420
+maximum blockGasUsage: 6193000
+average blockGasUsage: 3001820.3640040443
+maximum blockGasUsage of gasLimit: 0.26854462369110293%
+
+Analyzing the data.... 7500txs tracked.
+========================================================
+DURATION: 99050ms
+
+AVG. TPS: 75.7193336698637
+ATTENTION: The measure duration is only -47ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1005.8102666666666
+========================================================

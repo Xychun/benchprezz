@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.37:8001
+Date.now(): 1576893509672 startTime: 1576893660977 delay: 151562
+Deploying smart contract from 0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c
+TX HASH:
+ 0x7cb396f1a694d2330a4051e49b3873ed29ef4aa075d714ceb57b33d23228e051
+RECEIPT:
+ {
+  blockHash: '0xbaec00339d5d7fec3690256f9e37c43dc7680d3e728ef9f99a594eca104f5d25',
+  blockNumber: 16,
+  contractAddress: '0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86',
+  cumulativeGasUsed: 218495,
+  from: '0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x7cb396f1a694d2330a4051e49b3873ed29ef4aa075d714ceb57b33d23228e051',
+  transactionIndex: 0
+}
+Contract at: 0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86
+
+Evaluating  3600txs...
+
+Sending TXS started at 1576893661283 ...
+startingBlock: 168
+... Sending TXS finished at 1576893759242
+Total send duration: 97959
+... Waiting for mining process to finish! ...
+finishBlock: 266
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 32897216
+average blockGasUsage: 29122187.755102042
+maximum blockGasUsage of gasLimit: 13.1588864%
+
+Analyzing the data.... 3600txs tracked.
+========================================================
+DURATION: 98000ms
+
+
+AVG. TPS: 36.734693877551024 
+
+ATTENTION: The measure duration is only 41ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 2011.1266666666668
+========================================================

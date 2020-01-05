@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577344649669 startTime: 1577344721254 delay: 71879
+Deploying smart contract from 0xd97e663738dCd209D1Afce8A553814f41429d9ff
+TX HASH:
+ 0x361df3ecc1e44dbc6d606f1a4f5bdaa3adf0939ed6e84cb4ad10be7271d36848
+RECEIPT:
+ {
+  blockHash: '0x594b1574e62e4995117696e2c7e04a58a5446fd4815a6ac4a35933f7f41413a4',
+  blockNumber: 11,
+  contractAddress: '0x34bA29DBb480F2CA8385D0Cec58e846567E7A632',
+  cumulativeGasUsed: 218495,
+  from: '0xd97e663738dcd209d1afce8a553814f41429d9ff',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x361df3ecc1e44dbc6d606f1a4f5bdaa3adf0939ed6e84cb4ad10be7271d36848',
+  transactionIndex: 0
+}
+Contract at: 0x34bA29DBb480F2CA8385D0Cec58e846567E7A632
+
+Evaluating  8500txs...
+
+Sending TXS started at 1577344721650 ...
+startingBlock: 22
+... Sending TXS finished at 1577344817065
+Total send duration: 95415
+... Waiting for mining process to finish! ...
+finishBlock: 1929
+
+Gas Stats:
+gasLimit: 2346462245
+maximum blockGasUsage: 7282968
+average blockGasUsage: 3530421.927635029
+maximum blockGasUsage of gasLimit: 0.3103807877377545%
+
+Analyzing the data.... 8500txs tracked.
+========================================================
+DURATION: 95400ms
+
+AVG. TPS: 89.0985324947589
+ATTENTION: The measure duration is only -15ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1007.3323529411765
+========================================================

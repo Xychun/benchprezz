@@ -1,0 +1,46 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1577324768933 startTime: 1577324920578 delay: 151887
+Deploying smart contract from 0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c
+TX HASH:
+ 0x95af7f40ccd737e3f8a068c5ca99f82607e14f48fc524f0c6b09599663709ffc
+RECEIPT:
+ {
+  blockHash: '0xa937a80e42d891d29cf9a4e3eaf3794de52e85981b6b7d23b11068a1b40f711f',
+  blockNumber: 2,
+  contractAddress: '0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86',
+  cumulativeGasUsed: 218495,
+  from: '0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x95af7f40ccd737e3f8a068c5ca99f82607e14f48fc524f0c6b09599663709ffc',
+  transactionIndex: 0
+}
+Contract at: 0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86
+
+Evaluating  4000txs...
+
+Sending TXS started at 1577324920880 ...
+startingBlock: 20
+... Sending TXS finished at 1577325021844
+Total send duration: 100964
+... Waiting for mining process to finish! ...
+finishBlock: 2039
+
+Gas Stats:
+gasLimit: 2284278205
+maximum blockGasUsage: 2031304
+average blockGasUsage: 1570233.9692917287
+maximum blockGasUsage of gasLimit: 0.08892542053563042%
+
+Analyzing the data.... 4000txs tracked.
+========================================================
+DURATION: 100950ms
+
+AVG. TPS: 39.623576027736505
+ATTENTION: The measure duration is only -14ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1004.35625
+========================================================

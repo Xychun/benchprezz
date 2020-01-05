@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.231:8003
+Date.now(): 1576883303523 startTime: 1576883456103 delay: 152852
+Deploying smart contract from 0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c
+TX HASH:
+ 0x7cb396f1a694d2330a4051e49b3873ed29ef4aa075d714ceb57b33d23228e051
+RECEIPT:
+ {
+  blockHash: '0xf96495a8408aee6b0e21502d732fdae6f7204e7898051fea9e2dbee0649f978a',
+  blockNumber: 51,
+  contractAddress: '0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86',
+  cumulativeGasUsed: 218495,
+  from: '0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x7cb396f1a694d2330a4051e49b3873ed29ef4aa075d714ceb57b33d23228e051',
+  transactionIndex: 0
+}
+Contract at: 0x742236eeA28D7240c3D99e1E20f9F57C22C8BA86
+
+Evaluating  3600txs...
+
+Sending TXS started at 1576883456428 ...
+startingBlock: 204
+... Sending TXS finished at 1576883554589
+Total send duration: 98161
+... Waiting for mining process to finish! ...
+finishBlock: 302
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 47958592
+average blockGasUsage: 29122187.755102042
+maximum blockGasUsage of gasLimit: 19.1834368%
+
+Analyzing the data.... 3600txs tracked.
+========================================================
+DURATION: 98000ms
+
+
+AVG. TPS: 36.734693877551024 
+
+ATTENTION: The measure duration is only -161ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1990.7936111111112
+========================================================
