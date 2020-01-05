@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.215:8012
+Date.now(): 1576891835601 startTime: 1576891908009 delay: 72690
+Deploying smart contract from 0xd97e663738dCd209D1Afce8A553814f41429d9ff
+TX HASH:
+ 0x5ec361a16a696c200681293daf0c28042c3d7c6aa4c66dcda58c41553116e41d
+RECEIPT:
+ {
+  blockHash: '0xa3d5866ea043de5372fe62b94f1cd3b90ed4ec4a002c9ad13167605f8c8f72f1',
+  blockNumber: 7,
+  contractAddress: '0x34bA29DBb480F2CA8385D0Cec58e846567E7A632',
+  cumulativeGasUsed: 873980,
+  from: '0xd97e663738dcd209d1afce8a553814f41429d9ff',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x5ec361a16a696c200681293daf0c28042c3d7c6aa4c66dcda58c41553116e41d',
+  transactionIndex: 3
+}
+Contract at: 0x34bA29DBb480F2CA8385D0Cec58e846567E7A632
+
+Evaluating  3600txs...
+
+Sending TXS started at 1576891908347 ...
+startingBlock: 11
+... Sending TXS finished at 1576892006071
+Total send duration: 97724
+... Waiting for mining process to finish! ...
+finishBlock: 31
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 175930744
+average blockGasUsage: 142220847.6
+maximum blockGasUsage of gasLimit: 70.3722976%
+
+Analyzing the data.... 3600txs tracked.
+========================================================
+DURATION: 100000ms
+
+
+AVG. TPS: 36 
+
+ATTENTION: The measure duration is only 2276ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 5224.059722222222
+========================================================

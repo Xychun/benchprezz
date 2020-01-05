@@ -1,444 +1,483 @@
 {
-  "deploy.reloaded": {
-    "ignore": [".ssh", ".vscode", ".git", ".DS_Store"],
-    "packages": [
-      {
-        "name": "my benchprezz",
-        "files": ["**"],
-        "deployOnSave": [
-          "jump-node",
-          "miner-1",
-          "miner-2",
-          "miner-3",
-          "miner-4",
-          "miner-5",
-          "miner-6",
-          "miner-7",
-          "miner-8",
-          "miner-9",
-          "miner-10",
-          "miner-11",
-          "miner-12",
-          "miner-13",
-          "miner-14",
-          "miner-15",
-          "miner-16",
-          "client-1",
-          "client-2",
-          "client-3",
-          "client-4",
-          "client-5",
-          "client-6",
-          "client-7",
-          "client-8",
-          "client-9",
-          "client-10",
-          "client-11",
-          "client-12",
-          "client-13",
-          "client-14",
-          "client-15",
-          "client-16"
+    "deploy.reloaded": {
+        "ignore": [".ssh", ".vscode", ".git", ".DS_Store"],
+        "packages": [
+            {
+                "name": "my benchprezz",
+                "files": ["**"],
+                "deployOnSave": [
+                    "RabbitMQ",
+                    "sc-1",
+                    "sc-2"
+                    // "jump-node",
+                    // "miner-1",
+                    // "miner-2",
+                    // "miner-3",
+                    // "miner-4",
+                    // "miner-5",
+                    // "miner-6",
+                    // "miner-7",
+                    // "miner-8",
+                    // "miner-9",
+                    // "miner-10",
+                    // "miner-11",
+                    // "miner-12",
+                    // "miner-13",
+                    // "miner-14",
+                    // "miner-15",
+                    // "miner-16",
+                    // "client-1",
+                    // "client-2",
+                    // "client-3",
+                    // "client-4",
+                    // "client-5",
+                    // "client-6",
+                    // "client-7",
+                    // "client-8",
+                    // "client-9",
+                    // "client-10",
+                    // "client-11",
+                    // "client-12",
+                    // "client-13",
+                    // "client-14",
+                    // "client-15",
+                    // "client-16"
+                ]
+            }
+        ],
+        "targets": [
+            {
+                "type": "sftp",
+                "name": "RabbitMQ",
+                "host": "10.195.3.74",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "sc-1",
+                "host": "10.195.3.36",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "sc-2",
+                "host": "10.195.3.92",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "jump-node",
+                "host": "10.195.2.31",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-1",
+                "host": "10.195.2.37",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-2",
+                "host": "10.195.2.38",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-3",
+                "host": "10.195.2.231",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-4",
+                "host": "10.195.2.106",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-5",
+                "host": "10.195.2.83",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-6",
+                "host": "10.195.2.134",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-7",
+                "host": "10.195.2.238",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-8",
+                "host": "10.195.2.242",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-9",
+                "host": "10.195.2.180",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-10",
+                "host": "10.195.2.66",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-11",
+                "host": "10.195.2.97",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-12",
+                "host": "10.195.2.215",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-13",
+                "host": "10.195.3.52",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-14",
+                "host": "10.195.2.96",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-15",
+                "host": "10.195.3.48",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "miner-16",
+                "host": "10.195.3.55",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-1",
+                "host": "10.195.2.105",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-2",
+                "host": "10.195.2.111",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-3",
+                "host": "10.195.2.56",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-4",
+                "host": "10.195.2.92",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-5",
+                "host": "10.195.2.127",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-6",
+                "host": "10.195.2.158",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-7",
+                "host": "10.195.2.169",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-8",
+                "host": "10.195.2.174",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-9",
+                "host": "10.195.3.40",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-10",
+                "host": "10.195.1.18",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-11",
+                "host": "10.195.2.168",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-12",
+                "host": "10.195.3.4",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-13",
+                "host": "10.195.1.47",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-14",
+                "host": "10.195.3.44",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-15",
+                "host": "10.195.2.25",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            },
+            {
+                "type": "sftp",
+                "name": "client-16",
+                "host": "10.195.3.41",
+                "user": "ubuntu",
+                "dir": "/home/ubuntu/benchprezz",
+                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
+                "modes": {
+                    "/**/*.sh": 744,
+                    "/**/*.js": 744
+                }
+            }
         ]
-      }
-    ],
-    "targets": [
-      {
-        "type": "sftp",
-        "name": "jump-node",
-        "host": "10.195.2.31",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-1",
-        "host": "10.195.2.37",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-2",
-        "host": "10.195.2.38",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-3",
-        "host": "10.195.2.231",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-4",
-        "host": "10.195.2.106",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-5",
-        "host": "10.195.2.83",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-6",
-        "host": "10.195.2.134",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-7",
-        "host": "10.195.2.238",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-8",
-        "host": "10.195.2.242",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-9",
-        "host": "10.195.2.180",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-10",
-        "host": "10.195.2.66",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-11",
-        "host": "10.195.2.97",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-12",
-        "host": "10.195.2.215",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-13",
-        "host": "10.195.3.52",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-14",
-        "host": "10.195.2.96",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-15",
-        "host": "10.195.3.48",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "miner-16",
-        "host": "10.195.3.55",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-1",
-        "host": "10.195.2.105",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-2",
-        "host": "10.195.2.111",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-3",
-        "host": "10.195.2.56",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-4",
-        "host": "10.195.2.92",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-5",
-        "host": "10.195.2.127",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-6",
-        "host": "10.195.2.158",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-7",
-        "host": "10.195.2.169",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-8",
-        "host": "10.195.2.174",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-9",
-        "host": "10.195.3.40",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-10",
-        "host": "10.195.1.18",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-11",
-        "host": "10.195.2.168",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-12",
-        "host": "10.195.3.4",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-13",
-        "host": "10.195.1.47",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-14",
-        "host": "10.195.3.44",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-15",
-        "host": "10.195.2.25",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      },
-      {
-        "type": "sftp",
-        "name": "client-16",
-        "host": "10.195.3.41",
-        "user": "ubuntu",
-        "dir": "/home/ubuntu/benchprezz",
-        "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-        "modes": {
-          "/**/*.sh": 744,
-          "/**/*.js": 744
-        }
-      }
-    ]
-  }
+    }
 }

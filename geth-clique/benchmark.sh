@@ -52,5 +52,5 @@ while [ $count -lt $total ]; do
 done
 echo ""
 
-./all-stop.sh $minerCount $clientCount
+./all-stop.sh
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tEXPERIMENT DONE \n++++++++++++++++++++++++++++++++++++++++++++++++\n"

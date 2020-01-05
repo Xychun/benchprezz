@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.242:8008
+Date.now(): 1576942508067 startTime: 1576942614664 delay: 106857
+Deploying smart contract from 0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a
+TX HASH:
+ 0x28cea67cfd53e08457f9db5c7f89932ec6026e715886212579830fb7ab09b2ff
+RECEIPT:
+ {
+  blockHash: '0x3399a2e53eeceb51fa101db14ff10c43f9c940720d21e828a839bf9e9b4dff54',
+  blockNumber: 4,
+  contractAddress: '0x8f6983a2F40df2F1d456A440a6f003AF231B7ef7',
+  cumulativeGasUsed: 436990,
+  from: '0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x28cea67cfd53e08457f9db5c7f89932ec6026e715886212579830fb7ab09b2ff',
+  transactionIndex: 1
+}
+Contract at: 0x8f6983a2F40df2F1d456A440a6f003AF231B7ef7
+
+Evaluating  3700txs...
+
+Sending TXS started at 1576942614974 ...
+startingBlock: 9
+... Sending TXS finished at 1576942715487
+Total send duration: 100513
+... Waiting for mining process to finish! ...
+finishBlock: 30
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 158243536
+average blockGasUsage: 139678323.80952382
+maximum blockGasUsage of gasLimit: 63.297414399999994%
+
+Analyzing the data.... 3700txs tracked.
+========================================================
+DURATION: 105000ms
+
+
+AVG. TPS: 35.23809523809524 
+
+ATTENTION: The measure duration is only 4487ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 5184.767567567567
+========================================================
