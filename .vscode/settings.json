@@ -6,26 +6,23 @@
                 "name": "my benchprezz",
                 "files": ["**"],
                 "deployOnSave": [
-                    "RabbitMQ",
-                    "sc-1",
-                    "sc-2"
-                    // "jump-node",
-                    // "miner-1",
-                    // "miner-2",
-                    // "miner-3",
-                    // "miner-4",
-                    // "miner-5",
-                    // "miner-6",
-                    // "miner-7",
-                    // "miner-8",
-                    // "miner-9",
-                    // "miner-10",
-                    // "miner-11",
-                    // "miner-12",
-                    // "miner-13",
-                    // "miner-14",
-                    // "miner-15",
-                    // "miner-16",
+                    "jump-node",
+                    "miner-1",
+                    "miner-2",
+                    "miner-3",
+                    "miner-4",
+                    "miner-5",
+                    "miner-6",
+                    "miner-7",
+                    "miner-8",
+                    "miner-9",
+                    "miner-10",
+                    "miner-11",
+                    "miner-12",
+                    "miner-13",
+                    "miner-14",
+                    "miner-15",
+                    "miner-16"
                     // "client-1",
                     // "client-2",
                     // "client-3",
@@ -46,42 +43,6 @@
             }
         ],
         "targets": [
-            {
-                "type": "sftp",
-                "name": "RabbitMQ",
-                "host": "10.195.3.74",
-                "user": "ubuntu",
-                "dir": "/home/ubuntu/benchprezz",
-                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-                "modes": {
-                    "/**/*.sh": 744,
-                    "/**/*.js": 744
-                }
-            },
-            {
-                "type": "sftp",
-                "name": "sc-1",
-                "host": "10.195.3.36",
-                "user": "ubuntu",
-                "dir": "/home/ubuntu/benchprezz",
-                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-                "modes": {
-                    "/**/*.sh": 744,
-                    "/**/*.js": 744
-                }
-            },
-            {
-                "type": "sftp",
-                "name": "sc-2",
-                "host": "10.195.3.92",
-                "user": "ubuntu",
-                "dir": "/home/ubuntu/benchprezz",
-                "privateKey": "/Users/Juuu/.ssh/JDev.pem",
-                "modes": {
-                    "/**/*.sh": 744,
-                    "/**/*.js": 744
-                }
-            },
             {
                 "type": "sftp",
                 "name": "jump-node",

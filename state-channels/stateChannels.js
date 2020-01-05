@@ -6,18 +6,21 @@ const Web3Abi = require('web3-eth-abi');
 const Web3Accounts = require('web3-eth-accounts');
 const Accounts = new Web3Accounts();
 
-var myArgs = process.argv.slice(2);
-var clientId = myArgs[0];
-var clientCount = myArgs[1];
-var fromAddress = myArgs[2];
-var txLimit = Number(myArgs[3]);
-var startTime = Number(myArgs[4]);
+const myArgs = process.argv.slice(2);
+const clientId = myArgs[0];
+const clientCount = myArgs[1];
+const fromAddress = myArgs[2];
+const txLimit = Number(myArgs[3]);
+const startTime = Number(myArgs[4]);
 
-const endpoints = fs.readFileSync("./clients", 'utf-8').split("\n");
+const endpoints = fs.readFileSync("./nodes", 'utf-8').split("\n");
 
-let delay = 10000;
-// var delay = startTime - Date.now();
 let sendAmount = txLimit + 4;
+let delay = startTime - Date.now();
+let startingTime = 0;
+let finishingTime = 0;
+let totalDuration = 0;
+
 var txs0 = []; //(clientId, time): add when received
 var txs1 = []; //(clientId, time): add when mined
 for (let i = 0; i < clientCount; i++) {
@@ -25,7 +28,7 @@ for (let i = 0; i < clientCount; i++) {
     txs1.push([]);
 }
 
-keyFileName = fs.readdirSync("./chainInfo/keystore/").filter(fileName => fileName.endsWith(fromAddress.substring(2)))[0];
+keyFileName = fs.readdirSync("./chainInfo/keystore/").filter(fileName => fileName.endsWith(fromAddress.toLowerCase().substring(2)))[0];
 encrypted_key = fs.readFileSync("./chainInfo/keystore/" + keyFileName, 'utf-8');
 fromAccount = Accounts.decrypt(encrypted_key, 'password');
 var privateKey = fromAccount.privateKey;
@@ -106,11 +109,17 @@ async function loop() {
             });
             channel.consume(consumerQueueName, function (msg) {
                 if (clientId == msg.properties.correlationId) {
-                    // console.log('Received:', msg.properties.correlationId, msg.properties.messageId);
+                    // console.log('Received:', msg.properties.correlationId, "#" + msg.properties.messageId, "from", msg.properties.replyTo);
                     txs1[i].push(getNanoSecTime());
                 }
                 messageId = msg.properties.messageId - 1;
                 if (messageId > 0) {
+                    if (messageId == txLimit) {
+                        if (startingTime == 0 && clientId == msg.properties.correlationId) {
+                            startingTime = Date.now();
+                            console.log("Sending TXS started at ", startingTime, "...");
+                        }
+                    }
                     myChannel.sendToQueue(msg.properties.replyTo,
                         bufferObj, {
                         correlationId: msg.properties.correlationId,
@@ -122,6 +131,10 @@ async function loop() {
                     }
                 }
                 if (messageId == 0) {
+                    if (clientId == msg.properties.correlationId) {
+                        finishingTime = Date.now();
+                        console.log("...", "Sending TXS finished at", finishingTime);
+                    }
                     evaluate();
                 }
             }, {
@@ -131,13 +144,13 @@ async function loop() {
     }
 
     await sleep(delay);
+    console.log("producerQueues", producerQueues);
     producerQueues.forEach((producerQueueName, index) => {
         sendMessage(myChannel, producerQueueName, index);
     })
 }
 
 function sendMessage(channel, producerQueue, index) {
-    console.log("index", index);
     channel.sendToQueue(producerQueue,
         bufferObj, {
         correlationId: clientId,
@@ -147,32 +160,41 @@ function sendMessage(channel, producerQueue, index) {
     txs0[index].push(getNanoSecTime());
 }
 
+var evaluateCounter = 0;
 async function evaluate() {
-    txs0.splice(clientId, 1);
-    txs1.splice(clientId, 1);
-    txs0.forEach((element) => { element.shift(); element.shift(); });
-    txs1.forEach((element) => { element.shift(); element.shift(); });
+    evaluateCounter++;
+    if (evaluateCounter == clientCount - 1) {
+        // txs0.splice(clientId, 1);
+        // txs1.splice(clientId, 1);
+        txs0.forEach((element) => { element.shift(); element.shift(); });
+        txs1.forEach((element) => { element.shift(); element.shift(); });
 
-    var overallLatency = 0;
-    for (let i = 0; i < txs0.length; i++) {
-        const element0 = txs0[i];
-        const element1 = txs1[i];
-        console.log("element0.length", element0.length, "element1.length", element1.length);
-        while (element1.length < txLimit / 2 || element0.length != element1.length) {
-            await sleep(1000);
+        var overallLatency = 0;
+        for (let i = 0; i < txs0.length; i++) {
+            if (i != clientId) {
+                const element0 = txs0[i];
+                const element1 = txs1[i];
+                console.log("client " + i + ": element0.length", element0.length, "element1.length", element1.length);
+                while (element1.length < txLimit / 2 || element0.length != element1.length) {
+                    await sleep(1000);
+                }
+
+                let totalLatency = 0;
+                console.log("\nAnalyzing the data....", element0.length * 2 + "txs for client " + i + " tracked.");
+                for (let i = 0; i < element0.length; i++) {
+                    totalLatency += element1[i] - element0[i];
+                    console.log("Latency", i, element1[i] - element0[i]);
+                }
+                overallLatency += Math.round(((totalLatency / element0.length / 2) / 1e6) * 100) / 100;
+            }
         }
-
-        let totalLatency = 0;
-        console.log("\nAnalyzing the data....", element0.length + "txs tracked.");
         console.log("========================================================");
-        for (let i = 0; i < element0.length; i++) {
-            totalLatency += element1[i] - element0[i];
-            console.log("Latency", i, element1[i] - element0[i]);
-        }
-        overallLatency += Math.round(((totalLatency / element0.length / 2) / 1e6) * 100) / 100;
+        totalDuration = finishingTime - startingTime;
+        console.log("DURATION:", totalDuration + "ms");
+        console.log("\nAVG. TPS:", (txLimit / (totalDuration / 1000)));
+        console.log("\nAVG. TX LATENCY:", Math.round((overallLatency / txs0.length) * 100) / 100);
+        console.log("========================================================");
     }
-    console.log("\nAVG. TX LATENCY:", overallLatency / txs0.length);
-    console.log("========================================================");
 }
 
 function sleep(ms) {
