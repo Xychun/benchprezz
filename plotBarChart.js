@@ -23,37 +23,87 @@ Array.prototype.min = function () {
 
 const implementations = 4;
 
-var averagedData = [];
-var txLimits = [];
-var min = Infinity;
-var max = 0;
 var resultData = [];
 
-function getAverages(array, keysGroups, keysAverage) {
+
+function getAdvancedTestData(data) {
+    var uniqueDates = [];
+    var result = [];
+
+    data.forEach(obj => {
+        if (!uniqueDates.includes(obj["Date"])) {
+            uniqueDates.push(obj["Date"]);
+        }
+    });
+    // console.log("uniqueDates", uniqueDates);
+
+    for (let i = 0; i < uniqueDates.length; i++) {
+        dataArr = data.filter(obj => { return obj["Date"] == uniqueDates[i] });
+        result.push(getMergedObj(dataArr, ['Test', 'Workload', 'Miner#', 'Transaction Rate', 'Transaction Limit', 'Date'], ['Average TPS'], ['Total duration', 'Average Latency']));
+    }
+    // console.log("result", result);
+    return result;
+}
+
+function getMergedObj(data, keysKeep, keysSum, keysAverage) {
+    return getMergedTestData(data, keysKeep, keysSum, keysAverage)[0];
+}
+
+function getMergedTestData(data, keysKeep, keysSum, keysAverage) {
     var groups = {},
         result = [];
-    array.forEach(o => {
-        var key = keysGroups.map(k => o[k]).join('|');
+    data.forEach(obj => {
+        var key = keysKeep.map(k => obj[k]).join('|');
         if (!groups[key]) {
             groups[key] = { count: 0, payload: {} };
             keysAverage.forEach(k => groups[key][k] = 0);
-            keysGroups.forEach(k => groups[key].payload[k] = o[k]);
+            keysSum.forEach(k => groups[key][k] = 0);
+            keysKeep.forEach(k => groups[key].payload[k] = obj[k]);
             result.push(groups[key].payload);
         }
         groups[key].count++;
         keysAverage.forEach(k => {
-            groups[key][k] += parseFloat(o[k]);
-            groups[key].payload[k] = (groups[key][k] / groups[key].count).toFixed(2);
+            groups[key][k] += parseFloat(obj[k]);
+            groups[key].payload[k] = parseFloat((groups[key][k] / groups[key].count).toFixed(2));
+        });
+        keysSum.forEach(k => {
+            groups[key][k] += parseFloat(obj[k]);
+            groups[key].payload[k] = parseFloat((groups[key][k]).toFixed(2));
         });
     })
     return result;
 }
 
-function averageData(data) {
-    averagedData = getAverages(data, ['Test', 'Workload', 'Miner#', 'Transaction Rate', 'Transaction Limit'], ['Average TPS', 'Average Latency'])
+function getSpecificTestData(data, date) {
+    return data.filter(obj => { return obj["Date"] == date });
 }
 
-function setTxLimits(data) {
+// function getAverages(array, keysGroups, keysAverage) {
+//     var groups = {},
+//         result = [];
+//     array.forEach(obj => {
+//         var key = keysGroups.map(k => obj[k]).join('|'); // new string by concatenating all of the elements devided by | symbol
+//         if (!groups[key]) {
+//             groups[key] = { count: 0, payload: {} };
+//             keysAverage.forEach(k => groups[key][k] = 0);
+//             keysGroups.forEach(k => groups[key].payload[k] = obj[k]);
+//             result.push(groups[key].payload);
+//         }
+//         groups[key].count++;
+//         keysAverage.forEach(k => {
+//             groups[key][k] += parseFloat(obj[k]);
+//             groups[key].payload[k] = (groups[key][k] / groups[key].count).toFixed(2);
+//         });
+//     })
+//     return result;
+// }
+
+// function averageData(data) {
+//     averagedData = getAverages(data, ['Test', 'Workload', 'Miner#', 'Transaction Rate', 'Transaction Limit'], ['Average TPS', 'Average Latency'])
+// }
+
+function getTxLimits(data) {
+    var txLimits = [];
     data.forEach((obj) => {
         var value = obj["Transaction Limit"]
         if (!txLimits.includes(value)) {
@@ -61,33 +111,43 @@ function setTxLimits(data) {
         }
     })
     txLimits.sort();
-    txLimits.splice(txLimits.indexOf('100'), 1);
+    if (test == "tps") {
+        txLimits.splice(txLimits.indexOf('100'), 1);
+    }
+    return txLimits;
 }
 
-function setMin(data) {
-    var minValue = Infinity;
-    txLimits.forEach((element) => {
-        potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
-        values = potentials.map(potential => potential["Average Latency"]);
-        if (values.min() < minValue) {
-            minValue = values.min();
-        }
-    });
-    console.log("minValue", minValue);
-    min = minValue;
+
+function findMinLatency(data) {
+    var obj = data.find(function (obj) { return obj["Average Latency"] == Math.min.apply(Math, data.map(function (obj) { return obj["Average Latency"]; })); })
+    return obj;
+
+    // var minValue = Infinity;
+    // txLimits.forEach((element) => {
+    //     potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
+    //     console.log("potentials", potentials);
+    //     values = potentials.map(potential => potential["Average Latency"]);
+    //     if (values.min() < minValue) {
+    //         minValue = values.min();
+    //     }
+    // });
+    // return minValue;
 }
 
-function setMax(data) {
-    var maxValue = 0;
-    txLimits.forEach((element) => {
-        potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
-        values = potentials.map(potential => potential["Average TPS"]);
-        if (values.max() > maxValue) {
-            maxValue = values.max();
-        }
-    });
-    console.log("maxValue", maxValue);
-    max = maxValue;
+function findMaxTPS(data) {
+    var obj = data.find(function (obj) { return obj["Average TPS"] == Math.max.apply(Math, data.map(function (obj) { return obj["Average TPS"]; })); })
+    return obj;
+
+    // var maxValue = 0;
+    // txLimits.forEach((element) => {
+    //     potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
+    //     console.log("potentials", potentials);
+    //     values = potentials.map(potential => potential["Average TPS"]);
+    //     if (values.max() > maxValue) {
+    //         maxValue = values.max();
+    //     }
+    // });
+    // return maxValue;
 }
 
 function sleep(ms) {
@@ -134,6 +194,12 @@ async function plotDiagram() {
 
 async function main() {
     for (let i = 3; i < implementations; i++) {
+        var data = [];
+        var txLimits = [];
+        var advancedData = [];
+        var minLatencyObj = Infinity;
+        var maxTPSObj = 0;
+
         switch (i) {
             case 0:
                 var path = "./logs-geth-clique/csv/";
@@ -150,18 +216,19 @@ async function main() {
             default:
             // code block
         }
-    }
-    data = await readData(path);
-    await setTxLimits(data);
+        data = await readData(path);
+        txLimits = await getTxLimits(data);
+        advancedData = await getAdvancedTestData(data);
 
-    await averageData(data);
+        console.log("advancedData", advancedData);
 
-    if (test == "latency") {
-        await setMin(averagedData);
-        console.log("min", min);
-    } else if (test == "tps") {
-        await setMax(averagedData);
-        console.log("max", max);
+        if (test == "latency") {
+            minLatencyObj = await findMinLatency(advancedData, txLimits);
+            console.log("minLatencyObj", minLatencyObj);
+        } else if (test == "tps") {
+            maxTPSObj = await findMaxTPS(advancedData, txLimits);
+            console.log("maxTPSObj", maxTPSObj);
+        }
     }
     // await plotDiagram();
 }

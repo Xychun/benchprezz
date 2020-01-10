@@ -33,8 +33,8 @@ cd $BENCHMARK_HOME
 
 if [ $test = "latency" ]; then
     echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
-    nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
+    nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime $clientId $minerCount $clientCount $test "parity-aura" $timeStamp > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
 else
     echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txRate: "$adjTxRate " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
-    nohup node ./tpsUnsigned.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
+    nohup node ./tpsUnsigned.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime $clientId $minerCount $clientCount $test "parity-aura" $timeStamp > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
 fi

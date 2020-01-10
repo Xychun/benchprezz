@@ -21,7 +21,7 @@ const sendAmount = adjTxLimit + 4;
 const delay = startTime - Date.now();
 
 const endpoints = fs.readFileSync("./nodes", 'utf-8').split("\n");
-const logFile = `${clientId}_${clientCount}_${clientCount}_${txLimit}_${timeStamp}`
+const logFile = `${clientId}_${clientCount}_${txLimit}_${timeStamp}`
 const csvWriter = createCsvWriter({
     path: "./logs-state-channels/csv/" + logFile,
     header: [

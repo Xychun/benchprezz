@@ -32,7 +32,11 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startChannels.sh $test $nodeCount $txLimit
 
-total=$(expr 180)
+if [ $test = "tps" ]; then
+  total=$(expr 180)
+else
+  total=$(expr 60)
+fi
 count=0
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do

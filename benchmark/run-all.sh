@@ -7,10 +7,10 @@ rounds=$4
 HOME=/home/ubuntu/benchprezz
 wl=StandardContract
 
-if [ $implementation = "geth-parity" ]
+if [ $implementation = "geth" ]
 then
     # set to {1..2} to run KVStore aswell
-    for k in {1..5}
+    for k in {1..1}
     do
         # if [ "$k" -eq 2 ]
         # then
@@ -25,18 +25,31 @@ then
         done
 
         # tps
-        for j in {0..4}
-        do
-            maxi=$((rounds - 1))
-            for i in $(seq 0 $maxi);
-            do
-                tps=$(($startTps + $i * $increment))
-                limit=$(($tps * 100))
-                clients=$((2**$j))
-                $HOME/geth-clique/benchmark.sh tps $clients 16 $tps $limit $wl
-            done
-        done
-        $HOME/geth-clique/all-receiveLogs.sh
+        # for j in {0..4}
+        # do
+        #     maxi=$((rounds - 1))
+        #     for i in $(seq 0 $maxi);
+        #     do
+        #         tps=$(($startTps + $i * $increment))
+        #         limit=$(($tps * 100))
+        #         clients=$((2**$j))
+        #         $HOME/geth-clique/benchmark.sh tps $clients 16 $tps $limit $wl
+        #     done
+        # done        
+    done
+    
+    $HOME/geth-clique/all-receiveLogs.sh
+fi
+
+if [ $implementation = "parity" ]
+then
+    # set to {1..2} to run KVStore aswell
+    for k in {1..1}
+    do
+        # if [ "$k" -eq 2 ]
+        # then
+        #     wl=KVStore
+        # fi
 
         # PARITY_AURA
         # latency
@@ -46,26 +59,26 @@ then
         done
 
         # tps
-        for j in {0..4}
-        do
-            maxi=$((rounds - 1))
-            for i in $(seq 0 $maxi);
-            do
-                tps=$(($startTps + $i * $increment))
-                limit=$(($tps * 100))
-                clients=$((2**$j))
-                $HOME/parity-aura/benchmark.sh tps $clients 16 $tps $limit $wl
-            done
-        done
-        $HOME/parity-aura/all-receiveLogs.sh
+        # for j in {0..4}
+        # do
+        #     maxi=$((rounds - 1))
+        #     for i in $(seq 0 $maxi);
+        #     do
+        #         tps=$(($startTps + $i * $increment))
+        #         limit=$(($tps * 100))
+        #         clients=$((2**$j))
+        #         $HOME/parity-aura/benchmark.sh tps $clients 16 $tps $limit $wl
+        #     done
+        # done
     done
+    
+    $HOME/parity-aura/all-receiveLogs.sh
 fi
-
 
 if [ $implementation = "quorum" ]
 then
     # set to {1..2} to run KVStore aswell
-    for k in {1..5}
+    for k in {1..1}
     do
         # if [ "$k" -eq 2 ]
         # then
@@ -80,26 +93,27 @@ then
         done
 
         # tps
-        for j in {0..4}
-        do
-            maxi=$((rounds - 1))
-            for i in $(seq 0 $maxi);
-            do
-                tps=$(($startTps + $i * $increment))
-                limit=$(($tps * 100))
-                clients=$((2**$j))
-                $HOME/quorum-raft/benchmark.sh tps $clients 16 $tps $limit $wl
-            done
-        done
-        $HOME/quorum-raft/all-receiveLogs.sh
+        # for j in {0..4}
+        # do
+        #     maxi=$((rounds - 1))
+        #     for i in $(seq 0 $maxi);
+        #     do
+        #         tps=$(($startTps + $i * $increment))
+        #         limit=$(($tps * 100))
+        #         clients=$((2**$j))
+        #         $HOME/quorum-raft/benchmark.sh tps $clients 16 $tps $limit $wl
+        #     done
+        # done
     done
+
+    $HOME/quorum-raft/all-receiveLogs.sh
 fi
 
 if [ $implementation = "sc" ]
 then
     startLimit=$startTps
     # set to {1..2} to run KVStore aswell
-    for k in {1..5}
+    for k in {1..1}
     do
         # if [ "$k" -eq 2 ]
         # then
@@ -108,23 +122,24 @@ then
 
         # STATE_CHANNELS
         # latency
-        # for i in {0..4}
-        # do
-        #     $HOME/state-channels/benchmark.sh latency
-        # done
+        for i in {0..4}
+        do
+            $HOME/state-channels/benchmark.sh latency
+        done
 
         # tps
-        for j in {1..5}
-        do
-            maxi=$((rounds - 1))
-            for i in $(seq 0 $maxi);
-            do
-                limit=$(($startLimit + $i * 5000))
-                clients=$((2**$j))
-                channelCount=$(($clients * ($clients-1) / 2))
-                $HOME/state-channels/benchmark.sh tps $clients $limit
-            done
-        done
-        $HOME/state-channels/all-receiveLogs.sh
+        # for j in {1..5}
+        # do
+        #     maxi=$((rounds - 1))
+        #     for i in $(seq 0 $maxi);
+        #     do
+        #         limit=$(($startLimit + $i * 5000))
+        #         clients=$((2**$j))
+        #         channelCount=$(($clients * ($clients-1) / 2))
+        #         $HOME/state-channels/benchmark.sh tps $clients $limit
+        #     done
+        # done
     done
+
+    $HOME/state-channels/all-receiveLogs.sh
 fi

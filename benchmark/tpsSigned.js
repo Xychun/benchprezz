@@ -1,15 +1,24 @@
 const ABIs = require('./ABIs');
-const Web3 = require('web3');
 const fs = require("fs");
 const Tx = require('ethereumjs-tx')
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const Web3 = require('web3');
+const Web3Helpers = require('web3-core-helpers');
+const Web3Utils = require('web3-utils');
 
-var myArgs = process.argv.slice(2);
-var endpoint = myArgs[0];
-var fromAddress = myArgs[1];
-var contractType = myArgs[2];
-var txRate = Number(myArgs[3]);
-var txLimit = Number(myArgs[4]);
-var startTime = Number(myArgs[5]);
+const myArgs = process.argv.slice(2);
+const endpoint = myArgs[0];
+const fromAddress = myArgs[1];
+const contractType = myArgs[2];
+const txRate = Number(myArgs[3]);
+const txLimit = Number(myArgs[4]);
+const startTime = Number(myArgs[5]);
+const clientId = Number(myArgs[6]);
+const minerCount = Number(myArgs[7]);
+const clientCount = Number(myArgs[8]);
+const test = myArgs[9];
+const implementation = myArgs[10];
+const timeStamp = myArgs[11];
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
@@ -26,9 +35,9 @@ let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
 
-const logFile = `${clientId}_${clientCount}_${clientCount}_${txLimit}_${timeStamp}`
+const logFile = `${clientId}_${minerCount}_${txRate}_${timeStamp}`
 const csvWriter = createCsvWriter({
-    path: "./logs-state-channels/csv/" + logFile,
+    path: "../" + implementation + "/logs-" + implementation + "/csv/" + logFile,
     header: [
         { id: 'test', title: 'Test' },
         { id: 'wl', title: 'Workload' },
@@ -50,7 +59,7 @@ var data = [{
     clientId: clientId,
     minerCount: clientCount,
     clientCount: clientCount,
-    txRate: 0,
+    txRate: txRate,
     txLimit: txLimit,
     timeStamp: timeStamp,
 }];
@@ -129,9 +138,6 @@ async function sendTransaction() {
             }
         });
 }
-
-let Web3Helpers = require('web3-core-helpers');
-let Web3Utils = require('web3-utils');
 
 web3.extend({
     property: 'quorum_raft',
