@@ -19,7 +19,7 @@ sudo snap install go --classic
 git clone https://github.com/jpmorganchase/quorum.git
 cd quorum
 make all
-sudo cp -r build/bin/ /usr/local/bin/
+sudo cp -r build/bin/ /usr/local
 # sync system time
 sudo apt install chrony -y
 sudo chronyd -q

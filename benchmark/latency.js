@@ -18,6 +18,35 @@ let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
 
+const logFile = `${clientId}_${clientCount}_${clientCount}_${txLimit}_${timeStamp}`
+const csvWriter = createCsvWriter({
+    path: "./logs-state-channels/csv/" + logFile,
+    header: [
+        { id: 'test', title: 'Test' },
+        { id: 'wl', title: 'Workload' },
+        { id: 'clientId', title: 'Client Id' },
+        { id: 'minerCount', title: 'Miner#' },
+        { id: 'clientCount', title: 'Client#' },
+        { id: 'txRate', title: 'Transaction Rate' },
+        { id: 'txLimit', title: 'Transaction Limit' },
+        { id: 'duration', title: 'Total duration' },
+        { id: 'avgTPS', title: 'Average TPS' },
+        { id: 'avgLAT', title: 'Average Latency' },
+        { id: 'timeStamp', title: 'Date' }
+    ]
+});
+
+var data = [{
+    test: test,
+    wl: "StandardContract",
+    clientId: clientId,
+    minerCount: clientCount,
+    clientCount: clientCount,
+    txRate: 0,
+    txLimit: txLimit,
+    timeStamp: timeStamp,
+}];
+
 var Web3 = require('web3');
 var web3 = new Web3("http://" + endpoint);
 if (!web3) {
@@ -122,8 +151,19 @@ async function evaluate() {
             console.log("TXs were not mined chronologically - consider searching the array for correct hash!")
         }
     }
-    console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
+    var avgLAT = Math.round((totalLatency / txs0.length) * 100) / 100;
+    console.log("\nAVG. LATENCY:", avgLAT);
     console.log("========================================================");
+    writeData(0, 0, avgLAT);
+}
+
+function writeData(duration, tps, lat) {
+    data[0].duration = duration;
+    data[0].avgTPS = tps;
+    data[0].avgLAT = lat;
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: /csv/' + logFile));
 }
 
 function sleep(ms) {

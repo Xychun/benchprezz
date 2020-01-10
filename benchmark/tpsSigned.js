@@ -26,6 +26,34 @@ let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
 
+const logFile = `${clientId}_${clientCount}_${clientCount}_${txLimit}_${timeStamp}`
+const csvWriter = createCsvWriter({
+    path: "./logs-state-channels/csv/" + logFile,
+    header: [
+        { id: 'test', title: 'Test' },
+        { id: 'wl', title: 'Workload' },
+        { id: 'clientId', title: 'Client Id' },
+        { id: 'minerCount', title: 'Miner#' },
+        { id: 'clientCount', title: 'Client#' },
+        { id: 'txRate', title: 'Transaction Rate' },
+        { id: 'txLimit', title: 'Transaction Limit' },
+        { id: 'duration', title: 'Total duration' },
+        { id: 'avgTPS', title: 'Average TPS' },
+        { id: 'avgLAT', title: 'Average Latency' },
+        { id: 'timeStamp', title: 'Date' }
+    ]
+});
+
+var data = [{
+    test: test,
+    wl: "StandardContract",
+    clientId: clientId,
+    minerCount: clientCount,
+    clientCount: clientCount,
+    txRate: 0,
+    txLimit: txLimit,
+    timeStamp: timeStamp,
+}];
 
 var web3 = new Web3("http://" + endpoint, 0);
 if (!web3) {
@@ -182,13 +210,25 @@ async function evaluate() {
     } else {
         totalDuration = totalDuration * 1000;
         console.log("DURATION:", (totalDuration) + "ms");
-        console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)));
+        var avgTPS = Math.round((txCount / (totalDuration / 1000)) * 100) / 100;
+        console.log("\nAVG. TPS:", avgTPS);
     }
     if (totalDuration < sendingDuration + 7500) {
         console.log("ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!");
     }
-    console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
+    var avgLAT = Math.round((totalLatency / txs0.length) * 100) / 100;
+    console.log("\nAVG. LATENCY:", avgLAT);
     console.log("========================================================");
+    writeData(totalDuration, avgTPS, avgLAT);
+}
+
+function writeData(duration, tps, lat) {
+    data[0].duration = duration;
+    data[0].avgTPS = tps;
+    data[0].avgLAT = lat;
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: /csv/' + logFile));
 }
 
 async function setIntervalX(callback, delay, repetitions) {

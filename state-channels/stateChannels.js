@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const fs = require("fs");
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const amqp = require('amqplib');
 const Web3Utils = require('web3-utils');
 const Web3Abi = require('web3-eth-abi');
@@ -10,17 +11,49 @@ const myArgs = process.argv.slice(2);
 const clientId = myArgs[0];
 const clientCount = myArgs[1];
 const fromAddress = myArgs[2];
-const txLimit = Number(myArgs[3]);
-const startTime = Number(myArgs[4]);
+const adjTxLimit = Number(myArgs[3]);
+const txLimit = Number(myArgs[4]);
+const startTime = Number(myArgs[5]);
+const test = myArgs[6];
+const timeStamp = myArgs[7];
+
+const sendAmount = adjTxLimit + 4;
+const delay = startTime - Date.now();
 
 const endpoints = fs.readFileSync("./nodes", 'utf-8').split("\n");
+const logFile = `${clientId}_${clientCount}_${clientCount}_${txLimit}_${timeStamp}`
+const csvWriter = createCsvWriter({
+    path: "./logs-state-channels/csv/" + logFile,
+    header: [
+        { id: 'test', title: 'Test' },
+        { id: 'wl', title: 'Workload' },
+        { id: 'clientId', title: 'Client Id' },
+        { id: 'minerCount', title: 'Miner#' },
+        { id: 'clientCount', title: 'Client#' },
+        { id: 'txRate', title: 'Transaction Rate' },
+        { id: 'txLimit', title: 'Transaction Limit' },
+        { id: 'duration', title: 'Total duration' },
+        { id: 'avgTPS', title: 'Average TPS' },
+        { id: 'avgLAT', title: 'Average Latency' },
+        { id: 'timeStamp', title: 'Date' }
+    ]
+});
 
-let sendAmount = txLimit + 4;
-let delay = startTime - Date.now();
+var data = [{
+    test: test,
+    wl: "StandardContract",
+    clientId: clientId,
+    minerCount: clientCount,
+    clientCount: clientCount,
+    txRate: 0,
+    txLimit: txLimit,
+    timeStamp: timeStamp,
+}];
+
+
 let startingTime = 0;
 let finishingTime = 0;
 let totalDuration = 0;
-
 var txs0 = []; //(clientId, time): add when received
 var txs1 = []; //(clientId, time): add when mined
 for (let i = 0; i < clientCount; i++) {
@@ -87,6 +120,8 @@ for (let i = 0; i < clientCount; i++) {
     }
 }
 
+console.log("Date.now():", Date.now(), "startTime:", startTime, "delay:", delay);
+
 var myChannel;
 
 async function loop() {
@@ -114,7 +149,7 @@ async function loop() {
                 }
                 messageId = msg.properties.messageId - 1;
                 if (messageId > 0) {
-                    if (messageId == txLimit) {
+                    if (messageId == adjTxLimit) {
                         if (startingTime == 0 && clientId == msg.properties.correlationId) {
                             startingTime = Date.now();
                             console.log("Sending TXS started at ", startingTime, "...");
@@ -144,7 +179,7 @@ async function loop() {
     }
 
     await sleep(delay);
-    console.log("producerQueues", producerQueues);
+    // console.log("producerQueues", producerQueues);
     producerQueues.forEach((producerQueueName, index) => {
         sendMessage(myChannel, producerQueueName, index);
     })
@@ -175,7 +210,7 @@ async function evaluate() {
                 const element0 = txs0[i];
                 const element1 = txs1[i];
                 console.log("client " + i + ": element0.length", element0.length, "element1.length", element1.length);
-                while (element1.length < txLimit / 2 || element0.length != element1.length) {
+                while (element1.length < adjTxLimit / 2 || element0.length != element1.length) {
                     await sleep(1000);
                 }
 
@@ -183,7 +218,7 @@ async function evaluate() {
                 console.log("\nAnalyzing the data....", element0.length * 2 + "txs for client " + i + " tracked.");
                 for (let i = 0; i < element0.length; i++) {
                     totalLatency += element1[i] - element0[i];
-                    console.log("Latency", i, element1[i] - element0[i]);
+                    // console.log("Latency", i, element1[i] - element0[i]);
                 }
                 overallLatency += Math.round(((totalLatency / element0.length / 2) / 1e6) * 100) / 100;
             }
@@ -191,10 +226,22 @@ async function evaluate() {
         console.log("========================================================");
         totalDuration = finishingTime - startingTime;
         console.log("DURATION:", totalDuration + "ms");
-        console.log("\nAVG. TPS:", (txLimit / (totalDuration / 1000)));
-        console.log("\nAVG. TX LATENCY:", Math.round((overallLatency / txs0.length) * 100) / 100);
+        var avgTPS = Math.round((adjTxLimit / (totalDuration / 1000)) * 100) / 100;
+        console.log("\nAVG. TPS:", avgTPS);
+        var avgLAT = Math.round((overallLatency / txs0.length) * 100) / 100;
+        console.log("\nAVG. TX LATENCY:", avgLAT);
         console.log("========================================================");
+        writeData(totalDuration, avgTPS, avgLAT);
     }
+}
+
+function writeData(duration, tps, lat) {
+    data[0].duration = duration;
+    data[0].avgTPS = tps;
+    data[0].avgLAT = lat;
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: /csv/' + logFile));
 }
 
 function sleep(ms) {
