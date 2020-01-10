@@ -42,7 +42,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT N
 if [ $test = "tps" ]; then
   total=$(expr 300)
 else
-  total=$(expr 500)
+  total=$(expr 550)
 fi
 count=0
 pstr="[=======================================================================]"
