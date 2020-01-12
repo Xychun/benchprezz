@@ -220,15 +220,13 @@ async function evaluate() {
     }
 
     totalDuration = measureEnd - measureStart;
-    if (nanoseconds) {
-        console.log("DURATION:", totalDuration + "ms");
-        console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)));
-    } else {
+    if (!nanoseconds) {
         totalDuration = totalDuration * 1000;
-        console.log("DURATION:", (totalDuration) + "ms");
-        var avgTPS = Math.round((txCount / (totalDuration / 1000)) * 100) / 100;
-        console.log("\nAVG. TPS:", avgTPS);
     }
+    console.log("DURATION:", (totalDuration) + "ms");
+    var avgTPS = Math.round((txCount / (totalDuration / 1000)) * 100) / 100;
+    console.log("\nAVG. TPS:", avgTPS);
+
     if (totalDuration < sendingDuration + 7500) {
         console.log("ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!");
     }

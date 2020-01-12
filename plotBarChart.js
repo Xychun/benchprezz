@@ -1,10 +1,13 @@
 const csv = require('csv-parser');
 const fs = require('fs');
-const chartJS = require("chart.js");
+const Chart = require('node-chartjs');
+const chart = new Chart(1000, 1000)
+// const chartJS = require("chart.js");
+
 
 const myArgs = process.argv.slice(2);
 const test = myArgs[0];
-const avgOf = Number(myArgs[2]);
+const avgOf = Number(myArgs[1]);
 
 console.log("================= RUNNING PEAK PERFORMANCE PLOT WITH FOLLOWING CONFIG =================");
 console.log("test \t\t", test);
@@ -24,7 +27,7 @@ const implementations = 4;
 var resultData = [];
 
 /**
- * @dev Merges all tests into 1 object based on the "Date" key, averaging the duration and latency, summing up the TPS of each client's throughput.
+ * @dev Merges all tests into 1 object each based on the "Date" key, averaging the duration and latency, summing up the TPS of each client's throughput.
  * @param {*} data The csv data set as json array.
  */
 function getAdvancedTestData(data) {
@@ -73,8 +76,46 @@ function getMergedTestData(data, keysKeep, keysSum, keysAverage) {
     return result;
 }
 
-function getSpecificTestData(data, date) {
-    return data.filter(obj => { return obj["Date"] == date });
+function getTxLimits(data) {
+    var txLimits = [];
+    data.forEach((obj) => {
+        var value = obj["Transaction Limit"]
+        if (!txLimits.includes(value)) {
+            txLimits.push(value)
+        }
+    })
+    txLimits.sort();
+    return txLimits;
+}
+
+
+function findMinLatency(data) {
+    var obj = data.find(function (obj) { return obj["Average Latency"] == Math.min.apply(Math, data.map(function (obj) { return obj["Average Latency"]; })); })
+    return obj;
+}
+
+function findMaxTPS(data) {
+    var obj = data.find(function (obj) { return obj["Average TPS"] == Math.max.apply(Math, data.map(function (obj) { return obj["Average TPS"]; })); })
+    return obj;
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function readData(path) {
+    var data = [];
+    await fs.readdir(path, function (err, items) {
+        items.forEach((file) => {
+            fs.createReadStream(path + file)
+                .pipe(csv())
+                .on('data', (row) => {
+                    data.push(row);
+                })
+        })
+    });
+    await sleep(2000);
+    return data;
 }
 
 // function getAverages(array, keysGroups, keysAverage) {
@@ -97,76 +138,9 @@ function getSpecificTestData(data, date) {
 //     return result;
 // }
 
-// function averageData(data) {
-//     averagedData = getAverages(data, ['Test', 'Workload', 'Miner#', 'Transaction Rate', 'Transaction Limit'], ['Average TPS', 'Average Latency'])
+// function getSpecificTestData(data, date) {
+//     return data.filter(obj => { return obj["Date"] == date });
 // }
-
-function getTxLimits(data) {
-    var txLimits = [];
-    data.forEach((obj) => {
-        var value = obj["Transaction Limit"]
-        if (!txLimits.includes(value)) {
-            txLimits.push(value)
-        }
-    })
-    txLimits.sort();
-    if (test == "tps") {
-        txLimits.splice(txLimits.indexOf('100'), 1);
-    }
-    return txLimits;
-}
-
-
-function findMinLatency(data) {
-    var obj = data.find(function (obj) { return obj["Average Latency"] == Math.min.apply(Math, data.map(function (obj) { return obj["Average Latency"]; })); })
-    return obj;
-
-    // var minValue = Infinity;
-    // txLimits.forEach((element) => {
-    //     potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
-    //     console.log("potentials", potentials);
-    //     values = potentials.map(potential => potential["Average Latency"]);
-    //     if (values.min() < minValue) {
-    //         minValue = values.min();
-    //     }
-    // });
-    // return minValue;
-}
-
-function findMaxTPS(data) {
-    var obj = data.find(function (obj) { return obj["Average TPS"] == Math.max.apply(Math, data.map(function (obj) { return obj["Average TPS"]; })); })
-    return obj;
-
-    // var maxValue = 0;
-    // txLimits.forEach((element) => {
-    //     potentials = data.filter(obj => { return obj["Transaction Limit"] == element });
-    //     console.log("potentials", potentials);
-    //     values = potentials.map(potential => potential["Average TPS"]);
-    //     if (values.max() > maxValue) {
-    //         maxValue = values.max();
-    //     }
-    // });
-    // return maxValue;
-}
-
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-async function readData(path) {
-    var data = [];
-    await fs.readdir(path, function (err, items) {
-        items.forEach((file) => {
-            fs.createReadStream(path + file)
-                .pipe(csv())
-                .on('data', (row) => {
-                    data.push(row);
-                })
-        })
-    });
-    await sleep(2000);
-    return data;
-}
 
 // function getFilteredData(data, test, wl, minerCount, clientCount, txRate, txLimit) {
 //     var data = data.filter(obj => { if (obj["Test"] == test && obj["Workload"] == wl && obj["Miner#"] == minerCount && obj["Client#"] == clientCount && obj["Transaction Rate"] == txRate && obj["Transaction Limit"] == txLimit) { return obj } });
@@ -187,27 +161,137 @@ async function plotDiagram() {
     console.log("Creating the diagram.....");
     console.log("resultData", resultData);
 
-    // var myBarChart = new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Geth-clique', 'Parity-aura', 'Quorum-raft', 'State-channels'],
-    //         datasets: [{
-    //             barPercentage: 0.5,
-    //             barThickness: 6,
-    //             maxBarThickness: 8,
-    //             minBarLength: 2,
-    //             data: resultData
-    //         }]
-    //     },
-    //     options: options
-    // });
+    var data = {
+        labels: ['Geth-clique', 'Parity-aura', 'Quorum-raft', 'State-channels'],
+        datasets: [{
+            barPercentage: 0.5,
+            barThickness: 6,
+            maxBarThickness: 8,
+            minBarLength: 2,
+            data: resultData,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)',
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+    var options = {
+        plugins: {
+            beforeDraw: function (chartInstance) {
+                var ctx = chartInstance.chart.ctx;
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, chartInstance.chart.width, chartInstance.chart.height);
+            },
+            afterDraw: function (chartInstance) {
+                var ctx = chartInstance.chart.ctx;
 
-    // base64Chart = myBarChart.toBase64Image();
-    // console.log("base64Chart", base64Chart);
+                ctx.font = "14px Georgia";
+                ctx.fillStyle = "black";
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
 
+                chartInstance.data.datasets.forEach(function (dataset) {
+                    for (var i = 0; i < dataset.data.length; i++) {
+                        var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model;
+                        ctx.fillText(dataset.data[i], model.x, model.y - 2);
+                    }
+                });
+            }
+        },
+        legend: { display: false },
+        showTooltips: true,
+        title: {
+            fontSize: 26,
+            fontStyle: 'bold',
+            display: true,
+            text: 'Peak Performance - TPS',
+            fontColor: '#000000',
+            padding: 40
+        },
+        scales: {
+            xAxes: [{
+                ticks: {
+                    fontStyle: 'bold',
+                    fontSize: 14
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Implementation',
+                    fontSize: 16,
+                    fontStyle: 'bold',
+                    fontColor: '#000000',
+                }
+            }],
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true,
+                    fontStyle: 'bold',
+                    fontSize: 14
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: 'tx/s',
+                    fontSize: 16,
+                    fontStyle: 'bold',
+                    fontColor: '#000000',
+                },
+            }]
+        }
+    };
+
+    if (test == "tps") {
+        options.title.text = "Peak Performance - Troughput";
+        options.scales.yAxes[0].scaleLabel.labelString = "tx/s";
+    } else {
+        options.title.text = "Peak Performance - Latency";
+        options.scales.yAxes[0].scaleLabel.labelString = "ms";
+    }
+
+
+    const barConfig = {
+        type: 'bar',
+        data: data,
+        options: options
+    }
+
+    var plotFile = "./results/" + test + ".png";
+    chart.makeChart(barConfig)
+        .then(res => {
+            chart.drawChart();
+
+            chart.toFile(plotFile)
+                .then(_ => {
+                    // file is written
+                })
+        })
 
     console.log("========================================================");
-    console.log('The PNG file was written successfully: ../../results/' + "plotFile")
+    console.log('The PNG file was written successfully:', plotFile)
 }
 
 async function main() {
@@ -244,12 +328,12 @@ async function main() {
 
         if (test == "latency") {
             minLatencyObj = await findMinLatency(advancedData, txLimits);
-            resultData.push(minLatencyObj["Average Latency"]);
             console.log(impl + " minLatencyObj", minLatencyObj);
+            resultData.push(minLatencyObj["Average Latency"]);
         } else if (test == "tps") {
             maxTPSObj = await findMaxTPS(advancedData, txLimits);
-            resultData.push(minLatencyObj["Average TPS"]);
             console.log(impl + " maxTPSObj", maxTPSObj);
+            resultData.push(maxTPSObj["Average TPS"]);
         }
     }
     await plotDiagram();
