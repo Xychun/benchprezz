@@ -95,7 +95,14 @@ web3.eth.sendTransaction({ "from": fromAddress, "data": byteCode, "gas": 2000000
     .once('transactionHash', function (hash) { console.log("TX HASH:\n", hash) })
     .once('receipt', function (receipt) { console.log("RECEIPT:\n", receipt) })
     .on('confirmation', function (confNumber, receipt) { /*DO NOTHING*/ })
-    .on('error', function (error) { console.log("ERROR\n:", error) })
+    .on('error', function (error) {
+        console.log("ERROR:\n", error)
+        if (error.toString().includes("Invalid JSON RPC response") || error.toString().includes("Failed to check for transaction receipt")) {
+            console.log("========================================================");
+            console.log("========================================================");
+            throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+        }
+    })
     .then(function (receipt) {
         // will be fired once, at the time the transaction is mined
         console.log("Contract at:", receipt.contractAddress)

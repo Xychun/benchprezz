@@ -95,7 +95,12 @@ async function sendTransaction() {
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
-            console.log("ERROR\n:", error)
+            console.log("ERROR:\n", error)
+            if (error.toString().includes("Invalid JSON RPC response") || error.toString().includes("Failed to check for transaction receipt")) {
+                console.log("========================================================");
+                console.log("========================================================");
+                throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+            }
         })
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)

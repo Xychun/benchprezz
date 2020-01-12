@@ -20,5 +20,5 @@ mkdir -p $DATA_DIR
 mkdir -p $CSV_DIR
 
 sudo chronyd -q
-echo "Starting client " $clientId " using account " $account " with configuration:: nodeCount: "$nodeCount " txLimit: "$adjTxLimit " startTime: "$startTime
+echo "Starting client " $clientId " using account " $account " with configuration:: nodeCount: "$nodeCount " ajdTxLimit: "$adjTxLimit " startTime: "$startTime
 nohup node ./stateChannels.js $clientId $nodeCount $account $adjTxLimit $txLimit $startTime $test $timeStamp > $LOG_DIR/$test"_client_"$clientId"_"$nodeCount"_nodes_"$txLimit"_txLimit_"$timeStamp 2>&1 &
