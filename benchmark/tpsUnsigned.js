@@ -8,8 +8,8 @@ const myArgs = process.argv.slice(2);
 const endpoint = myArgs[0];
 const fromAddress = myArgs[1];
 const contractType = myArgs[2];
-const txRate = Number(myArgs[3]);
-const txLimit = Number(myArgs[4]);
+const adjTxRate = Number(myArgs[3]);
+const adjTxLimit = Number(myArgs[4]);
 const startTime = Number(myArgs[5]);
 const clientId = Number(myArgs[6]);
 const minerCount = Number(myArgs[7]);
@@ -17,6 +17,9 @@ const clientCount = Number(myArgs[8]);
 const test = myArgs[9];
 const implementation = myArgs[10];
 const timeStamp = myArgs[11];
+
+const txRate = adjTxRate * minerCount;
+const txLimit = adjTxLimit * minerCount;
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
@@ -111,7 +114,7 @@ async function sendTransaction() {
             // if (measureStart == 0) {
             //     measureStart = Date.now();
             // }
-            // if (txs1.length == txLimit) {
+            // if (txs1.length == adjTxLimit) {
             //     measureEnd = Date.now();
             // }
 
@@ -119,7 +122,7 @@ async function sendTransaction() {
                 startingBlock = receipt.blockNumber;
                 console.log("startingBlock:", startingBlock);
             }
-            if (txs1.length == txLimit) {
+            if (txs1.length == adjTxLimit) {
                 finishBlock = receipt.blockNumber;
                 console.log("finishBlock:", finishBlock + "\n");
             }
@@ -151,7 +154,7 @@ function getOutputBlockFormatter(block) {
 }
 
 async function evaluate() {
-    while (txs1.length < txLimit) {
+    while (txs1.length < adjTxLimit) {
         await sleep(1000);
     }
 
@@ -192,7 +195,7 @@ async function evaluate() {
         totalLatency += txs1[i].time - txs0[i].time;
     }
 
-    if (txCount != txLimit) {
+    if (txCount != adjTxLimit) {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
 
@@ -267,13 +270,13 @@ async function loop() {
             console.log("\nERROR: Contract Type not specified!!!!\n");
     }
 
-    console.log("\nEvaluating ", txLimit + "txs...\n");
+    console.log("\nEvaluating ", adjTxLimit + "txs...\n");
     setIntervalX(function () {
         sendTransaction();
-    }, 1000 / txRate, txLimit);
+    }, 1000 / adjTxRate, adjTxLimit);
     setTimeout(function () {
         evaluate();
-    }, (1000 / txRate) * txLimit);
+    }, (1000 / adjTxRate) * adjTxLimit);
 }
 
 loop();

@@ -4,12 +4,10 @@ const chartJS = require("chart.js");
 
 const myArgs = process.argv.slice(2);
 const test = myArgs[0];
-const wl = myArgs[1];
 const avgOf = Number(myArgs[2]);
 
 console.log("================= RUNNING PEAK PERFORMANCE PLOT WITH FOLLOWING CONFIG =================");
 console.log("test \t\t", test);
-console.log("wl \t\t", wl);
 console.log("avgOf \t\t", avgOf);
 console.log("========================================================");
 
@@ -25,7 +23,10 @@ const implementations = 4;
 
 var resultData = [];
 
-
+/**
+ * @dev Merges all tests into 1 object based on the "Date" key, averaging the duration and latency, summing up the TPS of each client's throughput.
+ * @param {*} data The csv data set as json array.
+ */
 function getAdvancedTestData(data) {
     var uniqueDates = [];
     var result = [];
@@ -35,13 +36,11 @@ function getAdvancedTestData(data) {
             uniqueDates.push(obj["Date"]);
         }
     });
-    // console.log("uniqueDates", uniqueDates);
 
     for (let i = 0; i < uniqueDates.length; i++) {
         dataArr = data.filter(obj => { return obj["Date"] == uniqueDates[i] });
         result.push(getMergedObj(dataArr, ['Test', 'Workload', 'Miner#', 'Transaction Rate', 'Transaction Limit', 'Date'], ['Average TPS'], ['Total duration', 'Average Latency']));
     }
-    // console.log("result", result);
     return result;
 }
 
@@ -169,31 +168,50 @@ async function readData(path) {
     return data;
 }
 
-function getFilteredData(data, test, wl, minerCount, clientCount, txRate, txLimit) {
-    var data = data.filter(obj => { if (obj["Test"] == test && obj["Workload"] == wl && obj["Miner#"] == minerCount && obj["Client#"] == clientCount && obj["Transaction Rate"] == txRate && obj["Transaction Limit"] == txLimit) { return obj } });
-    console.log("========================================================");
-    var expected = minerCount * avgOf;
-    console.log("Expected", minerCount * avgOf, "results");
-    console.log("Found", data.length, "results");
-    if (expected > data.length) {
-        console.log("test, wl, minerCount, clientCount, txRate, txLimit", test, wl, minerCount, clientCount, txRate, txLimit);
-        throw "This test requires at least " + avgOf + "entries per miner (" + expected + ") to be averaged into a graph.";
-    } else {
-        data = data.slice(0, avgOf);
-        return data;
-    }
-}
+// function getFilteredData(data, test, wl, minerCount, clientCount, txRate, txLimit) {
+//     var data = data.filter(obj => { if (obj["Test"] == test && obj["Workload"] == wl && obj["Miner#"] == minerCount && obj["Client#"] == clientCount && obj["Transaction Rate"] == txRate && obj["Transaction Limit"] == txLimit) { return obj } });
+//     console.log("========================================================");
+//     var expected = minerCount * avgOf;
+//     console.log("Expected", minerCount * avgOf, "results");
+//     console.log("Found", data.length, "results");
+//     if (expected > data.length) {
+//         console.log("test, wl, minerCount, clientCount, txRate, txLimit", test, wl, minerCount, clientCount, txRate, txLimit);
+//         throw "This test requires at least " + avgOf + "entries per miner (" + expected + ") to be averaged into a graph.";
+//     } else {
+//         data = data.slice(0, avgOf);
+//         return data;
+//     }
+// }
 
 async function plotDiagram() {
     console.log("Creating the diagram.....");
-    console.log("result", result);
+    console.log("resultData", resultData);
+
+    // var myBarChart = new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Geth-clique', 'Parity-aura', 'Quorum-raft', 'State-channels'],
+    //         datasets: [{
+    //             barPercentage: 0.5,
+    //             barThickness: 6,
+    //             maxBarThickness: 8,
+    //             minBarLength: 2,
+    //             data: resultData
+    //         }]
+    //     },
+    //     options: options
+    // });
+
+    // base64Chart = myBarChart.toBase64Image();
+    // console.log("base64Chart", base64Chart);
+
 
     console.log("========================================================");
     console.log('The PNG file was written successfully: ../../results/' + "plotFile")
 }
 
 async function main() {
-    for (let i = 3; i < implementations; i++) {
+    for (let i = 0; i < implementations; i++) {
         var data = [];
         var txLimits = [];
         var advancedData = [];
@@ -203,15 +221,19 @@ async function main() {
         switch (i) {
             case 0:
                 var path = "./logs-geth-clique/csv/";
+                var impl = "geth-clique"
                 break;
             case 1:
                 var path = "./logs-parity-aura/csv/";
+                var impl = "parity-aura"
                 break;
             case 2:
                 var path = "./logs-quorum-raft/csv/";
+                var impl = "quorum-raft"
                 break;
             case 3:
                 var path = "./logs-state-channels/csv/";
+                var impl = "state-channels"
                 break;
             default:
             // code block
@@ -220,17 +242,17 @@ async function main() {
         txLimits = await getTxLimits(data);
         advancedData = await getAdvancedTestData(data);
 
-        console.log("advancedData", advancedData);
-
         if (test == "latency") {
             minLatencyObj = await findMinLatency(advancedData, txLimits);
-            console.log("minLatencyObj", minLatencyObj);
+            resultData.push(minLatencyObj["Average Latency"]);
+            console.log(impl + " minLatencyObj", minLatencyObj);
         } else if (test == "tps") {
             maxTPSObj = await findMaxTPS(advancedData, txLimits);
-            console.log("maxTPSObj", maxTPSObj);
+            resultData.push(minLatencyObj["Average TPS"]);
+            console.log(impl + " maxTPSObj", maxTPSObj);
         }
     }
-    // await plotDiagram();
+    await plotDiagram();
 }
 
 main();
