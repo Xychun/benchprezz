@@ -10,6 +10,7 @@ txLimit=$5
 wl=$6
 startTime=$7
 clientId=$8
+timeStamp=$9
 
 sudo chronyd -q
 
@@ -18,7 +19,6 @@ minerId=$(expr $clientId % $minerCount)
 adjTxRate=$(expr $txRate / $clientCount)
 adjTxLimit=$(expr $txLimit / $clientCount)
 
-timestamp=$(date +"%Y-%m-%d_%H-%M-%S")
 rpcport=`expr $RPCPORT_INIT + $minerId`
 readarray accounts < $ACCOUNTS -t
 account=${accounts[$accId]}
@@ -28,12 +28,13 @@ endpoint=$miner:$rpcport
 
 mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
+mkdir -p $CSV_DIR
 cd $BENCHMARK_HOME
 
 if [ $test = "latency" ]; then
-    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
-    nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
+    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " ajdTxLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
+    nohup node ./latency.js $endpoint $account $wl $adjTxLimit $startTime $clientId $minerCount $clientCount $test "quorum-IBFT" $timeStamp > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
 else
-    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " txRate: "$adjTxRate " txLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
-    nohup node ./tpsUnsigned.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timestamp 2>&1 &
+    echo "Starting client " $clientId " for endpoint " $endpoint " using account " $account " with configuration:: minerCount: "$minerCount " clientCount: "$clientCount " ajdTxRate: "$adjTxRate " ajdTxLimit: "$adjTxLimit " workload: "$wl " startTime: "$startTime
+    nohup node ./tpsUnsigned.js $endpoint $account $wl $adjTxRate $adjTxLimit $startTime $clientId $minerCount $clientCount $test "quorum-IBFT" $timeStamp > $LOG_DIR/$test"_client_"$clientId"_"$wl"_"$minerCount"_miners_"$clientCount"_clients_"$txRate"_txRate_"$txLimit"_txLimit_"$timeStamp 2>&1 &
 fi

@@ -10,6 +10,8 @@ CLIENTS=$SC_HOME/nodes
 ACCOUNTS=$SC_HOME/accounts
 # folder that stores the log files (client-side)
 LOG_DIR=$SC_HOME/logs-state-channels
+# folder that stores the csv log files
+CSV_DIR=$LOG_DIR/csv
 # file containing chain info and running sc directory
 DATA_DIR=$SC_HOME/chainInfo
 # folde that contains the keystore

@@ -14,6 +14,8 @@ PEERS=$ETHASH_HOME/peers
 ACCOUNTS=$ETHASH_HOME/accounts
 # file containing chain info and running geth directory
 DATA_DIR=$ETHASH_HOME/chainInfo
+# folder that stores the csv log files
+CSV_DIR=$LOG_DIR/csv
 # folder that stores the log files (client-side)
 LOG_DIR=$ETHASH_HOME/logs-geth-ethash
 # password for account unlock

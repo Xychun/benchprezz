@@ -14,6 +14,8 @@ PEERS=$AURA_HOME/peers
 ACCOUNTS=$AURA_HOME/accounts
 # folder that stores the log files (client-side)
 LOG_DIR=$AURA_HOME/logs-parity-aura
+# folder that stores the csv log files
+CSV_DIR=$LOG_DIR/csv
 # file containing chain info and running aura directory
 DATA_DIR=$AURA_HOME/chainInfo
 # folde that contains the keystore

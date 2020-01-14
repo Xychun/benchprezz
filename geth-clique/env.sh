@@ -16,6 +16,8 @@ ACCOUNTS=$GETH_HOME/accounts
 DATA_DIR=$GETH_HOME/chainInfo
 # folder that stores the log files (client-side)
 LOG_DIR=$GETH_HOME/logs-geth-clique
+# folder that stores the csv log files
+CSV_DIR=$LOG_DIR/csv
 # password for account unlock
 PWD="password"
 # ssh key file

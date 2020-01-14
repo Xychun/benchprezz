@@ -10,8 +10,10 @@ txLimit=$5
 wl=$6
 
 if [ $test = "latency" ]; then
-  wl=$txLimit
-  txLimit=$txRate
+  minerCount=1
+  clientCount=1
+  txRate=1
+  txLimit=100
 fi
 
 if [ $(( $txRate % $clientCount )) -ne 0 ]; then
@@ -40,7 +42,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT N
 if [ $test = "tps" ]; then
   total=$(expr 300)
 else
-  total=$(expr 500)
+  total=$(expr 550)
 fi
 count=0
 pstr="[=======================================================================]"

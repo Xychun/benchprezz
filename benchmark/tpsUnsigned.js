@@ -1,12 +1,25 @@
-var ABIs = require('./ABIs');
-var myArgs = process.argv.slice(2);
+const ABIs = require('./ABIs');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const Web3 = require('web3');
+const Web3Helpers = require('web3-core-helpers');
+const Web3Utils = require('web3-utils');
 
-var endpoint = myArgs[0];
-var fromAddress = myArgs[1];
-var contractType = myArgs[2];
-var txRate = Number(myArgs[3]);
-var txLimit = Number(myArgs[4]);
-var startTime = Number(myArgs[5]);
+const myArgs = process.argv.slice(2);
+const endpoint = myArgs[0];
+const fromAddress = myArgs[1];
+const contractType = myArgs[2];
+const adjTxRate = Number(myArgs[3]);
+const adjTxLimit = Number(myArgs[4]);
+const startTime = Number(myArgs[5]);
+const clientId = Number(myArgs[6]);
+const minerCount = Number(myArgs[7]);
+const clientCount = Number(myArgs[8]);
+const test = myArgs[9];
+const implementation = myArgs[10];
+const timeStamp = myArgs[11];
+
+const txRate = adjTxRate * clientCount;
+const txLimit = adjTxLimit * clientCount;
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
@@ -25,7 +38,35 @@ let nanoseconds = false;
 // let measureStart = 0;
 // let measureEnd = 0;
 
-var Web3 = require('web3');
+const logFile = `${clientId}_${minerCount}_${txRate}_${timeStamp}`
+const csvWriter = createCsvWriter({
+    path: "../" + implementation + "/logs-" + implementation + "/csv/" + logFile,
+    header: [
+        { id: 'test', title: 'Test' },
+        { id: 'wl', title: 'Workload' },
+        { id: 'clientId', title: 'Client Id' },
+        { id: 'minerCount', title: 'Miner#' },
+        { id: 'clientCount', title: 'Client#' },
+        { id: 'txRate', title: 'Transaction Rate' },
+        { id: 'txLimit', title: 'Transaction Limit' },
+        { id: 'duration', title: 'Total duration' },
+        { id: 'avgTPS', title: 'Average TPS' },
+        { id: 'avgLAT', title: 'Average Latency' },
+        { id: 'timeStamp', title: 'Date' }
+    ]
+});
+
+var data = [{
+    test: test,
+    wl: "StandardContract",
+    clientId: clientId,
+    minerCount: clientCount,
+    clientCount: clientCount,
+    txRate: txRate,
+    txLimit: txLimit,
+    timeStamp: timeStamp,
+}];
+
 var web3 = new Web3("http://" + endpoint, 0);
 if (!web3) {
     console.log("Issue connecting to web3 provider at " + endpoint);
@@ -65,7 +106,12 @@ async function sendTransaction() {
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
-            console.log("ERROR\n:", error)
+            console.log("ERROR:\n", error)
+            if (error.toString().includes("Invalid JSON RPC response") || error.toString().includes("Failed to check for transaction receipt")) {
+                console.log("========================================================");
+                console.log("========================================================");
+                throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+            }
         })
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
@@ -73,7 +119,7 @@ async function sendTransaction() {
             // if (measureStart == 0) {
             //     measureStart = Date.now();
             // }
-            // if (txs1.length == txLimit) {
+            // if (txs1.length == adjTxLimit) {
             //     measureEnd = Date.now();
             // }
 
@@ -81,15 +127,12 @@ async function sendTransaction() {
                 startingBlock = receipt.blockNumber;
                 console.log("startingBlock:", startingBlock);
             }
-            if (txs1.length == txLimit) {
+            if (txs1.length == adjTxLimit) {
                 finishBlock = receipt.blockNumber;
                 console.log("finishBlock:", finishBlock + "\n");
             }
         });
 }
-
-let Web3Helpers = require('web3-core-helpers');
-let Web3Utils = require('web3-utils');
 
 web3.extend({
     property: 'quorum_raft',
@@ -116,7 +159,7 @@ function getOutputBlockFormatter(block) {
 }
 
 async function evaluate() {
-    while (txs1.length < txLimit) {
+    while (txs1.length < adjTxLimit) {
         await sleep(1000);
     }
 
@@ -157,24 +200,34 @@ async function evaluate() {
         totalLatency += txs1[i].time - txs0[i].time;
     }
 
-    if (txCount != txLimit) {
+    if (txCount != adjTxLimit) {
         console.log("\n\n", "SOMETHING WENT REALLY WRONG!", "\n\n");
     }
 
     totalDuration = measureEnd - measureStart;
-    if (nanoseconds) {
-        console.log("DURATION:", totalDuration + "ms");
-        console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)));
-    } else {
+    if (!nanoseconds) {
         totalDuration = totalDuration * 1000;
-        console.log("DURATION:", (totalDuration) + "ms");
-        console.log("\nAVG. TPS:", (txCount / (totalDuration / 1000)));
     }
+    console.log("DURATION:", (totalDuration) + "ms");
+    var avgTPS = Math.round((txCount / (totalDuration / 1000)) * 100) / 100;
+    console.log("\nAVG. TPS:", avgTPS);
+
     if (totalDuration < sendingDuration + 7500) {
         console.log("ATTENTION: The measure duration is only " + (totalDuration - sendingDuration) + "ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!");
     }
-    console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
+    var avgLAT = Math.round((totalLatency / txs0.length) * 100) / 100;
+    console.log("\nAVG. LATENCY:", avgLAT);
     console.log("========================================================");
+    writeData(totalDuration, avgTPS, avgLAT);
+}
+
+function writeData(duration, tps, lat) {
+    data[0].duration = duration;
+    data[0].avgTPS = tps;
+    data[0].avgLAT = lat;
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: /csv/' + logFile));
 }
 
 async function setIntervalX(callback, delay, repetitions) {
@@ -220,13 +273,13 @@ async function loop() {
             console.log("\nERROR: Contract Type not specified!!!!\n");
     }
 
-    console.log("\nEvaluating ", txLimit + "txs...\n");
+    console.log("\nEvaluating ", adjTxLimit + "txs...\n");
     setIntervalX(function () {
         sendTransaction();
-    }, 1000 / txRate, txLimit);
+    }, 1000 / adjTxRate, adjTxLimit);
     setTimeout(function () {
         evaluate();
-    }, (1000 / txRate) * txLimit);
+    }, (1000 / adjTxRate) * adjTxLimit);
 }
 
 loop();

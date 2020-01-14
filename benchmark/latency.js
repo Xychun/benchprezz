@@ -1,11 +1,21 @@
-var ABIs = require('./ABIs');
-var myArgs = process.argv.slice(2);
+const ABIs = require('./ABIs');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
+const Web3 = require('web3');
+const Web3Helpers = require('web3-core-helpers');
+const Web3Utils = require('web3-utils');
 
-var endpoint = myArgs[0];
-var fromAddress = myArgs[1];
-var contractType = myArgs[2];
-var txLimit = Number(myArgs[3]);
-var startTime = Number(myArgs[4]);
+const myArgs = process.argv.slice(2);
+const endpoint = myArgs[0];
+const fromAddress = myArgs[1];
+const contractType = myArgs[2];
+const txLimit = Number(myArgs[3]);
+const startTime = Number(myArgs[4]);
+const clientId = Number(myArgs[5]);
+const minerCount = Number(myArgs[6]);
+const clientCount = Number(myArgs[7]);
+const test = myArgs[8];
+const implementation = myArgs[9];
+const timeStamp = myArgs[10];
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
@@ -16,9 +26,36 @@ let nonce = 0; // avoids "replacement transaction underpriced" error by geth
 let txCount = 0;
 let startingBlock = 0;
 let finishBlock = 0;
-let nanoseconds = false;
 
-var Web3 = require('web3');
+const logFile = `${clientId}_${minerCount}_${txLimit}_${timeStamp}`
+const csvWriter = createCsvWriter({
+    path: "../" + implementation + "/logs-" + implementation + "/csv/" + logFile,
+    header: [
+        { id: 'test', title: 'Test' },
+        { id: 'wl', title: 'Workload' },
+        { id: 'clientId', title: 'Client Id' },
+        { id: 'minerCount', title: 'Miner#' },
+        { id: 'clientCount', title: 'Client#' },
+        { id: 'txRate', title: 'Transaction Rate' },
+        { id: 'txLimit', title: 'Transaction Limit' },
+        { id: 'duration', title: 'Total duration' },
+        { id: 'avgTPS', title: 'Average TPS' },
+        { id: 'avgLAT', title: 'Average Latency' },
+        { id: 'timeStamp', title: 'Date' }
+    ]
+});
+
+var data = [{
+    test: test,
+    wl: "StandardContract",
+    clientId: clientId,
+    minerCount: clientCount,
+    clientCount: clientCount,
+    txRate: 0,
+    txLimit: txLimit,
+    timeStamp: timeStamp,
+}];
+
 var web3 = new Web3("http://" + endpoint);
 if (!web3) {
     console.log("Issue connecting to web3 provider at " + endpoint);
@@ -58,7 +95,12 @@ async function sendTransaction() {
             txs0.push({ txHash: hash, time: Date.now() });
         })
         .on('error', function (error) {
-            console.log("ERROR\n:", error)
+            console.log("ERROR:\n", error)
+            if (error.toString().includes("Invalid JSON RPC response") || error.toString().includes("Failed to check for transaction receipt")) {
+                console.log("========================================================");
+                console.log("========================================================");
+                throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+            }
         })
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
@@ -79,9 +121,6 @@ async function sendTransaction() {
             }
         });
 }
-
-let Web3Helpers = require('web3-core-helpers');
-let Web3Utils = require('web3-utils');
 
 web3.extend({
     property: 'quorum_raft',
@@ -122,8 +161,19 @@ async function evaluate() {
             console.log("TXs were not mined chronologically - consider searching the array for correct hash!")
         }
     }
-    console.log("\nAVG. LATENCY:", totalLatency / txs0.length);
+    var avgLAT = Math.round((totalLatency / txs0.length) * 100) / 100;
+    console.log("\nAVG. LATENCY:", avgLAT);
     console.log("========================================================");
+    writeData(0, 0, avgLAT);
+}
+
+function writeData(duration, tps, lat) {
+    data[0].duration = duration;
+    data[0].avgTPS = tps;
+    data[0].avgLAT = lat;
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: /csv/' + logFile));
 }
 
 function sleep(ms) {

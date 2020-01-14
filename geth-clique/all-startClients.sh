@@ -10,6 +10,7 @@ txLimit=$5
 wl=$6
 
 sudo chronyd -q
+timeStamp=$(date +"%Y-%m-%d_%H-%M-%S")
 now=$(($(date +%s%N)/1000000))
 startTime=$((now + 10000 + clientCount*10000))
 
@@ -19,7 +20,7 @@ for client in `cat $CLIENTS`; do
   if [[ $i -lt $clientCount ]]; then
     clientId=$(expr $i + 1)
     echo starting client $client  clientNo=$clientId
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $GETH_HOME/startClient.sh $test $minerCount $clientCount $txRate $txLimit $wl $startTime $clientId
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $client $GETH_HOME/startClient.sh $test $minerCount $clientCount $txRate $txLimit $wl $startTime $clientId $timeStamp
   fi
   let i=$i+1
 done
