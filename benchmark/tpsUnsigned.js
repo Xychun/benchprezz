@@ -18,8 +18,8 @@ const test = myArgs[9];
 const implementation = myArgs[10];
 const timeStamp = myArgs[11];
 
-const txRate = adjTxRate * minerCount;
-const txLimit = adjTxLimit * minerCount;
+const txRate = adjTxRate * clientCount;
+const txLimit = adjTxLimit * clientCount;
 
 var delay = startTime - Date.now();
 var KVStoreABI = ABIs.KVStore;
