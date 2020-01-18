@@ -179,13 +179,14 @@ async function loop() {
     }
 
     await sleep(delay);
-    // console.log("producerQueues", producerQueues);
+    console.log("producerQueues", producerQueues);
     producerQueues.forEach((producerQueueName, index) => {
         sendMessage(myChannel, producerQueueName, index);
     })
 }
 
 function sendMessage(channel, producerQueue, index) {
+    console.log("Initiation TX towards", index, "sent.");
     channel.sendToQueue(producerQueue,
         bufferObj, {
         correlationId: clientId,

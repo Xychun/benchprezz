@@ -33,11 +33,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startChannels.sh $test $nodeCount $txLimit
 
-if [ $test = "tps" ]; then
-  total=$(expr 90)
-else
-  total=$(expr 60)
-fi
+total=$(( 20 + $txLimit * (1/2) ))
 count=0
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do

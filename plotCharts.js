@@ -40,7 +40,7 @@ function getAdvancedTestData(data) {
 
     for (let i = 0; i < uniqueDates.length; i++) {
         dataArr = data.filter(obj => { return obj["Date"] == uniqueDates[i] });
-        mergedData.push(getAveragedObj(dataArr, ['Test', 'Workload', 'Miner#', 'Client#', 'Transaction Rate', 'Transaction Limit', 'Date'], ['Average TPS'], ['Total duration', 'Average Latency']));
+        mergedData.push(getMergedObj(dataArr, ['Test', 'Workload', 'Miner#', 'Client#', 'Transaction Rate', 'Transaction Limit', 'Date'], ['Average TPS'], ['Total duration', 'Average Latency']));
     }
 
     var keysGroup = ['Miner#', 'Client#', 'Transaction Rate', 'Transaction Limit'];
@@ -69,7 +69,7 @@ function getAdvancedTestData(data) {
     return result;
 }
 
-function getAveragedObj(data, keysKeep, keysSum, keysAverage) {
+function getMergedObj(data, keysKeep, keysSum, keysAverage) {
     return getAveragedTestData(data, keysKeep, keysSum, keysAverage)[0];
 }
 
@@ -627,7 +627,7 @@ async function diagram6() {
 }
 
 async function diagram7() {
-    var title = "Average Throughput at Requests per second";
+    var title = "Average Throughput at varying Requests per second";
     var xLabel = "#requests/s";
     var yLabel = "#tx/s";
     var fileName = "diagram7-AvgTPS-at-req-s";
@@ -672,7 +672,7 @@ async function diagram7() {
 }
 
 async function diagram8() {
-    var title = "Average Latency at Requests per second";
+    var title = "Average Latency at varying Requests per second";
     var xLabel = "#requests/s";
     var yLabel = "ms";
     var fileName = "diagram8-AvgLAT-at-req-s";
@@ -717,7 +717,7 @@ async function diagram8() {
 }
 
 async function diagram9() {
-    var title = "Average Throughput at Transaction Limit";
+    var title = "Average Throughput at varying Transaction Limit";
     var xLabel = "txLimit";
     var yLabel = "#tx/s";
     var fileName = "diagram9-AvgTPS-at-txLimit";
@@ -740,26 +740,6 @@ async function diagram9() {
         var data = [];
         var path = "./logs-" + impl + "/csv/";
         var testData = await readData(path);
-
-        var count = 0;
-        var total = 0;
-
-        console.log("testData.length", testData.length);
-        var val = 100800
-        console.log("\n");
-        console.log("value", val);
-        for (let i = 0; i < testData.length; i++) {
-            if (testData[i]['Transaction Limit'] == val) {
-                count++;
-                total += parseFloat(testData[i]['Average TPS']);
-                // console.log("Average Latency", testData[i]['Average Latency']);
-            }
-        }
-        console.log("total", total);
-        console.log("count", count);
-        console.log("totalAvg", total / count * 5);
-        console.log("\n");
-
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
         averagedData.forEach(obj => {
@@ -780,7 +760,7 @@ async function diagram9() {
 }
 
 async function diagram10() {
-    var title = "Average Latency at Transaction Limit";
+    var title = "Average Latency at varying Transaction Limit";
     var xLabel = "txLimit";
     var yLabel = "#tx/s";
     var fileName = "diagram10-AvgLAT-at-txLimit";
@@ -803,24 +783,6 @@ async function diagram10() {
         var data = [];
         var path = "./logs-" + impl + "/csv/";
         var testData = await readData(path);
-
-        // var count = 0;
-        // var total = 0;
-
-        // console.log("testData.length", testData.length);
-        // for (let i = 0; i < testData.length; i++) {
-        //     if (testData[i]['Transaction Limit'] == 45360) {
-        //         count++;
-        //         total += parseFloat(testData[i]['Average Latency']);
-        //         // console.log("Average Latency", testData[i]['Average Latency']);
-        //     }
-        // }
-        // console.log("\n");
-        // console.log("total", total);
-        // console.log("count", count);
-        // console.log("totalAvg", total / count);
-        // console.log("\n");
-
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
         averagedData.forEach(obj => {
@@ -850,7 +812,7 @@ async function main() {
     // await diagram7();
     // await diagram8();
     await diagram9();
-    // await diagram10();
+    await diagram10();
 }
 
 main();

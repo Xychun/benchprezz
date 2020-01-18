@@ -97,27 +97,15 @@ fi
 if [ $implementation = "sc" ]
 then
     startLimit=$startTps
-    for k in {1..5}
+    for k in {1..2}
     do
-        # tps
-        # for j in {1..5}
-        # do
-        #     maxi=$((rounds - 1))
-        #     for i in $(seq 0 $maxi);
-        #     do
-        #         limit=$(($startLimit + $i * $increment)) # 3360 kgv
-        #         nodes=$((2**$j))
-        #         $HOME/state-channels/benchmark.sh tps $nodes $limit
-        #     done
-        # done
-
         # tps
         for j in {1..5}
         do
-            for i in $(seq 1 20);
+            for i in $(seq 0 9);
             do
-                nodes=16
-                limit=$(($i * 12000))
+                limit=$((3360*(2**$i))) # 3360 kgv
+                nodes=$((2**$j))
                 $HOME/state-channels/benchmark.sh tps $nodes $limit
             done
         done
