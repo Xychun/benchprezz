@@ -105,7 +105,7 @@ then
         #     maxi=$((rounds - 1))
         #     for i in $(seq 0 $maxi);
         #     do
-        #         limit=$(($startLimit + $i * $increment)) # 840 kgv
+        #         limit=$(($startLimit + $i * $increment)) # 3360 kgv
         #         nodes=$((2**$j))
         #         $HOME/state-channels/benchmark.sh tps $nodes $limit
         #     done

@@ -309,11 +309,7 @@ async function plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, lab
                                 ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
                             }
                         } else {
-                            if (i == 0) {
-                                ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x + 15, model.y - 2);
-                            } else {
-                                ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
-                            }
+                            ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
                         }
                     }
                 });
@@ -744,16 +740,34 @@ async function diagram9() {
         var data = [];
         var path = "./logs-" + impl + "/csv/";
         var testData = await readData(path);
+
+        var count = 0;
+        var total = 0;
+
+        console.log("testData.length", testData.length);
+        var val = 100800
+        console.log("\n");
+        console.log("value", val);
+        for (let i = 0; i < testData.length; i++) {
+            if (testData[i]['Transaction Limit'] == val) {
+                count++;
+                total += parseFloat(testData[i]['Average TPS']);
+                // console.log("Average Latency", testData[i]['Average Latency']);
+            }
+        }
+        console.log("total", total);
+        console.log("count", count);
+        console.log("totalAvg", total / count * 5);
+        console.log("\n");
+
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
-
         averagedData.forEach(obj => {
             data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average TPS']) });
-            console.log(`{ 'x': ${obj['Transaction Limit']}, 'y': ${obj['Average TPS']} }`);
-            resultLog = resultLog + `{ 'x': ${obj['Transaction Limit']}, 'y': ${obj['Average TPS']} }` + "\n";
         })
 
         data.sort(compareValues('x'));
+        console.log(data);
         resultObj['data'] = data;
         datasets.push(resultObj);
         resultLog = resultLog + "\n";
@@ -789,16 +803,32 @@ async function diagram10() {
         var data = [];
         var path = "./logs-" + impl + "/csv/";
         var testData = await readData(path);
+
+        // var count = 0;
+        // var total = 0;
+
+        // console.log("testData.length", testData.length);
+        // for (let i = 0; i < testData.length; i++) {
+        //     if (testData[i]['Transaction Limit'] == 45360) {
+        //         count++;
+        //         total += parseFloat(testData[i]['Average Latency']);
+        //         // console.log("Average Latency", testData[i]['Average Latency']);
+        //     }
+        // }
+        // console.log("\n");
+        // console.log("total", total);
+        // console.log("count", count);
+        // console.log("totalAvg", total / count);
+        // console.log("\n");
+
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
-
         averagedData.forEach(obj => {
             data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average Latency']) });
-            console.log(`{ 'x': ${obj['Transaction Limit']}, 'y': ${obj['Average Latency']} }`);
-            resultLog = resultLog + `{ 'x': ${obj['Transaction Limit']}, 'y': ${obj['Average Latency']} }` + "\n";
         })
 
         data.sort(compareValues('x'));
+        console.log(data);
         resultObj['data'] = data;
         datasets.push(resultObj);
         resultLog = resultLog + "\n";
@@ -811,16 +841,16 @@ async function diagram10() {
 }
 
 async function main() {
-    await diagram1();
-    await diagram2();
-    await diagram3();
-    await diagram4();
-    await diagram5();
-    await diagram6();
-    await diagram7();
-    await diagram8();
+    // await diagram1();
+    // await diagram2();
+    // await diagram3();
+    // await diagram4();
+    // await diagram5();
+    // await diagram6();
+    // await diagram7();
+    // await diagram8();
     await diagram9();
-    await diagram10();
+    // await diagram10();
 }
 
 main();

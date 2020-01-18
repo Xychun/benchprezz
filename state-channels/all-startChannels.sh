@@ -9,7 +9,7 @@ txLimit=$3
 sudo chronyd -q
 timeStamp=`date +%F_%H-%M-%S`
 now=$(($(date +%s%N)/1000000))
-startTime=$((now + 10000 + $nodeCount*11000))
+startTime=$((now + 10000 + $nodeCount*10000))
 
 echo "==== starting all clients ===="
 i=0

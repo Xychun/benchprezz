@@ -13,8 +13,9 @@ fi
 
 channelCount=$(($nodeCount * ($nodeCount-1) / 2))
 
-if [ $(( $txLimit % $channelCount )) -ne 0 ]; then
- printf "++++++++++++++++++++++++++++++++++++++++++++++++ \nPlease pass a txLimit != $txLimit, which is divisible by the given channelCount $channelCount\n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+# each channel has two directions and each roundtrip has two transactions => therefore, channelCount * 4
+if [ $(( $txLimit % ($channelCount * 4) )) -ne 0 ]; then
+ printf "++++++++++++++++++++++++++++++++++++++++++++++++ \nPlease pass a txLimit != $txLimit, which is divisible by the given channelCount $channelCount x 4\n++++++++++++++++++++++++++++++++++++++++++++++++\n"
  exit 64
 fi
 if [ $(( $txLimit % 2 )) -ne 0 ]; then
@@ -33,7 +34,7 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n
 ./all-startChannels.sh $test $nodeCount $txLimit
 
 if [ $test = "tps" ]; then
-  total=$(expr 180)
+  total=$(expr 90)
 else
   total=$(expr 60)
 fi
