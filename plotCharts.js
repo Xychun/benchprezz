@@ -57,11 +57,12 @@ function getAdvancedTestData(data) {
         }
     })
 
-    for (var k in groups) {
-        if (groups[k].count < avgOf) {
+    for (var key in groups) {
+        if (groups[key].count < avgOf) {
             console.log("The following test setup is missing test data:");
-            console.log("Workload:", groups[k].payload['Workload'], "Miner#:", groups[k].payload['Miner#'], "Client#:", groups[k].payload['Client#'], "Transaction Rate:", groups[k].payload['Transaction Rate'], "Transaction Limit:", groups[k].payload['Transaction Limit']);
-            console.log("Only got", groups[k].count, 'of', avgOf, "\n");
+            console.log("'Miner#', 'Client#', 'Transaction Rate', 'Transaction Limit':");
+            console.log(key);
+            console.log("Only got", groups[key].count, 'of', avgOf, "\n");
         }
     }
 
@@ -744,9 +745,7 @@ async function diagram9() {
         var path = "./logs-" + impl + "/csv/";
         var testData = await readData(path);
         var advancedData = getAdvancedTestData(testData);
-        console.log("advancedData", advancedData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
-        // console.log("averagedData", averagedData);
 
         averagedData.forEach(obj => {
             data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average TPS']) });
@@ -812,16 +811,16 @@ async function diagram10() {
 }
 
 async function main() {
-    // await diagram1();
-    // await diagram2();
-    // await diagram3();
-    // await diagram4();
-    // await diagram5();
-    // await diagram6();
-    // await diagram7();
-    // await diagram8();
+    await diagram1();
+    await diagram2();
+    await diagram3();
+    await diagram4();
+    await diagram5();
+    await diagram6();
+    await diagram7();
+    await diagram8();
     await diagram9();
-    // await diagram10();
+    await diagram10();
 }
 
 main();
