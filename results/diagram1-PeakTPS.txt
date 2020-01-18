@@ -1,3 +1,19 @@
-state-channels
-maxTPSObj: {"Workload":"StandardContract","Miner#":"8","Client#":"8","Transaction Rate":"0","Transaction Limit":"70000","Total duration":"1274.88","Average Latency":"0.84","Average TPS":"7863.97"}
-resultData: 7863.97
+Geth-clique
+maxTPSObj: {"Workload":"StandardContract","Miner#":"16","Client#":"16","Transaction Rate":"1024","Transaction Limit":"102400","Total duration":"97187.50","Average Latency":"2028.85","Average TPS":"1053.67"}
+
+Parity-aura
+maxTPSObj: {"Workload":"StandardContract","Miner#":"16","Client#":"16","Transaction Rate":"1024","Transaction Limit":"102400","Total duration":"132406.25","Average Latency":"18979.79","Average TPS":"773.62"}
+
+Quorum-raft
+maxTPSObj: {"Workload":"StandardContract","Miner#":"2","Client#":"16","Transaction Rate":"1712","Transaction Limit":"171200","Total duration":"98667.50","Average Latency":"1006.79","Average TPS":"1735.14"}
+
+State-channels
+maxTPSObj: {"Workload":"StandardContract","Miner#":"8","Client#":"8","Transaction Rate":"0","Transaction Limit":"90720","Total duration":"1686.13","Average Latency":"0.83","Average TPS":"7716.80"}
+
+resultData:
+[
+    "1053.67",
+    "773.62",
+    "1735.14",
+    "7716.80"
+]

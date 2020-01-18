@@ -49,7 +49,7 @@ var data = [{
     test: test,
     wl: "StandardContract",
     clientId: clientId,
-    minerCount: clientCount,
+    minerCount: minerCount,
     clientCount: clientCount,
     txRate: 0,
     txLimit: txLimit,
