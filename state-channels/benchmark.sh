@@ -33,7 +33,8 @@ printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startChannels.sh $test $nodeCount $txLimit
 
-total=$(( 20 + $txLimit * (1/2) ))
+total=$(( 20 + $txLimit / 2000 ))
+printf "Estimated Duration: "$total"sec\n"
 count=0
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do

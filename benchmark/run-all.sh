@@ -97,7 +97,7 @@ fi
 if [ $implementation = "sc" ]
 then
     startLimit=$startTps
-    for k in {1..2}
+    for k in {1..5}
     do
         # tps
         for j in {1..5}

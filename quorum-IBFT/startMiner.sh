@@ -10,6 +10,7 @@ account=$4
 
 mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
+sudo rm $LOG_DIR/eth_log
 
 sudo cp -r build/bin/ /usr/local
 

@@ -12,6 +12,7 @@ account=$7
 
 mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
+sudo rm $LOG_DIR/eth_log
 
 sudo cp -r $HOME/quorum/build/bin/ /usr/local
 
