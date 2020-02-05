@@ -1,0 +1,48 @@
+Connected web3 provider at 10.195.2.215:8012
+Date.now(): 1579709497347 startTime: 1579709567126 delay: 69782
+Deploying smart contract from 0xd97e663738dCd209D1Afce8A553814f41429d9ff
+TX HASH:
+ 0x5ec361a16a696c200681293daf0c28042c3d7c6aa4c66dcda58c41553116e41d
+RECEIPT:
+ {
+  blockHash: '0xd76ba49c8251c1260ceb95baf21b8665ff12807bbae1312654dfcbd1132e516d',
+  blockNumber: 8,
+  contractAddress: '0x34bA29DBb480F2CA8385D0Cec58e846567E7A632',
+  cumulativeGasUsed: 218495,
+  from: '0xd97e663738dcd209d1afce8a553814f41429d9ff',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x5ec361a16a696c200681293daf0c28042c3d7c6aa4c66dcda58c41553116e41d',
+  transactionIndex: 0
+}
+Contract at: 0x34bA29DBb480F2CA8385D0Cec58e846567E7A632
+
+Evaluating  5500txs...
+
+Sending TXS started at 1579709567230 ...
+startingBlock: 9
+... Sending TXS finished at 1579709667191
+Total send duration: 99961
+... Waiting for mining process to finish! ...
+finishBlock: 29
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 245341888
+average blockGasUsage: 149113520.55
+maximum blockGasUsage of gasLimit: 98.13675520000001%
+ATTENTION: The block gas usage exceeds 85% (98.13675520000001%) of the block gas limit (250000000) - consider raising the block gas limit!
+
+Analyzing the data.... 5500txs tracked.
+========================================================
+DURATION: 103000ms
+
+AVG. TPS: 53.4
+ATTENTION: The measure duration is only 3039ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 6053.68
+========================================================
+The CSV file was written successfully: /csv/11_16_880_2020-01-22_16-09-57

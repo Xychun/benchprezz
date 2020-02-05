@@ -29,11 +29,11 @@ printf "Nodes: "$nodeCount"\n"
 printf "Channel-Connections: "$channelCount"\n"
 printf "Total TXs: "$txLimit"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-stop.sh
+./all-stop.sh $nodeCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
 ./all-startChannels.sh $test $nodeCount $txLimit
 
-total=$(( 20 + $txLimit / 2000 ))
+total=$(( 30 + $txLimit / 2000 ))
 printf "Estimated Duration: "$total"sec\n"
 count=0
 pstr="[=======================================================================]"
@@ -45,5 +45,5 @@ while [ $count -lt $total ]; do
 done
 echo ""
 
-./all-stop.sh
+./all-stop.sh $nodeCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tEXPERIMENT DONE \n++++++++++++++++++++++++++++++++++++++++++++++++\n"

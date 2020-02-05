@@ -429,6 +429,7 @@ async function diagram1() {
     var resultLog = "";
 
     await asyncForEach(implementations, async (impl) => {
+        console.log("\nImplementation:", impl);
         var maxTPSObj = 0;
         var path = "./logs-" + impl + "/csv/";
 
@@ -456,6 +457,7 @@ async function diagram2() {
     var resultLog = "";
 
     await asyncForEach(implementations, async (impl) => {
+        console.log("\nImplementation:", impl);
         var minLatencyObj = Infinity;
         var path = "./logs-" + impl + "/csv/";
 
@@ -483,6 +485,7 @@ async function diagram3() {
     var resultLog = "";
 
     await asyncForEach(implementations, async (impl) => {
+        console.log("\nImplementation:", impl);
         var minLatencyObj = Infinity;
         var path = "./logs-" + impl + "/csv/";
 
@@ -510,6 +513,7 @@ async function diagram4() {
     var resultLog = "";
 
     await asyncForEach(implementations, async (impl) => {
+        console.log("\nImplementation:", impl);
         var maxTPSObj = 0;
         var path = "./logs-" + impl + "/csv/";
 
@@ -809,10 +813,10 @@ async function main() {
     // await diagram4();
     // await diagram5();
     // await diagram6();
-    // await diagram7();
-    // await diagram8();
-    await diagram9();
-    await diagram10();
+    await diagram7();
+    await diagram8();
+    // await diagram9();
+    // await diagram10();
 }
 
 main();
