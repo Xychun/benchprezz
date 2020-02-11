@@ -35,8 +35,6 @@ let totalDuration = 0;
 let startingBlock = 0;
 let finishBlock = 0;
 let nanoseconds = false;
-// let measureStart = 0;
-// let measureEnd = 0;
 
 const logFile = `${clientId}_${minerCount}_${txRate}_${timeStamp}`
 const csvWriter = createCsvWriter({
@@ -116,12 +114,6 @@ async function sendTransaction() {
         .then(function (receipt) {
             // console.log("TX MINED:", receipt.transactionHash)
             txs1.push({ txHash: receipt.transactionHash, time: Date.now() });
-            // if (measureStart == 0) {
-            //     measureStart = Date.now();
-            // }
-            // if (txs1.length == adjTxLimit) {
-            //     measureEnd = Date.now();
-            // }
 
             if (startingBlock == 0) {
                 startingBlock = receipt.blockNumber;

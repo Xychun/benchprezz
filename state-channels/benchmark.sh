@@ -45,5 +45,4 @@ while [ $count -lt $total ]; do
 done
 echo ""
 
-./all-stop.sh $nodeCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tEXPERIMENT DONE \n++++++++++++++++++++++++++++++++++++++++++++++++\n"

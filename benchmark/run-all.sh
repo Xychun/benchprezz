@@ -61,7 +61,7 @@ do
     do
         for i in $(seq 1 60); # 1 60
         do
-            limit=$((16800*(2**$i))) # 3360 kgv
+            limit=$((16800*$i)) # 3360 kgv
             nodes=$((2**$j))
             $HOME/state-channels/benchmark.sh tps $nodes $limit
         done

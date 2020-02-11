@@ -308,6 +308,10 @@ async function plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, lab
                             if ((i % 6 == 0 && i != 0) || i == dataset.data.length - 1) {
                                 ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
                             }
+                        } else if (labelingStart == 300) {
+                            if ((i % 3 == 0) || i == dataset.data.length - 1) {
+                                ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
+                            }
                         } else {
                             ctx.fillText(numToPrettyNum(dataset.data[i].y), model.x - 12, model.y - 2);
                         }
@@ -760,7 +764,7 @@ async function diagram9() {
     resultData['datasets'] = datasets;
     console.log("\nresultData", resultData, "\n");
     resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
-    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 0, fileName);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
 }
 
 async function diagram10() {
@@ -803,7 +807,7 @@ async function diagram10() {
     resultData['datasets'] = datasets;
     console.log("\nresultData", resultData, "\n");
     resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
-    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 0, fileName);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
 }
 
 async function main() {
@@ -813,10 +817,10 @@ async function main() {
     // await diagram4();
     // await diagram5();
     // await diagram6();
-    await diagram7();
-    await diagram8();
-    // await diagram9();
-    // await diagram10();
+    // await diagram7();
+    // await diagram8();
+    await diagram9();
+    await diagram10();
 }
 
 main();
