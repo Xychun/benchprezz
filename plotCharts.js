@@ -1,4 +1,5 @@
 const csv = require('csv-parser');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 const fs = require('fs');
 const Chart = require('node-chartjs');
 const chart = new Chart(1000, 1000)
@@ -81,6 +82,7 @@ function getAveragedTestData(data, keysKeep, keysSum, keysAverage) {
         if (!groups[key]) {
             groups[key] = { count: 0, payload: {} };
             keysAverage.forEach(k => groups[key][k] = 0);
+            keysAverage.forEach(k => groups[key][k + 'arr'] = []);
             keysSum.forEach(k => groups[key][k] = 0);
             keysKeep.forEach(k => groups[key].payload[k] = obj[k]); // adds all the constants to json already
             result.push(groups[key].payload);
@@ -88,11 +90,56 @@ function getAveragedTestData(data, keysKeep, keysSum, keysAverage) {
         groups[key].count++;
         keysAverage.forEach(k => {
             groups[key][k] += parseFloat(obj[k]);
+            groups[key][k + 'arr'].push(parseFloat(obj[k]));
             groups[key].payload[k] = parseFloat((groups[key][k] / groups[key].count).toFixed(2));
+            var mean = getMean(groups[key][k + 'arr']);
+            var sd = getSD(groups[key][k + 'arr']);
+            groups[key].payload[k + ' SD'] = sd;
+            groups[key].payload[k + ' MoE'] = getMoE(sd, groups[key].count, mean);
         });
         keysSum.forEach(k => {
             groups[key][k] += parseFloat(obj[k]);
             groups[key].payload[k] = parseFloat((groups[key][k]).toFixed(2));
+        });
+    })
+    return result;
+}
+
+// Arithmetic mean
+function getMean(data) {
+    return data.reduce((a, b) => a + b) / data.length;
+}
+
+// Standard deviation
+function getSD(data) {
+    var mean = getMean(data);
+    return parseFloat(Math.sqrt(data.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / data.length)).toFixed(2);
+}
+
+// Margin of Error
+function getMoE(sd, count, mean) {
+    var moe = sd / Math.sqrt(count);
+    var moePercent = parseFloat(moe / mean * 100).toFixed(2);
+    return parseFloat(moe).toFixed(2) + " (" + parseFloat(moePercent).toFixed(2) + '\\%)';
+}
+
+function getMedianTestData(data, keysKeep, keysMedian) {
+    var groups = {},
+        result = [];
+    data.forEach(obj => {
+        var identifier = keysKeep.map(k => obj[k]).join('|'); // new string by concatenating all of the elements devided by | symbol
+        if (!groups[identifier]) {
+            groups[identifier] = { count: 0, payload: {} };
+            keysMedian.forEach(k => groups[identifier][k] = []);
+            keysKeep.forEach(k => groups[identifier].payload[k] = obj[k]); // adds all the constants to json already
+            result.push(groups[identifier].payload);
+        }
+        groups[identifier].count++;
+        keysMedian.forEach(k => {
+            groups[identifier][k].push(parseFloat(obj[k]));
+            groups[identifier][k].sort((a, b) => { return a - b });
+            var medianIndex = Math.floor(groups[identifier].count / 2);
+            groups[identifier].payload[k] = parseFloat(groups[identifier][k][medianIndex]).toFixed(2);
         });
     })
     return result;
@@ -110,7 +157,7 @@ function getFilteredData(data, keyArray, valueArray) {
     });
 }
 
-function compareValues(key) {
+function compareValue(key) {
     return function innerSort(a, b) {
         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
             // property doesn't exist on either object
@@ -402,6 +449,43 @@ async function plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, lab
     await sleep(500);
 }
 
+function createCSV(dataArr, fileName) {
+    console.log("\n", "Creating the", fileName, "table.....");
+
+    var data = [];
+    var csvWriter = createCsvWriter({
+        path: "./results/" + fileName + ".csv",
+        header: [
+            { id: 'txRate', title: 'Transaction Rate' },
+            { id: 'txLimit', title: 'Transaction Limit' },
+            { id: 'avgTPS', title: 'Average TPS' },
+            { id: 'tpsSD', title: 'TPS Standard Deviation' },
+            { id: 'tpsMoE', title: 'TPS Margin of Error' },
+            { id: 'avgLAT', title: 'Average Latency' },
+            { id: 'latSD', title: 'Latency Standard Deviation' },
+            { id: 'latMoE', title: 'Latency Margin of Error' },
+        ]
+    });
+
+    dataArr.forEach(obj => {
+        data.push({
+            txRate: obj['Transaction Rate'],
+            txLimit: obj['Transaction Limit'],
+            avgTPS: obj['Average TPS'],
+            tpsSD: obj['Average TPS SD'],
+            tpsMoE: obj['Average TPS MoE'],
+            avgLAT: obj['Average Latency'],
+            latSD: obj['Average Latency SD'],
+            latMoE: obj['Average Latency MoE'],
+        });
+    });
+
+    console.log("========================================================");
+    csvWriter
+        .writeRecords(data)
+        .then(() => console.log('The CSV file was written successfully: ./results/' + fileName + '.csv' + "\n========================================================\n"));
+}
+
 function numToPrettyNum(num) {
     var result = roundNumber(num);
     if (result >= 1000) {
@@ -667,7 +751,52 @@ async function diagram7() {
             resultLog = resultLog + `{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average TPS']} }` + "\n";
         })
 
-        data.sort(compareValues('x'));
+        data.sort(compareValue('x'));
+        resultObj['data'] = data;
+        datasets.push(resultObj);
+        resultLog = resultLog + "\n";
+    })
+
+    resultData['datasets'] = datasets;
+    console.log("\nresultData", resultData, "\n");
+    resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 100, fileName);
+}
+
+async function diagram75() {
+    var title = "Median Throughput at varying Requests per second";
+    var xLabel = "#requests/s";
+    var yLabel = "#tx/s";
+    var fileName = "diagram7-5-MedTPS-at-req-s";
+
+    var resultData = {};
+    var datasets = [];
+    var resultLog = "";
+
+    await asyncForEach(implementations.slice(0, 3), async (impl) => {
+        console.log("\nImplementation:", impl);
+        resultLog = resultLog + impl + "\n";
+
+        var resultObj = {};
+        resultObj['fill'] = false;
+        resultObj['label'] = impl;
+        resultObj['lineTension'] = 0;
+        resultObj['borderColor'] = colors[impl];
+        resultObj['pointBackgroundColor'] = colors[impl];
+
+        var data = [];
+        var path = "./logs-" + impl + "/csv/";
+        var testData = await readData(path);
+        var advancedData = getAdvancedTestData(testData);
+        var medianData = getMedianTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], ['Total duration', 'Average Latency', 'Average TPS']);
+
+        medianData.forEach(obj => {
+            data.push({ 'x': parseFloat(obj['Transaction Rate']), 'y': parseFloat(obj['Average TPS']) });
+            console.log(`{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average TPS']} }`);
+            resultLog = resultLog + `{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average TPS']} }` + "\n";
+        })
+
+        data.sort(compareValue('x'));
         resultObj['data'] = data;
         datasets.push(resultObj);
         resultLog = resultLog + "\n";
@@ -712,7 +841,7 @@ async function diagram8() {
             resultLog = resultLog + `{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average Latency']} }` + "\n";
         })
 
-        data.sort(compareValues('x'));
+        data.sort(compareValue('x'));
         resultObj['data'] = data;
         datasets.push(resultObj);
         resultLog = resultLog + "\n";
@@ -721,7 +850,52 @@ async function diagram8() {
     resultData['datasets'] = datasets;
     console.log("\nresultData", resultData, "\n");
     resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
-    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 100, fileName);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
+}
+
+async function diagram85() {
+    var title = "Median Latency at varying Requests per second";
+    var xLabel = "#requests/s";
+    var yLabel = "ms";
+    var fileName = "diagram8-5-MedLAT-at-req-s";
+
+    var resultData = {};
+    var datasets = [];
+    var resultLog = "";
+
+    await asyncForEach(implementations.slice(0, 3), async (impl) => {
+        console.log("\nImplementation:", impl);
+        resultLog = resultLog + impl + "\n";
+
+        var resultObj = {};
+        resultObj['fill'] = false;
+        resultObj['label'] = impl;
+        resultObj['lineTension'] = 0;
+        resultObj['borderColor'] = colors[impl];
+        resultObj['pointBackgroundColor'] = colors[impl];
+
+        var data = [];
+        var path = "./logs-" + impl + "/csv/";
+        var testData = await readData(path);
+        var advancedData = getAdvancedTestData(testData);
+        var medianData = getMedianTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], ['Total duration', 'Average Latency', 'Average TPS']);
+
+        medianData.forEach(obj => {
+            data.push({ 'x': parseFloat(obj['Transaction Rate']), 'y': parseFloat(obj['Average Latency']) });
+            console.log(`{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average Latency']} }`);
+            resultLog = resultLog + `{ 'x': ${obj['Transaction Rate']}, 'y': ${obj['Average Latency']} }` + "\n";
+        })
+
+        data.sort(compareValue('x'));
+        resultObj['data'] = data;
+        datasets.push(resultObj);
+        resultLog = resultLog + "\n";
+    })
+
+    resultData['datasets'] = datasets;
+    console.log("\nresultData", resultData, "\n");
+    resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
 }
 
 async function diagram9() {
@@ -750,11 +924,56 @@ async function diagram9() {
         var testData = await readData(path);
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
-        averagedData.forEach(obj => {
+        averagedData.forEach((obj, index) => {
             data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average TPS']) });
         })
 
-        data.sort(compareValues('x'));
+        console.log("averagedData", averagedData);
+
+        data.sort(compareValue('x'));
+        console.log(data);
+        resultObj['data'] = data;
+        datasets.push(resultObj);
+        resultLog = resultLog + "\n";
+    })
+
+    resultData['datasets'] = datasets;
+    console.log("\nresultData", resultData, "\n");
+    resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
+}
+
+async function diagram95() {
+    var title = "Median Throughput at varying Transaction Limit";
+    var xLabel = "txLimit";
+    var yLabel = "#tx/s";
+    var fileName = "diagram9-5-MedTPS-at-txLimit";
+
+    var resultData = {};
+    var datasets = [];
+    var resultLog = "";
+
+    await asyncForEach(implementations.slice(3, 4), async (impl) => {
+        console.log("\nImplementation:", impl);
+        resultLog = resultLog + impl + "\n";
+
+        var resultObj = {};
+        resultObj['fill'] = false;
+        resultObj['label'] = impl;
+        resultObj['lineTension'] = 0;
+        resultObj['borderColor'] = colors[impl];
+        resultObj['pointBackgroundColor'] = colors[impl];
+
+        var data = [];
+        var path = "./logs-" + impl + "/csv/";
+        var testData = await readData(path);
+        var advancedData = getAdvancedTestData(testData);
+        var medianData = getMedianTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], ['Total duration', 'Average Latency', 'Average TPS']);
+        medianData.forEach((obj, index) => {
+            data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average TPS']) });
+        })
+
+        data.sort(compareValue('x'));
         console.log(data);
         resultObj['data'] = data;
         datasets.push(resultObj);
@@ -793,11 +1012,11 @@ async function diagram10() {
         var testData = await readData(path);
         var advancedData = getAdvancedTestData(testData);
         var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
-        averagedData.forEach(obj => {
+        averagedData.forEach((obj, index) => {
             data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average Latency']) });
         })
 
-        data.sort(compareValues('x'));
+        data.sort(compareValue('x'));
         console.log(data);
         resultObj['data'] = data;
         datasets.push(resultObj);
@@ -810,17 +1029,85 @@ async function diagram10() {
     await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
 }
 
+async function diagram105() {
+    var title = "Median Latency at varying Transaction Limit";
+    var xLabel = "txLimit";
+    var yLabel = "#tx/s";
+    var fileName = "diagram10-5-MedLAT-at-txLimit";
+
+    var resultData = {};
+    var datasets = [];
+    var resultLog = "";
+
+    await asyncForEach(implementations.slice(3, 4), async (impl) => {
+        console.log("\nImplementation:", impl);
+        resultLog = resultLog + impl + "\n";
+
+        var resultObj = {};
+        resultObj['fill'] = false;
+        resultObj['label'] = impl;
+        resultObj['lineTension'] = 0;
+        resultObj['borderColor'] = colors[impl];
+        resultObj['pointBackgroundColor'] = colors[impl];
+
+        var data = [];
+        var path = "./logs-" + impl + "/csv/";
+        var testData = await readData(path);
+        var advancedData = getAdvancedTestData(testData);
+        var medianData = getMedianTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], ['Total duration', 'Average Latency', 'Average TPS']);
+        medianData.forEach((obj, index) => {
+            data.push({ 'x': parseFloat(obj['Transaction Limit']), 'y': parseFloat(obj['Average Latency']) });
+        })
+
+        data.sort(compareValue('x'));
+        console.log(data);
+        resultObj['data'] = data;
+        datasets.push(resultObj);
+        resultLog = resultLog + "\n";
+    })
+
+    resultData['datasets'] = datasets;
+    console.log("\nresultData", resultData, "\n");
+    resultLog = resultLog + "resultData:\n" + JSON.stringify(resultData, null, 4);
+    await plotLineDiagram(resultData, resultLog, title, xLabel, yLabel, 300, fileName);
+}
+
+async function table1() {
+    await asyncForEach(implementations, async (impl) => {
+        console.log("\nImplementation:", impl);
+
+        var data = [];
+        var path = "./logs-" + impl + "/csv/";
+        var testData = await readData(path);
+        var advancedData = getAdvancedTestData(testData);
+        var averagedData = getAveragedTestData(advancedData, ['Transaction Rate', 'Transaction Limit'], [], ['Total duration', 'Average Latency', 'Average TPS']);
+
+        averagedData.forEach(obj => {
+            obj['Transaction Limit'] = parseInt(obj['Transaction Limit']);
+            data.push(obj);
+        })
+        data.sort(compareValue('Transaction Limit'));
+        await createCSV(data, "statistics-" + impl);
+    })
+}
+
 async function main() {
-    // await diagram1();
-    // await diagram2();
-    // await diagram3();
-    // await diagram4();
-    // await diagram5();
-    // await diagram6();
-    // await diagram7();
-    // await diagram8();
+    await diagram1();
+    await diagram2();
+    await diagram3();
+    await diagram4();
+    await diagram5();
+    await diagram6();
+    await diagram7();
+    await diagram75();
+    await diagram8();
+    await diagram85();
     await diagram9();
+    await diagram95();
     await diagram10();
+    await diagram105();
+
+    await table1();
 }
 
 main();

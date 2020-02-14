@@ -1,0 +1,113 @@
+[33mMemory limit exceeded for Node's built-in crypto.scrypt, falling back to scryptsy (times: 1), if this happens frequently you can improve the performance of scrypt when running Node.js versions older than 12.0.0 by installing the (deprecated) scrypt package in your project[0m
+Date.now(): 1581349008504 startTime: 1581349072402 delay: 70954
+producerQueues [
+  'Queue_0',      'Queue_1',
+  'Queue_2',      'Queue_3',
+  'Queue_4',      'Queue_5',
+  'Queue_6',      'Queue_7',
+  <1 empty item>, 'Queue_9',
+  'Queue_10',     'Queue_11',
+  'Queue_12',     'Queue_13',
+  'Queue_14',     'Queue_15'
+]
+Initiation TX towards 0 sent.
+Initiation TX towards 1 sent.
+Initiation TX towards 2 sent.
+Initiation TX towards 3 sent.
+Initiation TX towards 4 sent.
+Initiation TX towards 5 sent.
+Initiation TX towards 6 sent.
+Initiation TX towards 7 sent.
+Initiation TX towards 9 sent.
+Initiation TX towards 10 sent.
+Initiation TX towards 11 sent.
+Initiation TX towards 12 sent.
+Initiation TX towards 13 sent.
+Initiation TX towards 14 sent.
+Initiation TX towards 15 sent.
+Sending TXS started at  1581349080386 ...
+... Sending TXS finished at 1581349083396
+... Sending TXS finished at 1581349083472
+... Sending TXS finished at 1581349083532
+... Sending TXS finished at 1581349083565
+... Sending TXS finished at 1581349083571
+... Sending TXS finished at 1581349083728
+... Sending TXS finished at 1581349083755
+... Sending TXS finished at 1581349083761
+... Sending TXS finished at 1581349083827
+... Sending TXS finished at 1581349083884
+... Sending TXS finished at 1581349083907
+... Sending TXS finished at 1581349083951
+... Sending TXS finished at 1581349084016
+... Sending TXS finished at 1581349084130
+... Sending TXS finished at 1581349084260
+client 0: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 0 tracked.
+client 1: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 1 tracked.
+client 2: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 2 tracked.
+client 3: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 3 tracked.
+client 4: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 4 tracked.
+client 5: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 5 tracked.
+client 6: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 6 tracked.
+client 7: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 7 tracked.
+client 9: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 9 tracked.
+client 10: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 10 tracked.
+client 11: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 11 tracked.
+client 12: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 12 tracked.
+client 13: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 13 tracked.
+client 14: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 14 tracked.
+client 15: element0.length 1820 element1.length 1820
+
+Analyzing the data.... 3640txs for client 15 tracked.
+========================================================
+DURATION: 3874ms
+
+AVG. TPS: 939.6
+
+AVG. TX LATENCY: 0.87
+========================================================
+The CSV file was written successfully: /csv/8_16_873600_2020-02-10_15-35-18
+events.js:200
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: read ECONNRESET
+    at TCP.onStreamRead (internal/stream_base_commons.js:200:27)
+Emitted 'error' event on ChannelModel instance at:
+    at Connection.emit (events.js:223:5)
+    at Connection.C.onSocketError (/home/ubuntu/benchprezz/node_modules/amqplib/lib/connection.js:353:10)
+    at Socket.emit (events.js:228:7)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:81:21) {
+  errno: 'ECONNRESET',
+  code: 'ECONNRESET',
+  syscall: 'read'
+}
