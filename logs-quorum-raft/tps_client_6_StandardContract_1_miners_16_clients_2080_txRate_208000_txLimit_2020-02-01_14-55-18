@@ -1,0 +1,50 @@
+Connected web3 provider at 10.195.2.37:22001
+Date.now(): 1580568970104 startTime: 1580569088347 delay: 118246
+Deploying smart contract from 0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4
+TX HASH:
+ 0xa92cd0b1b6e8b5a2a58063e23b67772dc600df84682f70c89dece4c072c89739
+RECEIPT:
+ {
+  blockHash: '0x95875cbf4b80647d55e14ce49b8e8615dc70568c06aa178ca7ab50f6680e704f',
+  blockNumber: 6,
+  contractAddress: '0x826688F89B56fAD385e53925606c0Ce7BcFE5856',
+  cumulativeGasUsed: 218495,
+  from: '0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0xa92cd0b1b6e8b5a2a58063e23b67772dc600df84682f70c89dece4c072c89739',
+  transactionIndex: 0
+}
+Contract at: 0x826688F89B56fAD385e53925606c0Ce7BcFE5856
+
+Evaluating  13000txs...
+
+Sending TXS started at 1580569088464 ...
+startingBlock: 21
+(node:27293) UnhandledPromiseRejectionWarning: Error: Failed to check for transaction receipt:
+{}
+    at Object._fireError (/home/ubuntu/benchprezz/node_modules/web3-core-method/node_modules/web3-utils/src/index.js:56:17)
+    at /home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:260:23
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:501:9)
+    at processTimers (internal/timers.js:475:7)
+(node:27293) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:27293) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+ERROR:
+ Error: Failed to check for transaction receipt:
+{}
+    at Object._fireError (/home/ubuntu/benchprezz/node_modules/web3-core-method/node_modules/web3-utils/src/index.js:56:17)
+    at /home/ubuntu/benchprezz/node_modules/web3-core-method/src/index.js:260:23
+    at runNextTicks (internal/process/task_queues.js:58:5)
+    at listOnTimeout (internal/timers.js:501:9)
+    at processTimers (internal/timers.js:475:7)
+========================================================
+========================================================
+
+/home/ubuntu/benchprezz/benchmark/tpsUnsigned.js:113
+                throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+                ^
+Blockchain capabilities EXCEEDED - ABORTING test run!

@@ -1,0 +1,62 @@
+Connected web3 provider at 10.195.2.106:8004
+Date.now(): 1580875364745 startTime: 1580875506085 delay: 141343
+Deploying smart contract from 0x153efc18539e763e2fce033c0684ecc7b4e8b5e8
+TX HASH:
+ 0x540a2f40fcc36d79f7afccf41568647fe6b9e8d7470d6c685b2e6cba888139e3
+RECEIPT:
+ {
+  blockHash: '0x3b43f1545812a212605fa85574b883599c3df553d6c9f75be4aa36d87918bd31',
+  blockNumber: 1,
+  contractAddress: '0xA8Ab30fb62c6c5efbDe74CA8a760fd0b7D7884EF',
+  cumulativeGasUsed: 655485,
+  from: '0x153efc18539e763e2fce033c0684ecc7b4e8b5e8',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x540a2f40fcc36d79f7afccf41568647fe6b9e8d7470d6c685b2e6cba888139e3',
+  transactionIndex: 2
+}
+Contract at: 0xA8Ab30fb62c6c5efbDe74CA8a760fd0b7D7884EF
+
+Evaluating  8500txs...
+
+Sending TXS started at 1580875506239 ...
+startingBlock: 13
+(node:9634) UnhandledPromiseRejectionWarning: Error: Invalid JSON RPC response: ""
+    at Object.InvalidResponse (/home/ubuntu/benchprezz/node_modules/web3-core-helpers/src/errors.js:42:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/ubuntu/benchprezz/node_modules/web3-providers-http/src/index.js:92:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpRequestError (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:349:14)
+    at ClientRequest.<anonymous> (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:252:61)
+    at ClientRequest.emit (events.js:210:5)
+    at Socket.socketErrorListener (_http_client.js:406:9)
+    at Socket.emit (events.js:210:5)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+(node:9634) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:9634) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+ERROR:
+ Error: Invalid JSON RPC response: ""
+    at Object.InvalidResponse (/home/ubuntu/benchprezz/node_modules/web3-core-helpers/src/errors.js:42:16)
+    at XMLHttpRequest.request.onreadystatechange (/home/ubuntu/benchprezz/node_modules/web3-providers-http/src/index.js:92:32)
+    at XMLHttpRequestEventTarget.dispatchEvent (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request-event-target.js:34:22)
+    at XMLHttpRequest._setReadyState (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:208:14)
+    at XMLHttpRequest._onHttpRequestError (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:349:14)
+    at ClientRequest.<anonymous> (/home/ubuntu/benchprezz/node_modules/xhr2-cookies/dist/xml-http-request.js:252:61)
+    at ClientRequest.emit (events.js:210:5)
+    at Socket.socketErrorListener (_http_client.js:406:9)
+    at Socket.emit (events.js:210:5)
+    at emitErrorNT (internal/streams/destroy.js:92:8)
+    at emitErrorAndCloseNT (internal/streams/destroy.js:60:3)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21)
+========================================================
+========================================================
+
+/home/ubuntu/benchprezz/benchmark/tpsUnsigned.js:113
+                throw 'Blockchain capabilities EXCEEDED - ABORTING test run!';
+                ^
+Blockchain capabilities EXCEEDED - ABORTING test run!

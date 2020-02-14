@@ -18,6 +18,8 @@ STATIC_NODES=$DATA_DIR/static-nodes.json
 ACCOUNTS=$IBFT_HOME/accounts
 # folder that stores the log files (client-side)
 LOG_DIR=$IBFT_HOME/logs-quorum-IBFT
+# folder that stores the csv log files
+CSV_DIR=$LOG_DIR/csv
 # folder that contains the keystore
 KEY_DIR=$DATA_DIR/keystore
 # password for account unlock

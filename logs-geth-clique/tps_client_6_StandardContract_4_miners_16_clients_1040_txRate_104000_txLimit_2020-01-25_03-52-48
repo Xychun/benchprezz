@@ -1,0 +1,47 @@
+Connected web3 provider at 10.195.2.231:8003
+Date.now(): 1579924423612 startTime: 1579924538081 delay: 114473
+Deploying smart contract from 0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4
+TX HASH:
+ 0x2400e6b59da38a53abc3d37d72a906b976722979ae1236ec1e32bd99c6a715a6
+RECEIPT:
+ {
+  blockHash: '0x5187d861a9b59fbff698a41246bc54af9c0b9967b801576d5477b2740f583060',
+  blockNumber: 60,
+  contractAddress: '0x826688F89B56fAD385e53925606c0Ce7BcFE5856',
+  cumulativeGasUsed: 218495,
+  from: '0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4',
+  gasUsed: 218495,
+  logs: [],
+  logsBloom: '0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000',
+  status: true,
+  to: null,
+  transactionHash: '0x2400e6b59da38a53abc3d37d72a906b976722979ae1236ec1e32bd99c6a715a6',
+  transactionIndex: 0
+}
+Contract at: 0x826688F89B56fAD385e53925606c0Ce7BcFE5856
+
+Evaluating  6500txs...
+
+Sending TXS started at 1579924538225 ...
+startingBlock: 175
+... Sending TXS finished at 1579924637493
+Total send duration: 99268
+... Waiting for mining process to finish! ...
+finishBlock: 274
+
+Gas Stats:
+gasLimit: 250000000
+maximum blockGasUsage: 63267688
+average blockGasUsage: 52048646.464646466
+maximum blockGasUsage of gasLimit: 25.3070752%
+
+Analyzing the data.... 6500txs tracked.
+========================================================
+DURATION: 99000ms
+
+AVG. TPS: 65.66
+ATTENTION: The measure duration is only -268ms slower than the sending duration - consider sending more tps, using more clients or upgrading the client CPU!
+
+AVG. LATENCY: 1909.35
+========================================================
+The CSV file was written successfully: /csv/6_4_1040_2020-01-25_03-52-48

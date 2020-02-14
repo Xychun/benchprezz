@@ -1,0 +1,122 @@
+{
+  "name": "Benchprezz",
+  "engine": {
+    "authorityRound": {
+      "params": {
+        "stepDuration": "5",
+        "validators": {
+          "list": [
+            "0x933e73c3f959759c169effa4019c8faf7d05ce33",
+            "0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c",
+            "0x153efc18539e763e2fce033c0684ecc7b4e8b5e8",
+            "0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d",
+            "0xf19bd883f468433d2a50910be0aa8d3b5e56b95e",
+            "0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4",
+            "0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a",
+            "0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f"
+          ]
+        }
+      }
+    }
+  },
+  "params": {
+    "gasLimitBoundDivisor": "0x400",
+    "maximumExtraDataSize": "0x20",
+    "minGasLimit": "0x1388",
+    "networkID": "0x2323",
+    "eip155Transition": 0,
+    "validateChainIdTransition": 0,
+    "eip140Transition": 0,
+    "eip211Transition": 0,
+    "eip214Transition": 0,
+    "eip658Transition": 0
+  },
+  "genesis": {
+    "seal": {
+      "authorityRound": {
+        "step": "0x0",
+        "signature": "0x0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      }
+    },
+    "difficulty": "0x20000",
+    "gasLimit": "0xEE6B280"
+  },
+  "accounts": {
+    "0x0000000000000000000000000000000000000001": {
+      "balance": "1",
+      "builtin": {
+        "name": "ecrecover",
+        "pricing": { "linear": { "base": 3000, "word": 0 } }
+      }
+    },
+    "0x0000000000000000000000000000000000000002": {
+      "balance": "1",
+      "builtin": {
+        "name": "sha256",
+        "pricing": { "linear": { "base": 60, "word": 12 } }
+      }
+    },
+    "0x0000000000000000000000000000000000000003": {
+      "balance": "1",
+      "builtin": {
+        "name": "ripemd160",
+        "pricing": { "linear": { "base": 600, "word": 120 } }
+      }
+    },
+    "0x0000000000000000000000000000000000000004": {
+      "balance": "1",
+      "builtin": {
+        "name": "identity",
+        "pricing": { "linear": { "base": 15, "word": 3 } }
+      }
+    },
+    "0x933e73c3f959759c169effa4019c8faf7d05ce33": {
+      "balance": "10000000000000000000000"
+    },
+    "0xaf7f46a2cb4be01ec10db6c643d31fa09922ef2c": {
+      "balance": "10000000000000000000000"
+    },
+    "0x153efc18539e763e2fce033c0684ecc7b4e8b5e8": {
+      "balance": "10000000000000000000000"
+    },
+    "0x32d1ddc3632256ed61df2708ca8fb25ec87bd00d": {
+      "balance": "10000000000000000000000"
+    },
+    "0xf19bd883f468433d2a50910be0aa8d3b5e56b95e": {
+      "balance": "10000000000000000000000"
+    },
+    "0x99b2198a1de767872e2ab8b1b3c919e723d4b1f4": {
+      "balance": "10000000000000000000000"
+    },
+    "0x6fff54aa0710e9b47f5999f129f3ed301ea58d5a": {
+      "balance": "10000000000000000000000"
+    },
+    "0x232ee988523d3f8d7c18c2ae3c3b73e11e80cd0f": {
+      "balance": "10000000000000000000000"
+    },
+    "0x56eAB1c8709e9C7658C97eAD3903c012F115f71b": {
+      "balance": "10000000000000000000000"
+    },
+    "0x19C77ecFfae2ef7f461eBAF793E0c9015f3eBB74": {
+      "balance": "10000000000000000000000"
+    },
+    "0xd97e663738dCd209D1Afce8A553814f41429d9ff": {
+      "balance": "10000000000000000000000"
+    },
+    "0xDa0344835f667336920851580943f2B16de8E56D": {
+      "balance": "10000000000000000000000"
+    },
+    "0x6b68423ec26708431c8244AD7116b7909A386E75": {
+      "balance": "10000000000000000000000"
+    },
+    "0x5794AE026E8cdC8C2A9d6B85cD2061967E8314E4": {
+      "balance": "10000000000000000000000"
+    },
+    "0xdC55B8A1d3A0D44A62CD788a82bEC1C10485ab41": {
+      "balance": "10000000000000000000000"
+    },
+    "0xCC4B6e60c07C7174b2C6645eFf6FC4DAFab0c97a": {
+      "balance": "10000000000000000000000"
+    }
+  }
+}

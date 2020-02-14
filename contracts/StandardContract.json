@@ -1,0 +1,1329 @@
+{
+  "contractName": "StandardContract",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_latitude",
+          "type": "int32"
+        },
+        {
+          "name": "_longitude",
+          "type": "int32"
+        },
+        {
+          "name": "_direction",
+          "type": "uint16"
+        },
+        {
+          "name": "_speed",
+          "type": "uint16"
+        },
+        {
+          "name": "_acceleration",
+          "type": "int8"
+        }
+      ],
+      "name": "updateState",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.0+commit.1d4f565a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"_latitude\",\"type\":\"int32\"},{\"name\":\"_longitude\",\"type\":\"int32\"},{\"name\":\"_direction\",\"type\":\"uint16\"},{\"name\":\"_speed\",\"type\":\"uint16\"},{\"name\":\"_acceleration\",\"type\":\"int8\"}],\"name\":\"updateState\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/Juuu/Library/Mobile Documents/com~apple~CloudDocs/Studium/Master/LMU Informatik (MA)/Thesis/contractImplementation/contracts/StandardContract.sol\":\"StandardContract\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/Juuu/Library/Mobile Documents/com~apple~CloudDocs/Studium/Master/LMU Informatik (MA)/Thesis/contractImplementation/contracts/StandardContract.sol\":{\"keccak256\":\"0xbce00752edb2bd12269322afcaf45978eec99d83d85e98e71e2b6fa71bbc71a8\",\"urls\":[\"bzzr://630e6c6188ccff253b0d4760514b4e8ef3e8a46fe8df8688771311bb862a70cb\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50610271806100206000396000f3fe608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063e6efb19014610046575b600080fd5b34801561005257600080fd5b506100b8600480360360a081101561006957600080fd5b81019080803560030b9060200190929190803560030b9060200190929190803561ffff169060200190929190803561ffff169060200190929190803560000b90602001909291905050506100ba565b005b6100c2610205565b60a0604051908101604052808760030b81526020018660030b81526020018561ffff1681526020018461ffff1681526020018360000b8152509050806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548163ffffffff021916908360030b63ffffffff16021790555060208201518160000160046101000a81548163ffffffff021916908360030b63ffffffff16021790555060408201518160000160086101000a81548161ffff021916908361ffff160217905550606082015181600001600a6101000a81548161ffff021916908361ffff160217905550608082015181600001600c6101000a81548160ff021916908360000b60ff160217905550905050505050505050565b60a060405190810160405280600060030b8152602001600060030b8152602001600061ffff168152602001600061ffff1681526020016000800b8152509056fea165627a7a7230582037781b794e4d501eb2c02c73d017df96012bdf5b913ad005a7844d5f3f514cc10029",
+  "deployedBytecode": "0x608060405260043610610041576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063e6efb19014610046575b600080fd5b34801561005257600080fd5b506100b8600480360360a081101561006957600080fd5b81019080803560030b9060200190929190803560030b9060200190929190803561ffff169060200190929190803561ffff169060200190929190803560000b90602001909291905050506100ba565b005b6100c2610205565b60a0604051908101604052808760030b81526020018660030b81526020018561ffff1681526020018461ffff1681526020018360000b8152509050806000803373ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200190815260200160002060008201518160000160006101000a81548163ffffffff021916908360030b63ffffffff16021790555060208201518160000160046101000a81548163ffffffff021916908360030b63ffffffff16021790555060408201518160000160086101000a81548161ffff021916908361ffff160217905550606082015181600001600a6101000a81548161ffff021916908361ffff160217905550608082015181600001600c6101000a81548160ff021916908360000b60ff160217905550905050505050505050565b60a060405190810160405280600060030b8152602001600060030b8152602001600061ffff168152602001600061ffff1681526020016000800b8152509056fea165627a7a7230582037781b794e4d501eb2c02c73d017df96012bdf5b913ad005a7844d5f3f514cc10029",
+  "sourceMap": "25:687:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;25:687:4;;;;;;;",
+  "deployedSourceMap": "25:687:4:-;;;;;;;;;;;;;;;;;;;;;;;;423:287;;8:9:-1;5:2;;;30:1;27;20:12;5:2;423:287:4;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;423:287:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;548:30;;:::i;:::-;581:69;;;;;;;;;593:9;581:69;;;;;;604:10;581:69;;;;;;616:10;581:69;;;;;;628:6;581:69;;;;;;636:13;581:69;;;;;548:102;;694:11;658:21;:33;680:10;658:33;;;;;;;;;;;;;;;:47;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;423:287;;;;;;:::o;25:687::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.5.0;\n\ncontract StandardContract {\n\n    mapping(address => StateVector) addressToStateVector_;\n\n    struct StateVector {\n        int32 latitude; // in DD(Decimal Degrees) - xx.xxxxx between 90 and -90\n        int32 longitude; // in DD(Decimal Degrees) - xx.xxxxx between 180 and -180\n        uint16 direction; // in degrees\n        uint16 speed; // in km/h\n        int8 acceleration; // in m/s^2\n    }\n\n  function updateState(int32 _latitude, int32 _longitude, uint16 _direction, uint16 _speed, int8 _acceleration) public {\n      StateVector memory stateVector = StateVector(_latitude, _longitude, _direction, _speed, _acceleration);\n      addressToStateVector_[msg.sender] = stateVector;\n  }\n}\n\n",
+  "sourcePath": "/Users/Juuu/Library/Mobile Documents/com~apple~CloudDocs/Studium/Master/LMU Informatik (MA)/Thesis/contractImplementation/contracts/StandardContract.sol",
+  "ast": {
+    "absolutePath": "/Users/Juuu/Library/Mobile Documents/com~apple~CloudDocs/Studium/Master/LMU Informatik (MA)/Thesis/contractImplementation/contracts/StandardContract.sol",
+    "exportedSymbols": {
+      "StandardContract": [
+        582
+      ]
+    },
+    "id": 583,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 535,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 582,
+        "linearizedBaseContracts": [
+          582
+        ],
+        "name": "StandardContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 539,
+            "name": "addressToStateVector_",
+            "nodeType": "VariableDeclaration",
+            "scope": 582,
+            "src": "58:53:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+              "typeString": "mapping(address => struct StandardContract.StateVector)"
+            },
+            "typeName": {
+              "id": 538,
+              "keyType": {
+                "id": 536,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "66:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "58:31:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+                "typeString": "mapping(address => struct StandardContract.StateVector)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 537,
+                "name": "StateVector",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 550,
+                "src": "77:11:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_StateVector_$550_storage_ptr",
+                  "typeString": "struct StandardContract.StateVector"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "StandardContract.StateVector",
+            "id": 550,
+            "members": [
+              {
+                "constant": false,
+                "id": 541,
+                "name": "latitude",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "147:14:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int32",
+                  "typeString": "int32"
+                },
+                "typeName": {
+                  "id": 540,
+                  "name": "int32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "147:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 543,
+                "name": "longitude",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "227:15:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int32",
+                  "typeString": "int32"
+                },
+                "typeName": {
+                  "id": 542,
+                  "name": "int32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "227:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 545,
+                "name": "direction",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "310:16:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 544,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "310:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 547,
+                "name": "speed",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "350:12:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 546,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "350:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 549,
+                "name": "acceleration",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "383:17:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int8",
+                  "typeString": "int8"
+                },
+                "typeName": {
+                  "id": 548,
+                  "name": "int8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "383:4:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int8",
+                    "typeString": "int8"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "StateVector",
+            "nodeType": "StructDefinition",
+            "scope": 582,
+            "src": "118:301:4",
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 580,
+              "nodeType": "Block",
+              "src": "540:170:4",
+              "statements": [
+                {
+                  "assignments": [
+                    564
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 564,
+                      "name": "stateVector",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 580,
+                      "src": "548:30:4",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_memory_ptr",
+                        "typeString": "struct StandardContract.StateVector"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 563,
+                        "name": "StateVector",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 550,
+                        "src": "548:11:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_StateVector_$550_storage_ptr",
+                          "typeString": "struct StandardContract.StateVector"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 572,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 566,
+                        "name": "_latitude",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 552,
+                        "src": "593:9:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 567,
+                        "name": "_longitude",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 554,
+                        "src": "604:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 568,
+                        "name": "_direction",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 556,
+                        "src": "616:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 569,
+                        "name": "_speed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 558,
+                        "src": "628:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 570,
+                        "name": "_acceleration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 560,
+                        "src": "636:13:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int8",
+                          "typeString": "int8"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        },
+                        {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        },
+                        {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        },
+                        {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        },
+                        {
+                          "typeIdentifier": "t_int8",
+                          "typeString": "int8"
+                        }
+                      ],
+                      "id": 565,
+                      "name": "StateVector",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 550,
+                      "src": "581:11:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_StateVector_$550_storage_ptr_$",
+                        "typeString": "type(struct StandardContract.StateVector storage pointer)"
+                      }
+                    },
+                    "id": 571,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "581:69:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_StateVector_$550_memory",
+                      "typeString": "struct StandardContract.StateVector memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "548:102:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 578,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 573,
+                        "name": "addressToStateVector_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 539,
+                        "src": "658:21:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+                          "typeString": "mapping(address => struct StandardContract.StateVector storage ref)"
+                        }
+                      },
+                      "id": 576,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 574,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 597,
+                          "src": "680:3:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 575,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "680:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "658:33:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_storage",
+                        "typeString": "struct StandardContract.StateVector storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 577,
+                      "name": "stateVector",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 564,
+                      "src": "694:11:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_memory_ptr",
+                        "typeString": "struct StandardContract.StateVector memory"
+                      }
+                    },
+                    "src": "658:47:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_StateVector_$550_storage",
+                      "typeString": "struct StandardContract.StateVector storage ref"
+                    }
+                  },
+                  "id": 579,
+                  "nodeType": "ExpressionStatement",
+                  "src": "658:47:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 581,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 561,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 552,
+                  "name": "_latitude",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "444:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  },
+                  "typeName": {
+                    "id": 551,
+                    "name": "int32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "444:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int32",
+                      "typeString": "int32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 554,
+                  "name": "_longitude",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "461:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  },
+                  "typeName": {
+                    "id": 553,
+                    "name": "int32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "461:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int32",
+                      "typeString": "int32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 556,
+                  "name": "_direction",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "479:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 555,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "479:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 558,
+                  "name": "_speed",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "498:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 557,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 560,
+                  "name": "_acceleration",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "513:18:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int8",
+                    "typeString": "int8"
+                  },
+                  "typeName": {
+                    "id": 559,
+                    "name": "int8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "513:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int8",
+                      "typeString": "int8"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:89:4"
+            },
+            "returnParameters": {
+              "id": 562,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "540:0:4"
+            },
+            "scope": 582,
+            "src": "423:287:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 583,
+        "src": "25:687:4"
+      }
+    ],
+    "src": "0:714:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/Juuu/Library/Mobile Documents/com~apple~CloudDocs/Studium/Master/LMU Informatik (MA)/Thesis/contractImplementation/contracts/StandardContract.sol",
+    "exportedSymbols": {
+      "StandardContract": [
+        582
+      ]
+    },
+    "id": 583,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 535,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 582,
+        "linearizedBaseContracts": [
+          582
+        ],
+        "name": "StandardContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 539,
+            "name": "addressToStateVector_",
+            "nodeType": "VariableDeclaration",
+            "scope": 582,
+            "src": "58:53:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+              "typeString": "mapping(address => struct StandardContract.StateVector)"
+            },
+            "typeName": {
+              "id": 538,
+              "keyType": {
+                "id": 536,
+                "name": "address",
+                "nodeType": "ElementaryTypeName",
+                "src": "66:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "58:31:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+                "typeString": "mapping(address => struct StandardContract.StateVector)"
+              },
+              "valueType": {
+                "contractScope": null,
+                "id": 537,
+                "name": "StateVector",
+                "nodeType": "UserDefinedTypeName",
+                "referencedDeclaration": 550,
+                "src": "77:11:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_StateVector_$550_storage_ptr",
+                  "typeString": "struct StandardContract.StateVector"
+                }
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "canonicalName": "StandardContract.StateVector",
+            "id": 550,
+            "members": [
+              {
+                "constant": false,
+                "id": 541,
+                "name": "latitude",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "147:14:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int32",
+                  "typeString": "int32"
+                },
+                "typeName": {
+                  "id": 540,
+                  "name": "int32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "147:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 543,
+                "name": "longitude",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "227:15:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int32",
+                  "typeString": "int32"
+                },
+                "typeName": {
+                  "id": 542,
+                  "name": "int32",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "227:5:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 545,
+                "name": "direction",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "310:16:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 544,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "310:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 547,
+                "name": "speed",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "350:12:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint16",
+                  "typeString": "uint16"
+                },
+                "typeName": {
+                  "id": 546,
+                  "name": "uint16",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "350:6:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 549,
+                "name": "acceleration",
+                "nodeType": "VariableDeclaration",
+                "scope": 550,
+                "src": "383:17:4",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_int8",
+                  "typeString": "int8"
+                },
+                "typeName": {
+                  "id": 548,
+                  "name": "int8",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "383:4:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int8",
+                    "typeString": "int8"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "StateVector",
+            "nodeType": "StructDefinition",
+            "scope": 582,
+            "src": "118:301:4",
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 580,
+              "nodeType": "Block",
+              "src": "540:170:4",
+              "statements": [
+                {
+                  "assignments": [
+                    564
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 564,
+                      "name": "stateVector",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 580,
+                      "src": "548:30:4",
+                      "stateVariable": false,
+                      "storageLocation": "memory",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_memory_ptr",
+                        "typeString": "struct StandardContract.StateVector"
+                      },
+                      "typeName": {
+                        "contractScope": null,
+                        "id": 563,
+                        "name": "StateVector",
+                        "nodeType": "UserDefinedTypeName",
+                        "referencedDeclaration": 550,
+                        "src": "548:11:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_struct$_StateVector_$550_storage_ptr",
+                          "typeString": "struct StandardContract.StateVector"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 572,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 566,
+                        "name": "_latitude",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 552,
+                        "src": "593:9:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 567,
+                        "name": "_longitude",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 554,
+                        "src": "604:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 568,
+                        "name": "_direction",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 556,
+                        "src": "616:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 569,
+                        "name": "_speed",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 558,
+                        "src": "628:6:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 570,
+                        "name": "_acceleration",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 560,
+                        "src": "636:13:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_int8",
+                          "typeString": "int8"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        },
+                        {
+                          "typeIdentifier": "t_int32",
+                          "typeString": "int32"
+                        },
+                        {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        },
+                        {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        },
+                        {
+                          "typeIdentifier": "t_int8",
+                          "typeString": "int8"
+                        }
+                      ],
+                      "id": 565,
+                      "name": "StateVector",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 550,
+                      "src": "581:11:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_struct$_StateVector_$550_storage_ptr_$",
+                        "typeString": "type(struct StandardContract.StateVector storage pointer)"
+                      }
+                    },
+                    "id": 571,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "structConstructorCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "581:69:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_StateVector_$550_memory",
+                      "typeString": "struct StandardContract.StateVector memory"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "548:102:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 578,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "baseExpression": {
+                        "argumentTypes": null,
+                        "id": 573,
+                        "name": "addressToStateVector_",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 539,
+                        "src": "658:21:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_mapping$_t_address_$_t_struct$_StateVector_$550_storage_$",
+                          "typeString": "mapping(address => struct StandardContract.StateVector storage ref)"
+                        }
+                      },
+                      "id": 576,
+                      "indexExpression": {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 574,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 597,
+                          "src": "680:3:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 575,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "680:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "isConstant": false,
+                      "isLValue": true,
+                      "isPure": false,
+                      "lValueRequested": true,
+                      "nodeType": "IndexAccess",
+                      "src": "658:33:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_storage",
+                        "typeString": "struct StandardContract.StateVector storage ref"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "id": 577,
+                      "name": "stateVector",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 564,
+                      "src": "694:11:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_StateVector_$550_memory_ptr",
+                        "typeString": "struct StandardContract.StateVector memory"
+                      }
+                    },
+                    "src": "658:47:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_StateVector_$550_storage",
+                      "typeString": "struct StandardContract.StateVector storage ref"
+                    }
+                  },
+                  "id": 579,
+                  "nodeType": "ExpressionStatement",
+                  "src": "658:47:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 581,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "updateState",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 561,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 552,
+                  "name": "_latitude",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "444:15:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  },
+                  "typeName": {
+                    "id": 551,
+                    "name": "int32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "444:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int32",
+                      "typeString": "int32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 554,
+                  "name": "_longitude",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "461:16:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int32",
+                    "typeString": "int32"
+                  },
+                  "typeName": {
+                    "id": 553,
+                    "name": "int32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "461:5:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int32",
+                      "typeString": "int32"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 556,
+                  "name": "_direction",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "479:17:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 555,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "479:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 558,
+                  "name": "_speed",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "498:13:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint16",
+                    "typeString": "uint16"
+                  },
+                  "typeName": {
+                    "id": 557,
+                    "name": "uint16",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "498:6:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint16",
+                      "typeString": "uint16"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 560,
+                  "name": "_acceleration",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 581,
+                  "src": "513:18:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_int8",
+                    "typeString": "int8"
+                  },
+                  "typeName": {
+                    "id": 559,
+                    "name": "int8",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "513:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_int8",
+                      "typeString": "int8"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "443:89:4"
+            },
+            "returnParameters": {
+              "id": 562,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "540:0:4"
+            },
+            "scope": 582,
+            "src": "423:287:4",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 583,
+        "src": "25:687:4"
+      }
+    ],
+    "src": "0:714:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.0.16",
+  "updatedAt": "2019-10-26T18:13:48.630Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

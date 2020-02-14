@@ -2,29 +2,47 @@
 cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
-minerCount=$1
-clientCount=$2
-threadCount=$3
-txrate=$4
+test=$1
+minerCount=$2
+clientCount=$3
+txRate=$4
 txLimit=$5
 wl=$6
 
+if [ $test = "latency" ]; then
+  minerCount=1
+  clientCount=1
+  txRate=1
+  txLimit=100
+fi
+
+if [ $(( $txRate % $clientCount )) -ne 0 ]; then
+ printf "++++++++++++++++++++++++++++++++++++++++++++++++ \nPlease pass a txRate != $txRate, which is divisible by the given client count ${clientCount}\n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+ exit 64
+fi
+
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\tRUNNING BENCHMARK WITH FOLLOWING CONFIGURATION \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
+printf "Testing: "$test"\n"
 printf "Miners: "$minerCount"\n"
 printf "Clients: "$clientCount"\n"
-printf "Threads: "$threadCount"\n"
-printf "Sending TPS: "$txrate"\n"
+if [ $test = "tps" ]; then
+  printf "Sending TPS: "$txRate"\n"
+fi
 printf "Total TXs: "$txLimit"\n"
 printf "Workload: "$wl"\n"
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTOP ALL MINER AND CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-stop.sh $minerCount $clientCount
+./all-stop.sh
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART MINER NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startMiners.sh $minerCount $threadCount
+./all-startMiners.sh $minerCount
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tSTART CLIENT NODES \n++++++++++++++++++++++++++++++++++++++++++++++++\n"
-./all-startClients.sh $minerCount $clientCount $txrate $txLimit $wl
+./all-startClients.sh $test $minerCount $clientCount $txRate $txLimit $wl
 
+if [ $test = "tps" ]; then
+  total=$(expr 300)
+else
+  total=$(expr 550)
+fi
 count=0
-total=$(expr 60 + $txLimit / $txrate)
 pstr="[=======================================================================]"
 while [ $count -lt $total ]; do
   sleep 1
@@ -34,5 +52,5 @@ while [ $count -lt $total ]; do
 done
 echo ""
 
-./all-stop.sh $minerCount $clientCount
+./all-stop.sh
 printf " \n++++++++++++++++++++++++++++++++++++++++++++++++ \n\t\tEXPERIMENT DONE \n++++++++++++++++++++++++++++++++++++++++++++++++\n"

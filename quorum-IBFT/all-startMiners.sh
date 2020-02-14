@@ -4,8 +4,13 @@ cd `dirname ${BASH_SOURCE-$0}`
 
 minerCount=$1
 
+echo '++ scraping peers for peer list ++'
 ./scrapePeers.sh $minerCount
+echo '++ scraping successful ++'
+
 readarray accounts < $ACCOUNTS -t
+a=$( IFS=$'\n'; echo "${accounts[*]}" )
+accs=$(echo $a | sed s/\ /\,/g)
 
 i=0
 for miner in `cat $MINERS`; do
@@ -17,7 +22,7 @@ for miner in `cat $MINERS`; do
     port=`expr $PORT_INIT + $i`
     rpcport=`expr $RPCPORT_INIT + $i`
     account=${accounts[$i]}
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $IBFT_HOME/startMiner.sh $minerCount $port $rpcport ${account}
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $IBFT_HOME/startMiner.sh $minerCount $rpcport ${accs} ${account}
     echo done $miner
   fi
   let i=$i+1

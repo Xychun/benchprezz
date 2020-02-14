@@ -3,14 +3,17 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 minerCount=$1
-threads=$2
-rpcport=$3
+rpcport=$2
+accounts=$3
 account=$4
+
+threads=1
 
 mkdir -p $LOG_DIR
 mkdir -p $DATA_DIR
+sudo rm $LOG_DIR/eth_log
 
-nohup geth --nodiscover --syncmode full --datadir=$DATA_DIR --rpc --rpcaddr 0.0.0.0 --rpcport $rpcport --rpccorsdomain "*" --rpcapi "personal,db,eth,net,web3,txpool,miner" --networkid 1337 --allow-insecure-unlock --unlock $account --password <(echo -n "${PWD}") --verbosity 5 --mine --miner.etherbase $account --minerthreads $threads > $LOG_DIR/eth_log 2>&1 &
+nohup geth --nodiscover --syncmode full --datadir=$DATA_DIR --rpc --rpcaddr 0.0.0.0 --rpcport $rpcport --rpccorsdomain "*" --rpcapi "personal,db,eth,net,web3,txpool,miner" --networkid 1337 --allow-insecure-unlock --unlock $accounts --password <(echo -n "${PWD}") --verbosity 5 --mine --miner.etherbase $account --minerthreads $threads --miner.gastarget 250000000 --miner.gasprice 0 > $LOG_DIR/eth_log 2>&1 &
 sleep 1
 echo miner started
 

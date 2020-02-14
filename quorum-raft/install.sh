@@ -6,6 +6,7 @@ sudo apt-get install -y libtool
 sudo apt-get install -y autoconf
 sudo apt-get install -y libcurl4-gnutls-dev
 sudo apt-get install -y make
+sudo apt-get install sl
 # install Node and npm
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -18,4 +19,9 @@ sudo snap install go --classic
 git clone https://github.com/jpmorganchase/quorum.git
 cd quorum
 make all
-sudo cp -r build/bin/ /usr/local/
+sudo cp -r build/bin/ /usr/local
+# sync system time
+sudo apt install chrony -y
+sudo chronyd -q
+# Install finished
+sl

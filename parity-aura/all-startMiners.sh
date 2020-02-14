@@ -3,9 +3,10 @@ cd `dirname ${BASH_SOURCE-$0}`
 . env.sh
 
 minerCount=$1
-threadCount=$2
 
 readarray accounts < $ACCOUNTS -t
+a=$( IFS=$'\n'; echo "${accounts[*]}" )
+accs=$(echo $a | sed s/\ /\,/g)
 
 i=0
 for miner in `cat $MINERS`; do
@@ -14,14 +15,14 @@ for miner in `cat $MINERS`; do
     rpcport=`expr $RPCPORT_INIT + $i`
     account=${accounts[$i]}
     echo with validator $account
-    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $AURA_HOME/startMiner.sh $minerCount $threadCount $rpcport ${account}
+    ssh -i $SSH_KEY -oStrictHostKeyChecking=no $USER@$miner $AURA_HOME/startMiner.sh $minerCount $rpcport ${accs} ${account}
   fi
   let i=$i+1
 done
 
 echo '++ scraping peers for peer list ++'
-sleep 10
-./scrapePeers.sh
+sleep 30
+./scrapePeers.sh $minerCount
 echo '++ scraping successful ++'
 i=0
 for miner in `cat $MINERS`; do
